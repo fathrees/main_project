@@ -4,7 +4,7 @@
     angular.module("app.admin")
         .controller("GroupsController", GroupsController);
 
-    //GroupsController.$inject = [];
+    GroupsController.$inject = [];
 
     function GroupsController() {
         var vm = this;

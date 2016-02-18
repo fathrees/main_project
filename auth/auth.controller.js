@@ -4,7 +4,7 @@
     angular.module("app")
         .controller("AuthController", AuthController);
 
-    //AuthController.$inject = [];
+    AuthController.$inject = [];
 
     function AuthController() {
         var vm = this;

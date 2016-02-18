@@ -4,7 +4,7 @@
     angular.module("app.admin")
         .controller("SubjectsController", SubjectsController);
 
-    //SubjectsController.$inject = [];
+    SubjectsController.$inject = [];
 
     function SubjectsController() {
         var vm = this;

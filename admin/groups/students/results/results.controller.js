@@ -4,7 +4,7 @@
     angular.module("app.admin")
         .controller("ResultsController", ResultsController);
 
-    //ResultsController.$inject = [];
+    ResultsController.$inject = [];
 
     function ResultsController() {
         var vm = this;

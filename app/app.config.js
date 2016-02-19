@@ -10,7 +10,7 @@
         $stateProvider
             .state("auth", {
                 url: "/",
-                templateUrl: "auth/auth.html",
+                templateUrl: "app/auth/auth.html",
                 controller: "AuthController as auth"
             })
     }

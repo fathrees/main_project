@@ -2,9 +2,11 @@
     "use strict";
 
     angular.module("app")
-        .config(configApp);
+        .config(ConfigApp);
 
-    function configApp($stateProvider, $urlRouterProvider) {
+    ConfigApp.$inject = ["$stateProvider", "$urlRouterProvider"];
+
+    function ConfigApp($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("/");
 
         $stateProvider

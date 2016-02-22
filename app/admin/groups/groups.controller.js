@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module("app.admin")
+    angular.module("app.admin.groups")
         .controller("GroupsController", GroupsController);
 
     GroupsController.$inject = [];

@@ -1,0 +1,55 @@
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="row">
+                <span class="navbar-text navbar-left">iTester</span>
+                <span class="navbar-text">Hello, AdminName</span>
+                <div class="collapse navbar-collapse navbar-right">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sign-out fa-fw"></i> Logout
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="admin">iTester</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target=".navbar-collapse" aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="admin.admins">Admins</a></li>
+                        <li><a ui-sref="admin.reports">Reports</a></li>
+                        <li><a ui-sref="admin.faculties">Faculties</a></li>
+                        <li><a ui-sref="admin.specialities">Specialities</a></li>
+                        <li uib-dropdown on-toggle="toggled(open)">
+                            <a ui-sref="admin.groups" id="groups-dropdown" uib-dropdown-toggle>Groups<span class="caret"></span></a>
+                            <ul uib-dropdown-menu aria-labelledby="groups-dropdown">
+                                <li><a ui-sref="admin.groups.students">Students</a></li>
+                                <li><a ui-sref="admin.groups.students.results">Results</a></li>
+                            </ul>
+                        </li>
+                        <li uib-dropdown on-toggle="toggled(open)">
+                            <a ui-sref="admin.subjects" id="subjects-dropdown" uib-dropdown-toggle>Subjects<span
+                                    class="caret"></span></a>
+                            <ul uib-dropdown-menu aria-labelledby="subjects-dropdown">
+                                <li><a ui-sref="admin.subjects.schedules">Schedules</a></li>
+                                <li><a ui-sref="admin.subjects.tests">Tests</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div ui-view></div>
+</div>

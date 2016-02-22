@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module("app")
+    angular.module("app.admin")
         .controller("HomeAdminController", HomeAdminController);
 
     HomeAdminController.$inject = [];

@@ -4,9 +4,16 @@
     angular.module("app")
         .controller("AuthController", AuthController);
 
-    AuthController.$inject = [];
+    AuthController.$inject = ["AuthService"];
 
-    function AuthController() {
+    function AuthController(AuthService) {
         var vm = this;
-    }
+        vm.credentials = {};
+        vm.authentication = authentication;
+
+
+        function authentication(){
+            AuthService.login(vm.credentials)
+        }
+    };
 })();

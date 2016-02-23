@@ -2,8 +2,9 @@
     "use strict";
 
     angular.module("app")
-        .factory("AuthService", AuthService);
+        .factory("authService", authService);
 
+<<<<<<< HEAD
     AuthService.$inject = ["$http", "$state"];
 
     function AuthService($http, $state) {
@@ -40,6 +41,16 @@
                     }
                     })
         }
+=======
+    authService.$inject = [];
+
+    function authService() {
+        var service = {
+
+        };
+
+        return service;
+>>>>>>> 22943485f92ba58431a956416cfdd14e101c52e0
     }
 
 })();

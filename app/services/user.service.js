@@ -2,16 +2,16 @@
     "use strict";
 
     angular.module("app.user")
-        .factory("UserService", UserService);
+        .factory("userService", userService);
 
-    UserService.$inject = [];
+    userService.$inject = [];
 
-    function UserService() {
-        var userService = {
+    function userService() {
+        var service = {
 
         };
 
-        return userService;
+        return service;
     }
 
 })();

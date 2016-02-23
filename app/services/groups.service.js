@@ -2,16 +2,16 @@
     "use strict";
 
     angular.module("app.admin.groups")
-        .factory("GroupsService", GroupsService);
+        .factory("groupsService", groupsService);
 
-    GroupsService.$inject = [];
+    groupsService.$inject = [];
 
-    function GroupsService() {
-        var groupsService = {
+    function groupsService() {
+        var service = {
 
         };
 
-        return groupsService;
+        return service;
     }
 
 })();

@@ -2,16 +2,16 @@
     "use strict";
 
     angular.module("app.admin")
-        .factory("ReportsService", ReportsService);
+        .factory("reportsService", reportsService);
 
-    ReportsService.$inject = [];
+    reportsService.$inject = [];
 
-    function ReportsService() {
-        var reportsService = {
+    function reportsService() {
+        var service = {
 
         };
 
-        return reportsService;
+        return service;
     }
 
 })();

@@ -35,12 +35,12 @@
                 templateUrl: "app/admin/groups/groups.html",
                 controller: "GroupsController as groups"
             })
-            .state("admin.groups.students", {
+            .state("admin.students", {
                 url: "/students",
                 templateUrl: "app/admin/groups/students/students.html",
                 controller: "StudentsController as students"
             })
-            .state("admin.groups.students.results", {
+            .state("admin.results", {
                 url: "/results",
                 templateUrl: "app/admin/groups/students/results/results.html",
                 controller: "ResultsController as results"
@@ -60,22 +60,22 @@
                 templateUrl: "app/admin/subjects/subjects.html",
                 controller: "SubjectsController as subjects"
             })
-            .state("admin.subjects.schedules", {
+            .state("admin.schedules", {
                 url: "/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedules.html",
                 controller: "SchedulesController as schedules"
             })
-            .state("admin.subjects.tests", {
+            .state("admin.tests", {
                 url: "/tests",
                 templateUrl: "app/admin/subjects/tests/tests.html",
                 controller: "TestsController as tests"
             })
-            .state("admin.subjects.tests.question", {
+            .state("admin.question", {
                 url: "/question",
                 templateUrl: "app/admin/subjects/tests/question/question.html",
                 controller: "QuestionController as question"
             })
-            .state("admin.subjects.tests.testDetails", {
+            .state("admin.testDetails", {
                 url: "/question",
                 templateUrl: "app/admin/subjects/tests/test-details/test-details.html",
                 controller: "TestDetailsController as testDetails"

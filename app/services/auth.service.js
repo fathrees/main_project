@@ -2,16 +2,16 @@
     "use strict";
 
     angular.module("app")
-        .factory("AuthService", AuthService);
+        .factory("authService", authService);
 
-    AuthService.$inject = [];
+    authService.$inject = [];
 
-    function AuthService() {
-        var authService = {
+    function authService() {
+        var service = {
 
         };
 
-        return authService;
+        return service;
     }
 
 })();

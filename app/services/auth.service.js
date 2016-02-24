@@ -4,10 +4,9 @@
     angular.module("app")
         .factory("AuthService", AuthService);
 
-    AuthService.$inject = ["$http", "$state", "$q"];
+    AuthService.$inject = ["$http", "$state"];
 
-    function AuthService($http, $state, $q) {
-        ;
+    function AuthService($http, $state) {
         var authService = {
             login: login,
             isCollapsed:true
@@ -16,9 +15,7 @@
 
         function login(credentials){
             console.log(credentials);
-            var deffered =$q.defer();
-            $http
-                .post("http://dtapi.local/login/index", credentials)
+            $http.post("http://dtapi.local/login/index", credentials)
                 .then(function(res){
                   console.log(res.data.response);
                     if(res.data.response === "ok" && res.data.roles[1] === "admin") {
@@ -33,7 +30,6 @@
                         console.log(res)
                     }
                 })
-        };
+        }
     }
-
 })();

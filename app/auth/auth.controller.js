@@ -10,6 +10,7 @@
         var vm = this;
         vm.credentials = {};
         vm.authentication = authentication;
+        vm.isCollapsed = AuthService.isCollapsed;
 
 
         function authentication(){

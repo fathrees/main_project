@@ -2,55 +2,38 @@
     "use strict";
 
     angular.module("app")
-        .factory("authService", authService);
+        .factory("AuthService", AuthService);
 
-<<<<<<< HEAD
-    AuthService.$inject = ["$http", "$state"];
+    AuthService.$inject = ["$http", "$state", "$q"];
 
-    function AuthService($http, $state) {
+    function AuthService($http, $state, $q) {
         ;
         var authService = {
-            session :{
-                username:"",
-                userRoles:[],
-            },
-            login: login
+            login: login,
+            isCollapsed:true
         };
         return authService;
 
         function login(credentials){
             console.log(credentials);
+            var deffered =$q.defer();
             $http
                 .post("http://dtapi.local/login/index", credentials)
                 .then(function(res){
-                  console.log(res.data.response)
+                  console.log(res.data.response);
                     if(res.data.response === "ok" && res.data.roles[1] === "admin") {
-                        authService.session.username = res.data.username;
-                        authService.session.userRoles = res.data.roles;
                         $state.go("admin")
                     }
-                    if(res.data.response === "ok" && res.data.roles === " ") {
-                        authService.session.username = res.data.username;
-                        authService.session.userRoles = res.data.roles;
+                    if(res.data.response === "ok" && res.data.roles[1] === "student") {
                         $state.go("user");
                     }
-                    else{
-                        alert(res.data.response);
-                        console
-                        console.log(res.data);
+                    if(res.data.response !== "ok"){
+                         authService.isCollapsed = false;
+                        console.log(authService.isCollapsed);
+                        console.log(res)
                     }
-                    })
-        }
-=======
-    authService.$inject = [];
-
-    function authService() {
-        var service = {
-
+                })
         };
-
-        return service;
->>>>>>> 22943485f92ba58431a956416cfdd14e101c52e0
     }
 
 })();

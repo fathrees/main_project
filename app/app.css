@@ -1,0 +1,32 @@
+
+/*Style and alignment login form*/
+html,body, body>div, .auth-container{
+    height: 100%;
+
+}
+
+.auth-container{
+    background: URL(img/background.jpg) no-repeat;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.title{
+    font-size: 42px;
+    font-weight: 900;
+}
+.form-container{
+    margin-right:15%;
+}
+.auth-input-element{
+    border-radius: 0;
+    border: 1px solid #000;
+    background-color: #f6f1ed;
+}
+.alert-warning{
+    opacity: 0.7;
+    padding: 5px;
+
+}

@@ -4,13 +4,15 @@
     angular.module("app.admin")
         .directive("appHeader", appHeader);
 
+    appHeader.$inject = [];
+
     function appHeader() {
-        var headerDirective = {
+        var directive = {
             templateUrl: "app/admin/header/header.directive.html",
             replace: true
         };
 
-        return headerDirective;
+        return directive;
     }
 
 })();

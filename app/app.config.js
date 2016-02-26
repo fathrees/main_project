@@ -134,7 +134,7 @@
                 url: "/user",
                 templateUrl: "app/user/home-user.html",
                 controller: "HomeUserController as user"
-            }
+            })
     }
 })();
 

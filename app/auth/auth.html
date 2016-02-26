@@ -5,13 +5,15 @@
             <p>Please, log in to start your work</p>
         </div>
         <div class="col-md-4 clearfix">
-            <form class="form-horizontal " ng-submit="auth.authentication()">
+            <form class="form-horizontal touchedForm" ng-submit="auth.authentication()">
                 <div class="form-group" >
                     <p class="alert-warning" uib-collapse="auth.isCollapsed">Invalid login or password. Please, try again </p>
-                    <input type="text" class="auth-input-element form-control" placeholder="Username" required ng-model="auth.credentials.username">
+                    <input type="text" class="auth-input-element form-control" placeholder="Username" required ng-model="auth.credentials.username"
+                            ng-minlength="4" ng-maxlength="50">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="auth-input-element form-control" placeholder="Password" required ng-model="auth.credentials.password">
+                    <input type="password" class="auth-input-element form-control" placeholder="Password" required ng-model="auth.credentials.password"
+                            ng-minlength="4" ng-maxlength="50">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="auth-input-element btn btn-default  btn-block">Log in</button>

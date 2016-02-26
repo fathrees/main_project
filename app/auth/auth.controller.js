@@ -10,23 +10,24 @@
         var vm = this;
         vm.credentials = {};
         vm.authentication = authentication;
-        vm.checkResponse = checkResponse;
         vm.isCollapsed = true;
+        vm.checkResponse = checkResponse;
 
-        function authentication(){
-            authService.login(vm.credentials).then(function(data){
-                checkResponse(data)
+        function authentication() {
+            authService.login(vm.credentials).then(function (data) {
+                console.log(data);
+                vm.checkResponse(data)
             })
-        };
+        }
 
-        function checkResponse(data){
-            if(data.response === "ok" && data.roles[1] === "admin"){
+        function checkResponse(data) {
+            if (data.response === "ok" && data.roles[1] === "admin") {
                 $state.go("admin");
-            }else if (data.response === "ok" && data.roles[1] === "student"){
+            } else if (data.response === "ok" && data.roles[1] === "student") {
                 $state.go("user");
-            }else{
+            } else {
                 vm.isCollapsed = false;
             }
         }
-    };
+    }
 })();

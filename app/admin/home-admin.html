@@ -1,5 +1,13 @@
 <app-header></app-header>
 
 <div class="container">
-    <div ui-view></div>
+    <div ui-view>
+        <table class="table table-striped">
+            <caption>Статистика системи</caption>
+            <tr ng-repeat="stat in admin.statistics">
+                <td>Зареєстровано {{::stat.title}}</td>
+                <td>{{::stat.count.numberOfRecords}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

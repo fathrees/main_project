@@ -110,11 +110,6 @@
                 templateUrl: "app/admin/subjects/tests/test.html",
                 controller: "TestController as test"
             })
-            //.state("admin.question", {
-            //    url: "/subjects/{subject_id}/tests/{test_id}/{question_id}",
-            //    templateUrl: "app/admin/subjects/tests/question/question.html",
-            //    controller: "QuestionController as question"
-            //})
             .state("admin.question", {
                 url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}",
                 templateUrl: "app/admin/subjects/tests/question/question.html",

@@ -35,30 +35,45 @@
                 templateUrl: "app/admin/faculties/faculties.html",
                 controller: "FacultiesController as faculties"
             })
-            .state("admin.faculty", {
+            .state("admin.editFaculty", {
                 url: "/faculties/{faculty_Id:int}",
                 templateUrl: "app/admin/faculties/faculty.html",
-                controller: "FacultyController as faculty"
+                controller: "EditFacultyController as faculty"
+            })
+            .state("admin.addFaculty", {
+                url: "/faculties/addFaculty",
+                templateUrl: "app/admin/faculties/faculty.html",
+                controller: "AddFacultyController as faculty"
             })
             .state("admin.groups", {
                 url: "/groups",
                 templateUrl: "app/admin/groups/groups.html",
                 controller: "GroupsController as groups"
             })
-            .state("admin.group", {
+            .state("admin.editGroup", {
                 url: "/groups/{group_id:int}",
                 templateUrl: "app/admin/groups/group.html",
-                controller: "GroupController as group"
+                controller: "EditGroupController as group"
+            })
+            .state("admin.addGroup", {
+                url: "/groups/addGroup",
+                templateUrl: "app/admin/groups/group.html",
+                controller: "AddGroupController as group"
             })
             .state("admin.students", {
                 url: "/groups/{group_id:int}/students",
                 templateUrl: "app/admin/groups/students/students.html",
                 controller: "StudentsController as students"
             })
-            .state("admin.student", {
+            .state("admin.editStudent", {
                 url: "/groups/{group_id:int}/students/{student_Id:int}",
                 templateUrl: "app/admin/groups/students/student.html",
-                controller: "StudentController as student"
+                controller: "EditStudentController as student"
+            })
+            .state("admin.addStudent", {
+                url: "/groups/{group_id:int}/students/addStudent",
+                templateUrl: "app/admin/groups/students/student.html",
+                controller: "AddStudentController as student"
             })
             .state("admin.studentResults", {
                 url: "/groups/{group_id:int}/students/{student_Id:int}/results",
@@ -75,20 +90,30 @@
                 templateUrl: "app/admin/specialities/specialities.html",
                 controller: "SpecialitiesController as specialities"
             })
-            .state("admin.speciality", {
+            .state("admin.editSpeciality", {
                 url: "/specialities/{speciality_id:int}",
                 templateUrl: "app/admin/specialities/speciality.html",
-                controller: "SpecialityController as speciality"
+                controller: "EditSpecialityController as speciality"
+            })
+            .state("admin.addSpeciality", {
+                url: "/specialities/addSpeciality",
+                templateUrl: "app/admin/specialities/speciality.html",
+                controller: "AddSpecialityController as speciality"
             })
             .state("admin.subjects", {
                 url: "/subjects",
                 templateUrl: "app/admin/subjects/subjects.html",
                 controller: "SubjectsController as subjects"
             })
-            .state("admin.subject", {
+            .state("admin.editSubject", {
                 url: "/subjects/{subject_id:int}",
                 templateUrl: "app/admin/subjects/subject.html",
-                controller: "SubjectController as subject"
+                controller: "EditSubjectController as subject"
+            })
+            .state("admin.addSubject", {
+                url: "/subjects/addSubject",
+                templateUrl: "app/admin/subjects/subject.html",
+                controller: "AddSubjectController as subject"
             })
             .state("admin.schedules", {
                 url: "/subjects/{subject_id:int}/schedules",

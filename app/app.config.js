@@ -71,7 +71,7 @@
                 controller: "EditStudentController as student"
             })
             .state("admin.addStudent", {
-                url: "/groups/{group_id:int}/students/addStudent",
+                url: "/groups/addStudent",
                 templateUrl: "app/admin/groups/students/student.html",
                 controller: "AddStudentController as student"
             })

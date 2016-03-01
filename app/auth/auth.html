@@ -6,19 +6,20 @@
         <div class="col-md-4 clearfix">
             <form name="authform" class="form-horizontal" ng-submit="auth.authentication()">
                 <div class="form-group" >
-                    <p class="alert-warning" uib-collapse="auth.isCollapsed">Invalid login or password. Please, try again </p>
+                    <p class="alert-warning" uib-collapse="auth.isCollapsed">Invalid login or password. Please, try again! </p>
+                    <p class="alert-warning" ng-show="authform.username.$error.required">All fields are required! </p>
                     <input type="text" name="username" class="auth-input-element form-control" placeholder="Username" required
                            ng-model="auth.credentials.username"
                            ng-minlength="5" ng-maxlength="20">
-                    <p class="alert-warning" ng-show="authform.username.$error.maxlength">Max length 20 symbols</p>
-                    <p class="alert-warning" ng-show="authform.username.$error.minlength">Min length 5 symbols</p>
+                    <p class="alert-warning" ng-show="authform.username.$error.maxlength">Max length 20 symbols!</p>
+                    <p class="alert-warning" ng-show="authform.username.$error.minlength">Min length 5 symbols!</p>
                 </div>
                 <div class="form-group">
                     <input type="password" name="password" class="auth-input-element form-control" placeholder="Password" required
                            ng-model="auth.credentials.password"
                            ng-minlength="4" ng-maxlength="30">
-                    <p class="alert-warning" ng-show="authform.password.$error.maxlength">Max length 30 symbols</p>
-                    <p class="alert-warning" ng-show="authform.password.$error.minlength">Min length 4 symbols</p>
+                    <p class="alert-warning" ng-show="authform.password.$error.maxlength">Password is too long!</p>
+                    <p class="alert-warning" ng-show="authform.password.$error.minlength">Min length 4 symbols!</p>
 
                 </div>
                 <div class="form-group">

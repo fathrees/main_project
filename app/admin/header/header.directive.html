@@ -3,16 +3,16 @@
         <div class="container">
             <div class="row hidden-xs">
                 <span class="navbar-text navbar-left">iTester</span>
-                <span class="navbar-text">Hello, AdminName</span>
+                <span class="navbar-text">Привіт, {{ header.username }}</span>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="auth">
+                    <li><a ng-click="header.logout()"  ui-sref="auth">
                         <i class="fa fa-sign-out fa-fw"></i>Вихід</a>
                     </li>
                 </ul>
             </div>
 
             <div class="navbar-header">
-                <a class="navbar-brand" ui-sref="admin">iTesterLOGO</a>
+                <a class="navbar-brand" ui-sref="admin">iTester</a>
                 <button type="button" class="navbar-toggle" ng-init="navCollapsed=true"
                         ng-click="navCollapsed=!navCollapsed">
                     <span class="icon-bar"></span>

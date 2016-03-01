@@ -12,6 +12,7 @@
         vm.authentication = authentication;
         vm.isCollapsed = true;
         vm.checkResponse = checkResponse;
+        vm.username;
 
         function authentication() {
             authService.login(vm.credentials).then(function (data) {
@@ -22,6 +23,7 @@
 
         function checkResponse(data) {
             if (data.response === "ok" && data.roles[1] === "admin") {
+                vm.username = data
                 $state.go("admin");
             } else if (data.response === "ok" && data.roles[1] === "student") {
                 $state.go("user");

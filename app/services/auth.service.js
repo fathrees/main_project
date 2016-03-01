@@ -4,25 +4,26 @@
     angular.module("app")
         .factory("authService", authService);
 
-    authService.$inject = ["$http", "$q"];
+    authService.$inject = ["$http", "$q", "URL"];
 
-    function authService($http, $q) {
+    function authService($http, $q, URL) {
         var service = {
             login: login,
             isLogged: isLogged,
-            logout:logout
+            logout: logout,
         };
         return service;
 
         function login(credentials){
             var defer = $q.defer();
 
-            $http.post("http://dtapi.local/login/index", credentials)
+            $http.post(URL.LOGIN_URL, credentials)
                 .then(function(res){
-                        defer.resolve(res.data)
+                        defer.resolve(res.data);
+                    console.log(res.data);
                     },
-                    function(err){
-                        defer.reject(err);
+                    function(res){
+                        defer.reject(res);
                     });
 
             return defer.promise;
@@ -31,13 +32,14 @@
         function isLogged(){
             var defer = $q.defer();
 
-            $http.get("http://dtapi.local/login/isLogged")
+            $http.get(URL.ISLOGGED_URL)
                 .then(function(res){
-                        if(res.response === "logged")
-                            defer.resolve(res.data)
+                        if(res.data.response === "logged") {
+                            defer.resolve(res.data);
+                        }
                     },
-                    function(err){
-                        defer.reject(err);
+                    function(res){
+                        defer.reject(res);
                     });
 
             return defer.promise;
@@ -48,10 +50,10 @@
 
             $http.get("http://dtapi.local/login/logout")
                 .then(function(res){
-                            defer.resolve(res)
+                        defer.resolve(res);
                     },
-                    function(err){
-                        defer.reject(err);
+                    function(res){
+                        defer.reject(res);
                     });
 
             return defer.promise;

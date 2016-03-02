@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="faculty in faculties.facultiesList | filter: faculties.search}">
+        <tr ng-repeat="faculty in faculties.facultiesList | filter: faculties.search">
             <td>{{faculty.name}}</td>
             <td>{{faculty.description}}</td>
             <td><a ui-sref="admin.editFaculty({faculty_Id: faculty.id})" class="btn btn-small btn-primary"

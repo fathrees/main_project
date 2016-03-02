@@ -37,20 +37,33 @@ table.scroll tbody {
     float: left;
 }
 
-.glyphicon {
+.groups-container .glyphicon {
     display: inline-block;
 }
 
-span .btn-success {
+.groups-container span .btn-success {
     float: right;
     padding-left: 30px;
     padding-right: 30px;
 }
 
-.input-group, .form-control {
+.groups-container .form-control {
     margin-bottom: 7px;
 }
 
-h4 {
-    margin: 20px;
+.groups-container .btn-act {
+    margin: 55px;
+    min-width: 40px;
+}
+
+.groups-container .btns-act {
+    border: 1px solid black;
+    padding-top: 11px;
+    text-align: center
+}
+
+.groups-container .btn-md {
+    padding: 5px;
+    width: 200px;
+    margin: 3px;
 }

@@ -1,0 +1,34 @@
+.students .panel-body {
+    overflow-y: auto;
+    height: 600px;
+}
+
+.students .no-padding {
+    padding: 0;
+}
+
+.students .plus, .title {
+    padding-top: 6px;
+}
+
+.students .title {
+    font-size: 20px;
+}
+
+.students .odd {
+    background-color: #ffffff;
+}
+
+.students .panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #222;
+    border: none;
+}
+
+.students .clip {
+    max-width: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

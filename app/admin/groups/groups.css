@@ -1,0 +1,56 @@
+table.scroll {
+    width: 100%;
+    border-spacing: 0;
+}
+
+table.scroll th,
+table.scroll td,
+table.scroll tr,
+table.scroll thead,
+table.scroll tbody { display: block;}
+
+table.scroll tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+table.scroll tbody {
+    height: 52vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.small-space {
+    width: 4%;
+    float:left;
+}
+
+.large-space {
+    width: 36%;
+    float: left;
+}
+
+.medium-space {
+    width: 12%;
+    float: left;
+}
+
+.glyphicon {
+    display: inline-block;
+}
+
+span .btn-success {
+    float: right;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.input-group, .form-control {
+    margin-bottom: 7px;
+}
+
+h4 {
+    margin: 20px;
+}

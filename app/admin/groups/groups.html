@@ -1,0 +1,479 @@
+<link rel="stylesheet" type="text/css" href="app/admin/groups/groups.css">
+<style>
+
+    /* class btn */
+
+    .my-app-name-container .btn {
+        border: none;
+        border-radius: 0;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn:focus,
+    .my-app-name-container .btn:active:focus,
+    .my-app-name-container .btn.active:focus,
+    .my-app-name-container .btn.focus,
+    .my-app-name-container .btn:active.focus,
+    .my-app-name-container .btn.active.focus {
+        outline: none;
+        box-shadow: 0 7px 7px rgba(0,0,0,0.5);
+        background-color: #64ADF2;
+    }
+    .my-app-name-container .btn:hover,
+    .my-app-name-container .btn:focus,
+    .my-app-name-container .btn.focus {
+        box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn:active,
+    .my-app-name-container .btn.active {
+        border: none;
+    }
+
+
+    /* class btn-primary */
+
+    .my-app-name-container .btn-primary {
+        border: none;
+    }
+    .my-app-name-container .btn-primary:focus,
+    .my-app-name-container .btn-primary.focus {
+        border: none;
+    }
+    .my-app-name-container .btn-primary:hover {
+        background-color: #4E97D7;
+    }
+    .my-app-name-container .btn-primary:active:hover,
+    .my-app-name-container .btn-primary.active:hover,
+    .my-app-name-container .open > .dropdown-toggle.btn-primary:hover,
+    .my-app-name-container .btn-primary:active:focus,
+    .my-app-name-container .btn-primary.active:focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-primary:focus,
+    .my-app-name-container .btn-primary:active.focus,
+    .my-app-name-container .btn-primary.active.focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-primary.focus {
+        background-color: #64ADF2; /* button collor */
+    }
+    .my-app-name-container .btn-primary:active,
+    .my-app-name-container .btn-primary.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-primary {
+        background-image: none;
+    }
+    .my-app-name-container .btn-primary.disabled:hover,
+    .my-app-name-container .btn-primary[disabled]:hover,
+    .my-app-name-container fieldset[disabled] .btn-primary:hover,
+    .my-app-name-container .btn-primary.disabled:focus,
+    .my-app-name-container .btn-primary[disabled]:focus,
+    .my-app-name-container fieldset[disabled] .btn-primary:focus,
+    .my-app-name-container .btn-primary.disabled.focus,
+    .my-app-name-container .btn-primary[disabled].focus,
+    .my-app-name-container fieldset[disabled] .btn-primary.focus {
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+    .my-app-name-container .btn-primary .badge {
+        color: #337ab7;
+        background-color: #fff;
+    }
+
+    /* class btn-default */
+
+    .my-app-name-container .btn-default {
+        background-color: #BDBDBD;
+    }
+    .my-app-name-container .btn-default:focus,
+    .my-app-name-container .btn-default.focus {
+        background-color: #e6e6e6;
+    }
+    .my-app-name-container .btn-default:hover {
+        box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn-default:active,
+    .my-app-name-container .btn-default.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-default {
+        background-color: #E6E6E6;
+    }
+    .my-app-name-container .btn-default:active:hover,
+    .my-app-name-container .btn-default.active:hover,
+    .my-app-name-container .open > .dropdown-toggle.btn-default:hover,
+    .my-app-name-container .btn-default:active:focus,
+    .my-app-name-container .btn-default.active:focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-default:focus,
+    .my-app-name-container .btn-default:active.focus,
+    .my-app-name-container .btn-default.active.focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-default.focus {
+        background-color: #F0F0F0;
+        box-shadow: 0 7px 7px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn-default:active,
+    .my-app-name-container .btn-default.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-default {
+        background-image: none;
+    }
+    .my-app-name-container .btn-default.disabled:hover,
+    .my-app-name-container .btn-default[disabled]:hover,
+    .my-app-name-container fieldset[disabled] .btn-default:hover,
+    .my-app-name-container .btn-default.disabled:focus,
+    .my-app-name-container .btn-default[disabled]:focus,
+    .my-app-name-container fieldset[disabled] .btn-default:focus,
+    .my-app-name-container .btn-default.disabled.focus,
+    .my-app-name-container .btn-default[disabled].focus,
+    .my-app-name-container fieldset[disabled] .btn-default.focus {
+        background-color: #fff;
+    }
+
+    /* class btn-info */
+    .my-app-name-container .btn-info {
+        background-color: #8B5A2B;
+    }
+    .my-app-name-container .btn-info:focus,
+    .my-app-name-container .btn-info.focus {
+        background-color: #996B41;
+    }
+    .my-app-name-container .btn-info:hover {
+        background-color: #A67E59;
+    }
+    .my-app-name-container .btn-info:active,
+    .my-app-name-container .btn-info.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-info {
+        background-color: #B49374;
+    }
+    .my-app-name-container .btn-info:active:hover,
+    .my-app-name-container .btn-info.active:hover,
+    .my-app-name-container .open > .dropdown-toggle.btn-info:hover,
+    .my-app-name-container .btn-info:active:focus,
+    .my-app-name-container .btn-info.active:focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-info:focus,
+    .my-app-name-container .btn-info:active.focus,
+    .my-app-name-container .btn-info.active.focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-info.focus {
+        background-color: #C6A98E;
+        box-shadow: 0 7px 7px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn-info:active,
+    .my-app-name-container .btn-info.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-info {
+        background-image: none;
+        box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+    }
+    .my-app-name-container .btn-info.disabled:hover,
+    .my-app-name-container .btn-info[disabled]:hover,
+    .my-app-name-container fieldset[disabled] .btn-info:hover,
+    .my-app-name-container .btn-info.disabled:focus,
+    .my-app-name-container .btn-info[disabled]:focus,
+    .my-app-name-container fieldset[disabled] .btn-info:focus,
+    .my-app-name-container .btn-info.disabled.focus,
+    .my-app-name-container .btn-info[disabled].focus,
+    .my-app-name-container fieldset[disabled] .btn-info.focus {
+        background-color: yellow; /* !!! */
+    }
+
+    /* btn-danger*/
+    .my-app-name-container.btn-danger {
+        background-color: #C44945;
+    }
+    .my-app-name-container .btn-danger:focus,
+    .my-app-name-container .btn-danger.focus {
+        background-color: #E35752;
+    }
+    .my-app-name-container .btn-danger:hover {
+        background-color: #E35752;
+    }
+    .my-app-name-container .btn-danger:active,
+    .my-app-name-container .btn-danger.active,
+    .my-app-name-container .open > .dropdown-toggle.btn-danger {
+        background-color: #FD615C;
+    }
+    .my-app-name-container .btn-danger:active:hover,
+    .my-app-name-container .btn-danger.active:hover,
+    .my-app-name-container .open > .dropdown-toggle.btn-danger:hover,
+    .my-app-name-container .btn-danger:active:focus,
+    .my-app-name-container .btn-danger.active:focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-danger:focus,
+    .my-app-name-container .btn-danger:active.focus,
+    .my-app-name-container .btn-danger.active.focus,
+    .my-app-name-container .open > .dropdown-toggle.btn-danger.focus {
+        background-color: #FD615C;
+    }
+
+    /* pagination */
+    .my-app-name-container .pagination {
+        border-radius: 0;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.5); /* shadow */
+    }
+
+    .my-app-name-container .pagination > li > a,
+    .pagination > li > span {
+        border: none;
+    }
+    .my-app-name-container .pagination > li:first-child > a,
+    .my-app-name-container .pagination > li:first-child > span {
+        margin-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .pagination > li:last-child > a,
+    .my-app-name-container .pagination > li:last-child > span {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .my-app-name-container .pagination > li > a:hover,
+    .my-app-name-container .pagination > li > span:hover,
+    .my-app-name-container .pagination > li > a:focus,
+    .my-app-name-container .pagination > li > span:focus {
+        box-shadow: 0 7px 7px rgba(0,0,0,0.5); /* shadow */
+    }
+    .my-app-name-container .pagination > .active > a,
+    .my-app-name-container .pagination > .active > span,
+    .my-app-name-container .pagination > .active > a:hover,
+    .my-app-name-container .pagination > .active > span:hover,
+    .my-app-name-container .pagination > .active > a:focus,
+    .my-app-name-container .pagination > .active > span:focus {
+        /* !!! */
+    }
+    .my-app-name-container .pagination > .disabled > span,
+    .my-app-name-container .pagination > .disabled > span:hover,
+    .my-app-name-container .pagination > .disabled > span:focus,
+    .my-app-name-container .pagination > .disabled > a,
+    .my-app-name-container .pagination > .disabled > a:hover,
+    .my-app-name-container .pagination > .disabled > a:focus {
+        /* !!! */
+    }
+    .my-app-name-container .pagination-lg > li > a,
+    .my-app-name-container .pagination-lg > li > span {
+        /* !!! */
+    }
+    .my-app-name-container .pagination-lg > li:first-child > a,
+    .my-app-name-container .pagination-lg > li:first-child > span {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .pagination-lg > li:last-child > a,
+    .my-app-name-container .pagination-lg > li:last-child > span {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    /* table */
+    .my-app-name-container .table {
+        box-shadow: 0 3px 3px rgba(0,0,0,0.5); /* shadow */
+    }
+    .my-app-name-container .table td {
+        border: none;
+    }
+    .my-app-name-container .table tr:hover {
+        background-color: #BDBDBD;
+    }
+
+    /* panel */
+    .my-app-name-container .panel {
+        background-color: #F2F2F2;
+        border: none;
+        border-radius: 0;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        box-shadow: 0 2px 2px rgba(0,0,0,0.5); /* shadow */
+    }
+    .my-app-name-container .panel-footer {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .panel > .list-group:first-child .list-group-item:first-child,
+    .my-app-name-container .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .my-app-name-container .panel > .list-group:last-child .list-group-item:last-child,
+    .my-app-name-container .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .panel > .panel-heading + .panel-collapse > .list-group .list-group-item:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .my-app-name-container .panel > .table:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .my-app-name-container .panel > .table:first-child > thead:first-child > tr:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
+    .my-app-name-container .panel > .table:first-child > tbody:first-child > tr:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .my-app-name-container .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
+    .my-app-name-container .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+    .my-app-name-container .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
+    .my-app-name-container .panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
+        border-top-left-radius: 0;
+    }
+    .my-app-name-container .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
+    .my-app-name-container .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+    .my-app-name-container .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
+    .my-app-name-container .panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
+    .my-app-name-container .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
+        border-top-right-radius: 0;
+    }
+    .my-app-name-container .panel > .table:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .panel > .table:last-child > tbody:last-child > tr:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
+    .my-app-name-container .panel > .table:last-child > tfoot:last-child > tr:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+    .my-app-name-container .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+    .my-app-name-container .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+    .my-app-name-container .panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
+        border-bottom-left-radius: 0;
+    }
+    .my-app-name-container .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+    .my-app-name-container .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+    .my-app-name-container .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+    .my-app-name-container .panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
+    .my-app-name-container .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
+        border-bottom-right-radius: 0;
+    }
+    .my-app-name-container .panel-group .panel {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    .my-app-name-container .pannel .table {
+        box-shadow: none; /* shadow */
+        border-radius: 0;
+    }
+    .my-app-name-container .panel .table {
+        box-shadow: none;
+    }
+</style>
+<div class="my-app-name-container">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="input-group">
+            <input type="text" ng-model="search.group_name" class="form-control">
+            <span class="input-group-btn"><button class="btn btn-success" ng-click="groups.toggleAdd()"><i class="glyphicon glyphicon-plus"></i></button></span>
+        </div>
+        <select class="form-control" ng-model="groups.selectedFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+            <option value="">Виберіть факультет</option>
+        </select>
+        <select class="form-control" ng-model="groups.selectedSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+            <option value="">Виберіть спецальність</option>
+        </select>
+    </div>
+
+    <!-- Add new entity -->
+<div>
+    <div ng-show="groups.showAddPanel">
+        <h4 class="col-xs-offset-2">Створіть нову групу</h4>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-2">Назва групи</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" placeholder="введіть назву групи" ng-model="groups.newGroup"
+                </div>
+                <select class="form-control" ng-model="groups.newGroupFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+                    <option value="">Виберіть факультет</option>
+                </select>
+                <select class="form-control" ng-model="groups.newGroupSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+                    <option value="">Виберіть спецальність</option>
+                </select>
+            </div>
+            <div class="col-xs-offset-7 col-xs-2">
+                <button class="btn btn-success btn-md" ng-click="groups.addGroup()">Зберегти групу</button>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-danger btn-md" ng-click="groups.toggleAdd()">Відмінити</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <!-- Edit entity -->
+<div>
+    <div ng-show="groups.showEditPanel">
+        <h4 class="col-xs-offset-2">Редагування групи</h4>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-xs-2">Назва групи</label>
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" ng-model="groups.editName"
+                </div>
+                <select class="form-control" ng-model="groups.editFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+                    <option value="">Виберіть факультет</option>
+                </select>
+                <select class="form-control" ng-model="groups.editSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+                    <option value="">Виберіть спецальність</option>
+                </select>
+            </div>
+            <div class="col-xs-offset-7 col-xs-2">
+                <button class="btn btn-success btn-md" ng-click="groups.editGroup(groups.editName, groups.editFaculty, groups.editSpeciality)">Зберегти групу</button>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-danger btn-md" ng-click="groups.toggleEdit()">Відмінити</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+    <table class="table table-stripped scroll">
+        <thead>
+        <tr>
+            <th class="small-space">№</th>
+            <th class="medium-space">Група</th>
+            <th class="large-space">Факультет</th>
+            <th class="large-space">Спеціальність</th>
+            <th class="medium-space">Дія</th>
+        </tr>
+        </thead>
+        <tbody id="table">
+        <tr ng-repeat="group in groups.allGroups | filter:groups.facultyFilter | filter:groups.specialityFilter | filter:search | orderBy:'faculty'">
+            <td class="small-space">
+                {{ $index + 1 }}
+            </td>
+
+            <td class="medium-space">
+                <a href="#" ui-sref="admin.students({group_id: group.group_id})">{{ group.group_name }}</a>
+            </td>
+
+            <td class="large-space">
+                <a href="#" ui-sref="admin.faculty({faculty_Id: group.faculty_id})"> {{ ::group.faculty }}</a>
+            </td>
+
+            <td class="large-space">
+                <a href="#" ui-sref="admin.speciality({speciality_id: group.speciality_id})"> {{ ::group.speciality }} </a>
+            </td>
+
+            <td class="medium-space">
+                <button class="btn btn-warning" ng-click="groups.toggleEdit(group)"><i class="glyphicon glyphicon-pencil"></i></button>
+                <button class="btn btn-danger" ng-click="groups.removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" class="alert alert-danger" ng-show="groups.showError">No groups with these parameters in the database</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>

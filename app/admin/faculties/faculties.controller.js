@@ -8,7 +8,7 @@
 
     function FacultiesController(facultiesService) {
         var vm = this;
-        vm.facultiesList = {};
+        vm.facultiesList = [];
         vm.deleteFaculty = deleteFaculty;
         vm.search = "";
         activate();

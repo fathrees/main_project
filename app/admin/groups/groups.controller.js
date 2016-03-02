@@ -17,8 +17,7 @@
         vm.editSpeciality = null;
 
         vm.checkForError = function() {
-            var testNodesNum = document.getElementById('table').children.length;
-            vm.showError = testNodesNum == 1;
+            if(document.getElementById('table')) {vm.showError = document.getElementById('table').children.length == 1;}
         };
 
         // gets all the groups
@@ -43,7 +42,7 @@
 
         vm.removeGroup = function(group) {
             var ask = confirm('Ви впевнені, що бажаєте видалити групу ' + group.group_name + '?');
-            if (ask) {vm.allGroups.splice(vm.allGroups.indexOf(group), 1)};
+            if (ask) {vm.allGroups.splice(vm.allGroups.indexOf(group), 1)}
         };
 
         vm.addGroup = function() {
@@ -59,19 +58,21 @@
         };
 
         vm.editGroup = function(name, faculty, speciality) {
-            vm.allGroups[vm.indexOfEdit].group_name = name;
-            vm.allGroups[vm.indexOfEdit].faculty = faculty;
-            vm.allGroups[vm.indexOfEdit].specialitye = speciality;
+            vm.allGroups[vm.indexOfEdit] = {
+                group_name: name,
+                faculty: faculty,
+                speciality: speciality
+            };
+            console.log(vm.allGroups[vm.indexOfEdit]);
             vm.toggleEdit();
         };
 
         vm.toggleAdd = function() {
             vm.showAddPanel = !vm.showAddPanel;
-
         };
 
         vm.toggleEdit = function(group) {
-            if(group != undefined) {
+            if(group !== undefined) {
                 vm.indexOfEdit = vm.allGroups.indexOf(group);
                 vm.editName = group.group_name;
                 vm.editFaculty = group.faculty;
@@ -79,6 +80,12 @@
             }
             vm.showEditPanel = !vm.showEditPanel;
         };
+
+        vm.headers = groupsService.headers;
+
+        vm.allowAdd = function() {
+            return !(vm.newGroupFaculty && vm.newGroupSpeciality && vm.newGroup);
+        }
 
     }
 })();

@@ -7,7 +7,6 @@
     studentsService.$inject = ["$http", "$q"];
 
     function studentsService($http, $q) {
-        var studentsData;
         var studentsService = {
             //getStudentsData: getStudentsData,
             getStudentsByGroupId: getStudentsByGroupId,
@@ -20,8 +19,7 @@
         //$q.defer request with filter - to get student`s info from JSON file by he`s/her`s group_id
 
         function getStudentsByGroupId(url, group_id) {
-            if (angular.isUndefined(studentsData)) {
-                studentsData = $q.defer();
+                var studentsData = $q.defer();
                 $http.get(url).then(
                     function (result) {
                         var filtered = result.data.filter(function (student) {
@@ -29,7 +27,6 @@
                         });
                         studentsData.resolve(filtered);
                     });
-            }
 
             return studentsData.promise;
         }

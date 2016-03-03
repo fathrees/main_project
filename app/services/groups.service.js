@@ -11,7 +11,14 @@
                 getGroups: getGroups,
                 addGroup: addGroup,
                 editGroup: editGroup,
-                removeGroup: removeGroup
+                removeGroup: removeGroup,
+                headers: [
+                    {class: "small-space", header: "№"},
+                    {class: "medium-space", header: "Назва"},
+                    {class: "large-space", header: "Факультет"},
+                    {class: "large-space", header: "Спеціальність"},
+                    {class: "medium-space", header: "Дія"}
+                    ]
             };
 
             return groupsService;

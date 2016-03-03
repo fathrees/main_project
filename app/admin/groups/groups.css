@@ -1,22 +1,22 @@
-table.scroll {
+table.scroll-block {
     width: 100%;
     border-spacing: 0;
 }
 
-table.scroll th,
-table.scroll td,
-table.scroll tr,
-table.scroll thead,
-table.scroll tbody { display: block;}
+table.scroll-block th,
+table.scroll-block td,
+table.scroll-block tr,
+table.scroll-block thead,
+table.scroll-block tbody { display: block;}
 
-table.scroll tr:after {
+table.scroll-block tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
 
-table.scroll tbody {
+table.scroll-block tbody {
     height: 52vh;
     overflow-y: auto;
     overflow-x: hidden;

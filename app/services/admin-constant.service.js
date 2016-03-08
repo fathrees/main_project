@@ -3,13 +3,12 @@
 
     angular.module("app.admin")
         .constant("urls", [
-            {name: "faculty", jsonUrl: "app/admin/count-faculty.json", title: "факультетів"},
-            {name: "speciality", jsonUrl: "app/admin/count-speciality.json", title: "спеціальностей"},
-            {name: "group", jsonUrl: "app/admin/count-group.json", title: "груп"},
-            {name: "student", jsonUrl: "app/admin/count-student.json", title: "студентів"},
-            {name: "subject", jsonUrl: "app/admin/count-subject.json", title: "предметів"},
-            {name: "test", jsonUrl: "app/admin/count-test.json", title: "тестів"},
-            {name: "user", jsonUrl: "app/admin/count-user.json", title: "користувачів"}
+            {ENTITYNAME: "faculty", URL: "http://dtapi.local/faculty/countRecords", TITLE: "факультетів"},
+            {ENTITYNAME: "speciality", URL: "http://dtapi.local/speciality/countRecords", TITLE: "спеціальностей"},
+            {ENTITYNAME: "group", URL: "http://dtapi.local/group/countRecords", TITLE: "груп"},
+            {ENTITYNAME: "student", URL: "http://dtapi.local/student/countRecords", TITLE: "студентів"},
+            {ENTITYNAME: "subject", URL: "http://dtapi.local/subject/countRecords", TITLE: "предметів"},
+            {ENTITYNAME: "test", URL: "http://dtapi.local/test/countRecords", TITLE: "тестів"}
         ])
 
 })();

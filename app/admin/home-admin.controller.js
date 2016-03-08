@@ -14,7 +14,7 @@
         function activate() {
             return adminService.getAllCountRecords().then(function(response) {
                 angular.forEach(urls, function(item) {
-                    var tempObj = {title: item.title, count: response[item.name].data};
+                    var tempObj = {title: item.TITLE, count: response[item.ENTITYNAME].data};
                     vm.statistics.push(tempObj);
                 });
                 return vm.statistics;

@@ -17,7 +17,7 @@
             var defer = $q.defer();
             var urlCalls = {};
             angular.forEach(urls, function(url) {
-                urlCalls[url.name] = $http.get(url.jsonUrl);
+                urlCalls[url.ENTITYNAME] = $http.get(url.URL);
             });
             $q.all(urlCalls).then(function(response) {
                 defer.resolve(response);

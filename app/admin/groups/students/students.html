@@ -1,0 +1,75 @@
+<div class="my-app-name-container students">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <p class="col-xs-6 title">Список студентів:</p>
+                <div class="col-xs-6">
+                    <div class="col-xs-1 pull-right plus">
+                        <i class="glyphicon glyphicon-plus" ng-click="students.showAddForm()" title=""></i>
+                    </div>
+                    <div class="col-xs-6 pull-right">
+                        <input class="form-control" type="text" ng-model="search" placeholder="Пошук студента...">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" ng-show="students.addForm">
+                <div class="col-xs-6 pull-right">
+                    <button class="btn btn-default" ng-click="students.addNewStudent()" title="Додати студента">Додати студента</button>
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.newStudent.student_name" placeholder="Введіть імя...">
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.newStudent.student_surname" placeholder="Введіть прізвище..."  required>
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.newStudent.plain_password" placeholder="Введіть пароль..."  required>
+                </div>
+            </div>
+            <div class="row" ng-show="students.editForm">
+                <div class="col-xs-6 pull-right">
+                    <button class="btn btn-default" ng-click="students.editStudent()" title="Зберегти зміни">Зберегти зміни</button>
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.editStudentModel.student_name">
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.editStudentModel.student_surname">
+                </div>
+                <div class="col-xs-2 ">
+                    <input class="form-control" type="text" ng-model="students.editStudentModel.plain_password">
+                </div>
+            </div>
+        </div>
+        <div class="panel-body no-padding">
+            <table class="table">
+                <tbody>
+                <thead>
+                <tr>
+                    <th class="clip" class="header" ng-repeat="headerElement in students.headElements">{{::headerElement}}</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-class-odd="'odd'" ng-repeat="student in students.list | filter:search">
+                    <td class="clip">{{::student.student_name}}</td>
+                    <td class="clip">{{::student.student_surname}}</td>
+                    <td class="clip">{{::student.plain_password}}</td>
+                    <td class="clip">{{::student.group_id}}</td>
+                    <!--<td>{{::students.groups[student.group_id]}}</td>-->
+                    <td class="clip">
+                        <i class="glyphicon glyphicon-edit" ng-click="students.showEditForm($index, student)" title="edit {{::student.student_name}} {{::student.student_surname}}"></i>
+                        <i class="glyphicon glyphicon-remove" ng-click="students.removeStudent(student)" title="remove {{::student.student_name}} {{::student.student_surname}}"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+

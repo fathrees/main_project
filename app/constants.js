@@ -13,6 +13,7 @@
             ADD_SUBJECT: domain + "subject/insertData",
             COUNT_SUBJECTS: domain + "subject/countRecords",
             EDIT_SUBJECT: domain + "subject/update/",
+            GET_SUBJECT_RANGE: domain + "subject/getRecordsRange/10/",
             GET_SUBJECTS: domain + "subject/getRecords",
             REMOVE_SUBJECT: domain + "subject/del/",
         });

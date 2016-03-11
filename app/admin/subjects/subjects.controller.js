@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("SubjectsController", SubjectsController);
 
-    SubjectsController.$inject = ["subjectsService"];
+    SubjectsController.$inject = ["subjectsService", "APP_CONST"];
 
-    function SubjectsController (subjectsService) {
+    function SubjectsController (subjectsService, APP_CONST) {
         var vm = this;
         vm.newSubject = {};
         vm.editModel = {};
@@ -19,32 +19,24 @@
         vm.addSubject = addSubject;
         vm.removeSubject = removeSubject;
         vm.editSubject = editSubject;
-        //$scope.totalItems = 64;
-        //$scope.currentPage = 4;
-        //
-        //$scope.setPage = function (pageNo) {
-        //    $scope.currentPage = pageNo;
-        //};
-        //
-        //$scope.pageChanged = function() {
-        //    $log.log('Page changed to: ' + $scope.currentPage);
-        //};
-        //
-        //$scope.maxSize = 5;
-        //$scope.bigTotalItems = 175;
-        //$scope.bigCurrentPage = 1;
+        vm.maxSize = 5;
+        vm.currentPage = 1;
+        vm.currentRecordsRange = 0;
+        vm.pageChanged = pageChanged;
         activate();
 
         function activate() {
-            return subjectsService.getSubjects().then(function (data) {
+            subjectsService.totalItems().then(function (quantity) {
+                vm.totalItems = +quantity;
+            });
+            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
             });
-
-            return vm.list;
         }
 
         function allowAddEdit (obj) {
-            return !(obj.subject_name && obj.subject_description)
+
+            return !(obj.subject_name && obj.subject_description);
         }
 
         function showAddForm() {
@@ -56,8 +48,6 @@
             vm.editFormCollapsed = false;
             vm.addFormCollapsed = true;
             vm.index = index;
-            console.log(vm.index);
-            console.log(subject);
             vm.editModel = {
                 subject_name: subject.subject_name,
                 subject_description: subject.subject_description
@@ -73,18 +63,26 @@
 
         function removeSubject(index) {
             vm.index = index
-            console.log(vm.list[vm.index].subject_id);
             subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
-                console.log(res);
                 activate();
             })
         }
 
         function editSubject() {
             subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (res) {
-                console.log(res)
                 activate();
             })
+        }
+
+        function getNextRange ()   {
+                   vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
+        }
+
+        function pageChanged (){
+            getNextRange ();
+            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
+                vm.list = data;
+            });
 
         }
     }

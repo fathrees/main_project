@@ -9,9 +9,11 @@
     function SubjectsController (subjectsService) {
         var vm = this;
         vm.newSubject = {};
+        vm.editModel = {};
         vm.headElements = subjectsService.getHeader();
         vm.addFormCollapsed = true;
         vm.editFormCollapsed = true;
+        vm.allowAddEdit = allowAddEdit;
         vm.showAddForm = showAddForm;
         vm.showEditForm = showEditForm;
         vm.addSubject = addSubject;
@@ -25,6 +27,10 @@
             });
 
             return vm.list;
+        }
+
+        function allowAddEdit (obj) {
+            return !(obj.subject_name && obj.subject_description)
         }
 
         function showAddForm() {

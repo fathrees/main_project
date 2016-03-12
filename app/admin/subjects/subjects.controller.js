@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("SubjectsController", SubjectsController);
 
-    SubjectsController.$inject = ["subjectsService", "APP_CONST"];
+    SubjectsController.$inject = ["subjectsService", "APP_CONST", "$q"];
 
-    function SubjectsController (subjectsService, APP_CONST) {
+    function SubjectsController (subjectsService, APP_CONST, $q) {
         var vm = this;
         vm.newSubject = {};
         vm.editModel = {};
@@ -23,15 +23,17 @@
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
-        activate();
+        vm.promises = {
+            totalItems: subjectsService.totalItems(),
+            getSubjects: subjectsService.getSubjects(vm.currentRecordsRange)
+        }
+        activate(vm.promises);
 
-        function activate() {
-            subjectsService.totalItems().then(function (quantity) {
-                vm.totalItems = +quantity;
-            });
-            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
-                vm.list = data;
-            });
+        function activate(promises) {
+            $q.all(promises).then(function (values){
+                vm.totalItems = +values.totalItems;
+                vm.list = values.getSubjects;
+            })
         }
 
         function allowAddEdit (obj) {
@@ -56,26 +58,28 @@
 
         function addSubject() {
             subjectsService.addSubject(vm.newSubject).then(function (data) {
-                activate();
+                activate(vm.promises);
                 vm.newSubject = {};
             })
         }
 
         function removeSubject(index) {
-            vm.index = index
+            vm.index = index;
             subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
-                activate();
+                console.log(res)
+                activate(vm.promises);
             })
         }
 
         function editSubject() {
-            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (res) {
-                activate();
+            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (config) {
+                vm.list[vm.index].subject_name = config.subject_name;
+                vm.list[vm.index].subject_description = config.subject_description;
             })
         }
 
         function getNextRange ()   {
-                   vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
+            vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
         }
 
         function pageChanged (){

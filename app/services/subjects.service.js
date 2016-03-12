@@ -35,12 +35,15 @@
             var deferred = $q.defer();
             $http.get(URL.COUNT_SUBJECTS)
                 .then(function (res){
-                    if(res.status === 200) {
-deferred.resolve(res.data.numberOfRecords)
+                    if(res.status === 200 && res.data.numberOfRecords) {
+                        deferred.resolve(res.data.numberOfRecords)
+                    }else{
+                        console.log(res);
+                        deferred.reject (res);
                     }
                 },
-                function(res){
-                    deferred.reject (res);
+                function(reason){
+                    deferred.reject (reason);
                 });
 
             return deferred.promise;
@@ -50,10 +53,15 @@ deferred.resolve(res.data.numberOfRecords)
             var deferred = $q.defer();
             $http.post(URL.ADD_SUBJECT, newSubject)
                 .then(function (res) {
-                    deferred.resolve(res.data);
+                    if(res.status === 200 && res.data.config) {
+                        deferred.resolve(res.data.config);
+                    }else{
+                        console.log(res)
+                        deferred.reject(res)
+                    };
                 },
-                function(res){
-                    deferred.reject(res);
+                function(reason){
+                    deferred.reject(reason);
                 });
 
             return deferred.promise;
@@ -63,10 +71,10 @@ deferred.resolve(res.data.numberOfRecords)
             var deferred = $q.defer();
             $http.post(URL.EDIT_SUBJECT + id, editModel)
                 .then(function(res){
-                    deferred.resolve(res);
+                    deferred.resolve(res.config.data);
                 },
-                function (res) {
-                    deferred.reject(res);
+                function (reason) {
+                    deferred.reject(reason);
                 });
 
             return deferred.promise;
@@ -78,8 +86,8 @@ deferred.resolve(res.data.numberOfRecords)
                 .then(function (res) {
                     deferred.resolve(res);
                 },
-                function (res){
-                    deferred.reject(res);
+                function (reason){
+                    deferred.reject(reason);
                 });
 
             return deferred.promise;

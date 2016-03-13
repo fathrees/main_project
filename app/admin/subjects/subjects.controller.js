@@ -24,14 +24,14 @@
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
         vm.promises = {
-            totalItems: subjectsService.totalItems(),
-            getSubjects: subjectsService.getSubjects(vm.currentRecordsRange)
+            getSubjects: subjectsService.getSubjects(vm.currentRecordsRange),
+            totalItems: subjectsService.totalItems()
         }
-        activate(vm.promises);
+        activate();
 
-        function activate(promises) {
-            $q.all(promises).then(function (values){
-                vm.totalItems = +values.totalItems;
+        function activate() {
+            $q.all(vm.promises).then(function (values){
+                vm.totalItems = +(values.totalItems);
                 vm.list = values.getSubjects;
             })
         }
@@ -58,7 +58,8 @@
 
         function addSubject() {
             subjectsService.addSubject(vm.newSubject).then(function (data) {
-                activate(vm.promises);
+                console.log(res)
+                activate();
                 vm.newSubject = {};
             })
         }
@@ -67,7 +68,7 @@
             vm.index = index;
             subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
                 console.log(res)
-                activate(vm.promises);
+                activate();
             })
         }
 

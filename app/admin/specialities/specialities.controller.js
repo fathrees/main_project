@@ -4,9 +4,9 @@
     angular.module("app.admin")
         .controller("SpecialitiesController", SpecialitiesController);
 
-    SpecialitiesController.$inject = ["specialitiesService", "APP_CONST"];
+    SpecialitiesController.$inject = ["specialitiesService", "APP_CONST", "SPECIALITIES_CONST"];
 
-    function SpecialitiesController (specialitiesService, APP_CONST) {
+    function SpecialitiesController (specialitiesService, APP_CONST, SPECIALITIES_CONST) {
         var vm = this;
         vm.newSpeciality = {};
         vm.editModel = {};
@@ -14,9 +14,8 @@
         vm.addFormCollapsed = true;
         vm.editFormCollapsed = true;
         vm.allowAddEdit = allowAddEdit;
-        vm.minInputLength = APP_CONST.MIN_INPUT_LENGTH;
-        vm.maxNameLength = APP_CONST.MAX_NAME_LENGTH;
-        vm.maxCodeLength = APP_CONST.MAX_CODE_LENGTH;
+        vm.minNameLength = SPECIALITIES_CONST.MIN_NAME_LENGTH;
+        vm.maxNameLength = SPECIALITIES_CONST.MAX_NAME_LENGTH;
         vm.showAddForm = showAddForm;
         vm.showEditForm = showEditForm;
         vm.addSpeciality = addSpeciality;
@@ -38,12 +37,8 @@
         }
 
         function allowAddEdit(obj) {
-            var message = "";
-            if (!(obj.speciality_name && (obj.speciality_name.length <= vm.maxNameLength)) && (obj.speciality_code && (obj.speciality_code.length <= vm.maxCodeLength))) {
-                message = "Заповніть всі поля!";
-            };
 
-            return message;
+            return !(obj.speciality_name && obj.speciality_code);
         }
 
         function showAddForm() {

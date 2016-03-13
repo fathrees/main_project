@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary specialities">
     <div class="panel-heading">
         <!--SEARCH ADDBUTTON-->
         <div class="row">
@@ -15,32 +15,31 @@
             <p class="col-xs-12 col-md-6  title">Спеціальності</p>
         </div>
         <!--ADD FORM-->
-        <form name="addform" class="row" uib-collapse="specialities.addFormCollapsed" ng-submit="specialities.addSpeciality()">
+        <form name="addForm" class="row" uib-collapse="specialities.addFormCollapsed" ng-submit="specialities.addSpeciality()">
             <div class="col-md-3">
-                <input class="form-control" name="specialityname" type="text" ng-model="specialities.newSpeciality.speciality_name"
-                       placeholder="назва"  ng-minlength="{{specialities.minInputLength}}" ng-maxlength="{{specialities.maxNameLength}}" required>
+                <input class="form-control" name="specialityName" type="text" ng-model="specialities.newSpeciality.speciality_name"
+                       placeholder="назва (обов'язково!)"  ng-minlength="{{specialities.minNameLength}}"
+                       ng-maxlength="{{specialities.maxNameLength}}" required>
             </div>
             <div class="col-md-3">
-                <input class="form-control" name="specialitycode" type="text" ng-model="specialities.newSpeciality.speciality_code"
-                       placeholder="код"  ng-minlength="{{specialities.minInputLength}}" ng-maxlength="{{specialities.maxCodeLength}}" required>
+                <input class="form-control" name="specialityCode" type="text" ng-model="specialities.newSpeciality.speciality_code"
+                       placeholder="код (обов'язково!)" required validation-directive>
             </div>
             <div class="col-md-6 pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="specialities.allowAddEdit(specialities.newSpeciality)"
-                        title="Зберегти">
+                <button type="submit" class="btn btn-success" ng-disabled="addForm.specialityName.$invalid &&
+                   !addForm.specialityCode.code" title="Зберегти">
                     <i class="glyphicon glyphicon-floppy-saved"></i>
                 </button>
                 <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="specialities.showAddForm()">
                     <i class="glyphicon glyphicon-floppy-remove"></i>
                 </button>
-                <span  ng-show="addform.specialityname.$error.maxlength">Макс. довжина назви {{specialities.maxNameLength}}!</span>
-                <span  ng-show="addform.specialitycode.$error.maxlength">Макс. довжина коду {{specialities.maxCodeLength}}!</span>
-                <span  ng-show="addform.specialitycode.$error.minlength">Мін. довжина коду {{specialities.minInputLength}}!</span>
-                <span  ng-show="addform.specialityname.$error.minlength">Мін. довжина назви {{specialities.minInputLength}}!</span>
-                <span  ng-show="specialities.allowAddEdit(specialities.newSpeciality)">Заповніть усі поля!</span>
+                <span ng-show="addForm.specialityName.$error.maxlength">Макс. довжина назви {{specialities.maxNameLength}}!</span>
+                <span ng-show="addForm.specialityName.$error.minlength">Мін. довжина назви {{specialities.minNameLength}}!</span>
+                <span ng-show="addForm.specialityCode.$error.code">Код має мати вигляд: (6/7/8).123456(78)!</span>
             </div>
         </form>
         <!--EDIT FORM-->
-        <form name="editform" class="row" uib-collapse="specialities.editFormCollapsed" ng-submit="specialities.editSpeciality()">
+        <form name="editForm" class="row" uib-collapse="specialities.editFormCollapsed" ng-submit="specialities.editSpeciality()">
             <div class="col-md-6 pull-right">
                 <button type="submit" class="btn btn-success" ng-disabled="specialities.allowAddEdit(specialities.editModel)"
                         title="Зберегти">
@@ -49,7 +48,7 @@
                 <a class="btn btn-danger" title="Відмінити" ng-click="specialities.editFormCollapsed = !specialities.editFormCollapsed">
                     <i class="glyphicon glyphicon-floppy-remove"></i>
                 </a>
-                <span  ng-show="editform.specialityname.$error.maxlength">Max length 100 symbols!</span>
+                <span  ng-show="editForm.specialityname.$error.maxlength">Max length 100 symbols!</span>
                 <span  ng-show="specialities.allowAddEdit(specialities.editModel)">Мінімум символів: {{specialities.minSymbs}}!</span>
             </div>
             <div class="col-md-3 ">
@@ -73,7 +72,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | filter: search">
+            <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | filter: search | orderBy: speciality_code">
                 <td class="clip">{{$index + 1}}</td>
                 <td class="clip">{{speciality.speciality_name}}</td>
                 <td class="clip">{{speciality.speciality_code}}</td>

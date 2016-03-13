@@ -44,3 +44,11 @@ header .container .row a {
     padding-bottom: 8px;
     margin-right: 30px;
 }
+
+.specialities input.ng-invalid {
+    background-color: #ffc0cb;
+}
+.specialities input.ng-valid {
+    background-color: #fff;
+}
+

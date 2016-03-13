@@ -6,11 +6,8 @@
 
     angular.module("app")
         .constant("APP_CONST", {
-            MIN_INPUT_LENGTH: 2,
-            MAX_NAME_LENGTH: 50,
-            MAX_CODE_LENGTH: 15,
             QUANTITY_ON_PAGE: 10
-    })
+        })
         .constant("URL", {
             LOGIN: domain + "login/index",
             ISLOGGED: domain + "login/isLogged",
@@ -29,5 +26,10 @@
             GET_SUBJECT_RANGE: domain + "subject/getRecordsRange/",
             GET_SUBJECTS: domain + "subject/getRecords",
             REMOVE_SUBJECT: domain + "subject/del/"
+        })
+        .constant("SPECIALITIES_CONST", {
+            MIN_NAME_LENGTH: 2,
+            MAX_NAME_LENGTH: 50,
+            CODE_REGEXP: /^([6-8]\.\d{6,8})$/
         });
 })();

@@ -4,9 +4,9 @@
     angular.module("app.admin")
         .factory("adminService", adminService);
 
-    adminService.$inject = ["$http", "$q", "urls"];
+    adminService.$inject = ["$http", "$q", "domain", "entities", "entitiesUKR", "actions"];
 
-    function adminService($http, $q, urls) {
+    function adminService($http, $q, domain, entities, entitiesUKR, actions) {
         var service = {
             getAllCountRecords: getAllCountRecords
         };
@@ -16,8 +16,8 @@
         function getAllCountRecords() {
             var defer = $q.defer();
             var urlCalls = {};
-            angular.forEach(urls, function(url) {
-                urlCalls[url.ENTITYNAME] = $http.get(url.URL);
+            angular.forEach(entities, function(entity) {
+                urlCalls[entity] = $http.get(domain + entity + actions.COUNT_ENTITY);
             });
             $q.all(urlCalls).then(function(response) {
                 defer.resolve(response);

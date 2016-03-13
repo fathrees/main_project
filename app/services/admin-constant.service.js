@@ -1,14 +1,30 @@
-(function() {
+(function () {
     "use strict";
 
     angular.module("app.admin")
-        .constant("urls", [
-            {ENTITYNAME: "faculty", URL: "http://dtapi.local/faculty/countRecords", TITLE: "факультетів"},
-            {ENTITYNAME: "speciality", URL: "http://dtapi.local/speciality/countRecords", TITLE: "спеціальностей"},
-            {ENTITYNAME: "group", URL: "http://dtapi.local/group/countRecords", TITLE: "груп"},
-            {ENTITYNAME: "student", URL: "http://dtapi.local/student/countRecords", TITLE: "студентів"},
-            {ENTITYNAME: "subject", URL: "http://dtapi.local/subject/countRecords", TITLE: "предметів"},
-            {ENTITYNAME: "test", URL: "http://dtapi.local/test/countRecords", TITLE: "тестів"}
-        ])
-
+        .constant("domain", "http://dtapi.local/")
+        .constant("entities", {
+            FACULTY: "faculty",
+            SPECIALITY: "speciality",
+            GROUP: "group",
+            STUDENT: "student",
+            SUBJECT: "subject",
+            TEST: "test"
+        })
+        .constant("entitiesUKR", {
+            FACULTY: "факультетів",
+            SPECIALITY: "спеціальностей",
+            GROUP: "груп",
+            STUDENT: "студентів",
+            SUBJECT: "предметів",
+            TEST: "тестів"
+        })
+        .constant("actions", {
+            ADD_ENTITY: "/insertData/",
+            COUNT_ENTITY: "/countRecords/",
+            EDIT_ENTITY: "/update/",
+            GET_ENTITY_RANGE: "/getRecordsRange/",
+            GET_ENTITIES: "/getRecords/",
+            REMOVE_ENTITY: "/del/"
+        })
 })();

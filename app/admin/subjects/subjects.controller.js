@@ -8,6 +8,7 @@
 
     function SubjectsController (subjectsService, APP_CONST) {
         var vm = this;
+        vm.list = [];
         vm.newSubject = {};
         vm.editModel = {};
         vm.headElements = subjectsService.getHeader();

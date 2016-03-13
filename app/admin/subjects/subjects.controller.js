@@ -19,6 +19,7 @@
         vm.addSubject = addSubject;
         vm.removeSubject = removeSubject;
         vm.editSubject = editSubject;
+        vm.entitiesPerPage = APP_CONST.QUANTITY_ON_PAGE;
         vm.maxSize = 5;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;

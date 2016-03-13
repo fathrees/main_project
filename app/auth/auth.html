@@ -7,7 +7,7 @@
             <form name="authform" class="form-horizontal" ng-submit="auth.authentication()">
                 <div class="form-group" >
                     <p class="alert-warning" uib-collapse="auth.isCollapsed">Invalid login or password. Please, try again! </p>
-                    <p class="alert-warning" ng-show="authform.username.$error.required">All fields are required! </p>
+                    <p class="alert-warning" ng-show="authform.username.$error.required || authform.password.$error.required">All fields are required! </p>
                     <input type="text" name="username" class="auth-input-element form-control" placeholder="Username" required
                            ng-model="auth.credentials.username"
                            ng-minlength="5" ng-maxlength="20">

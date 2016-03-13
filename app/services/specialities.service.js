@@ -1,70 +1,93 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module("app.admin")
         .factory("specialitiesService", specialitiesService);
 
-    specialitiesService.$inject = ["$http", "$q"];
+    specialitiesService.$inject = ["$http", "$q", "URL", "APP_CONST"];
 
-    function specialitiesService($http, $q) {
-        var specialitiesList = {};
-
+    function specialitiesService($http, $q, URL, APP_CONST) {
         var service = {
             getSpecialities: getSpecialities,
-            getOneSpeciality: getOneSpeciality,
+            totalItems: totalItems,
             addSpeciality: addSpeciality,
-            deleteSpeciality: deleteSpeciality
+            editSpeciality: editSpeciality,
+            removeSpeciality: removeSpeciality,
+            getHeader: getHeader
         };
 
         return service;
 
-        function getSpecialities() {
-            if(specialitiesList.promise === undefined) {
-                specialitiesList = $q.defer();
-                $http.get("app/admin/specialities/json/specialities.json").then(function(response) {
-                    specialitiesList.resolve(response);
-                }, function (response) {
-                    specialitiesList.reject(response);
-                });
-            }
+        function getSpecialities(currentRecordsRange){
+            var deferred = $q.defer();
+            $http.get(URL.GET_SPECIALITY_RANGE + APP_CONST.QUANTITY_ON_PAGE+ "/" + currentRecordsRange)
+                .then(function(res){
+                        deferred.resolve(res.data);
+                    },
+                    function(res){
+                        deferred.reject(res);
+                    });
 
-            return specialitiesList.promise;
+            return deferred.promise;
         }
 
-        function getOneSpeciality(id) {
-            var specialitiesArray = [],
-                speciality = $q.defer();
-            specialitiesList.promise.then(function(response) {
-                specialitiesArray = response.data.specialities;
-                angular.forEach(specialitiesArray, function (item){
-                    if(item.id === id){
-                        speciality.resolve(item);
-                    }
-                });
-            });
+        function totalItems(){
+            var deferred = $q.defer();
+            $http.get(URL.COUNT_SPECIALITIES)
+                .then(function(res){
+                        if(res.status === 200) {
+                            deferred.resolve(res.data.numberOfRecords)
+                        }
+                    },
+                    function(res){
+                        deferred.reject(res);
+                    });
 
-            return speciality.promise;
+            return deferred.promise;
         }
 
-        function deleteSpeciality(id) {
-            var specialitiesArray = [];
-            specialitiesList.promise.then(function(response) {
-                specialitiesArray = response.data.specialities;
-                angular.forEach(specialitiesArray, function (item){
-                    if(item.id === id){
-                        specialitiesArray.splice(specialitiesArray.indexOf(item), 1);
-                    }
-                });
-            });
+        function addSpeciality(newSpeciality){
+            var deferred = $q.defer();
+            $http.post(URL.ADD_SPECIALITY, newSpeciality)
+                .then(function(res) {
+                        deferred.resolve(res.data);
+                    },
+                    function(res){
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
         }
 
-        function addSpeciality(speciality) {
-            var specialitiesArray = [];
-            specialitiesList.promise.then(function(response) {
-                specialitiesArray = response.data.specialities;
-                specialitiesArray[specialitiesArray.length] = speciality;
-                specialitiesArray[specialitiesArray.length-1].id = specialitiesArray.length;
-            });
+        function editSpeciality(id, editModel){
+            var deferred = $q.defer();
+            $http.post(URL.EDIT_SPECIALITY + id, editModel)
+                .then(function(res){
+                        deferred.resolve(res);
+                    },
+                    function(res) {
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
+        }
+
+        function removeSpeciality(id) {
+            var deferred = $q.defer();
+            $http.get(URL.REMOVE_SPECIALITY + id)
+                .then(function(res) {
+                        deferred.resolve(res);
+                    },
+                    function(res){
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
+        }
+
+        function getHeader() {
+            return ["№", "Назва", "Код"];
         }
     }
+
 })();

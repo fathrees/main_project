@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("SubjectsController", SubjectsController);
 
-    SubjectsController.$inject = ["subjectsService", "APP_CONST", "$q"];
+    SubjectsController.$inject = ["subjectsService", "APP_CONST"];
 
-    function SubjectsController (subjectsService, APP_CONST, $q) {
+    function SubjectsController (subjectsService, APP_CONST) {
         var vm = this;
         vm.newSubject = {};
         vm.editModel = {};
@@ -23,17 +23,15 @@
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
-        vm.promises = {
-            getSubjects: subjectsService.getSubjects(vm.currentRecordsRange),
-            totalItems: subjectsService.totalItems()
-        }
         activate();
 
         function activate() {
-            $q.all(vm.promises).then(function (values){
-                vm.totalItems = +(values.totalItems);
-                vm.list = values.getSubjects;
-            })
+            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
+                vm.list = data;
+            });
+            subjectsService.totalItems().then(function (quantity) {
+                vm.totalItems = +quantity;
+            });
         }
 
         function allowAddEdit (obj) {
@@ -60,7 +58,8 @@
             subjectsService.addSubject(vm.newSubject).then(function (data) {
                 console.log(res)
                 activate();
-                vm.newSubject = {};
+                vm.addFormCollapsed = true;
+                //vm.newSubject = {};
             })
         }
 

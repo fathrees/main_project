@@ -35,11 +35,13 @@
             var deferred = $q.defer();
             $http.get(URL.COUNT_SUBJECTS)
                 .then(function (res){
-                    if(res.status === 200 && res.data.numberOfRecords) {
+                    console.log(res)
+                    if(res.status === 200) {
+                        console.log(res.data.numberOfRecords)
                         deferred.resolve(res.data.numberOfRecords)
                     }else{
-                        console.log(res);
-                        deferred.reject (res);
+                        console.log("else "+res);
+                        //deferred.reject (res);
                     }
                 },
                 function(reason){

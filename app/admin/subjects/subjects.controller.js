@@ -26,11 +26,11 @@
         activate();
 
         function activate() {
-            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
-                vm.list = data;
-            });
             subjectsService.totalItems().then(function (quantity) {
                 vm.totalItems = +quantity;
+            });
+            subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
+                vm.list = data;
             });
         }
 
@@ -56,17 +56,14 @@
 
         function addSubject() {
             subjectsService.addSubject(vm.newSubject).then(function (data) {
-                console.log(res)
                 activate();
-                vm.addFormCollapsed = true;
-                //vm.newSubject = {};
+                vm.newSubject = {};
             })
         }
 
         function removeSubject(index) {
-            vm.index = index;
+            vm.index = index
             subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
-                console.log(res)
                 activate();
             })
         }
@@ -87,7 +84,6 @@
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
             });
-
         }
     }
 })();

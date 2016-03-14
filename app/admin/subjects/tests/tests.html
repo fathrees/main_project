@@ -1,17 +1,18 @@
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="row">
             <div class="col-xs-12 col-md-6  pull-right">
                 <div class="col-xs-3 col-md-1 pull-right">
-                    <button class="btn btn-info"  ng-click=""  title="Додати предмет">
+                    <button class="btn btn-info"  ng-click=""  title="Додати тест">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </div>
-                <div class="col-xs-9 col-md-6 pull-right">
-                    <input class="form-control" type="text" ng-model="search" placeholder="Пошук...">
-                </div>
+                <!--<div class="col-xs-9 col-md-6 pull-right">-->
+                    <!--<input class="form-control" type="text" ng-model="search" placeholder="Пошук...">-->
+                <!--</div>-->
             </div>
-            <p class="col-xs-12 col-md-6  title">Тести предмету: {{}}</p>
+            <p class="col-xs-12 col-md-6 ">Тести предмету: {{}}</p>
         </div>
     </div>
     <div class="panel-body">
@@ -19,17 +20,18 @@
             <tbody>
             <thead>
             <tr>
-                <th class="clip" class="header" ng-repeat="headerElement in tests.headElements">{{::headerElement}}</th>
+                <th class="clip" class="header" ng-repeat="headElement in tests.headElements">{{::headElement}}</th>
                 <th></th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-class-odd="'odd'" ng-repeat="">
-                <td>{{subject.subject_name}}</td>
-                <td>{{subject.subject_description}}</a></td>
-                <td>
-                </td>
+            <tr ng-class-odd="'odd'" ng-repeat="test in tests.list">
+                <td>{{test.test_name}}</td>
+                <td>{{test.tasks}}</a></td>
+                <td>{{test.time_for_test}}</td>
+                <td>{{test.enabled}}</td>
+                <td>{{test.subject_id}}</td>
                 <td>
                     <button class="btn btn-warning" ng-click=""
                             title="Редагувати {{}}">

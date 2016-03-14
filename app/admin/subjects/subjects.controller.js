@@ -32,6 +32,7 @@
                 vm.totalItems = +quantity;
             });
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
+                console.log("vm.list "+ data)
                 vm.list = data;
             });
         }

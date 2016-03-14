@@ -78,9 +78,11 @@
             var deferred = $q.defer();
             $http.get(URL.REMOVE_SUBJECT + id)
                 .then(function (res) {
+                        console.log(res);
                         deferred.resolve(res);
                     },
                     function (res){
+                        console.log(res);
                         deferred.reject(res);
                     });
 

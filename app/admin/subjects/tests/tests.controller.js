@@ -8,16 +8,17 @@
 
     function TestsController($stateParams, testsService) {
         var vm = this;
+        vm.test = "jkdfkfdjk";
         vm.headElements = testsService.getHeader();
-
         activate();
 
-        function activate () {
-            console.log("activate");
-            testsService.getTests().then(function (data){
-                console.log(data);
-            })
-        }
+            function activate (){
+
+                testsService.getTests($stateParams.subject_id).then(function(data){
+                    vm.list = data;
+                    console.log(vm.list);
+                });
+            };
 
     }
 })();

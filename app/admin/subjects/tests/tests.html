@@ -1,48 +1,47 @@
-<div>TEST page</div>
-<!--<div class="panel panel-primary">-->
-    <!--<div class="panel-heading">-->
-        <!--<div class="row">-->
-            <!--<div class="col-xs-12 col-md-6  pull-right">-->
-                <!--<div class="col-xs-3 col-md-1 pull-right">-->
-                    <!--<button class="btn btn-info"  ng-click=""  title="Додати предмет">-->
-                        <!--<i class="glyphicon glyphicon-plus"></i>-->
-                    <!--</button>-->
-                <!--</div>-->
-                <!--<div class="col-xs-9 col-md-6 pull-right">-->
-                    <!--<input class="form-control" type="text" ng-model="search" placeholder="Пошук...">-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<p class="col-xs-12 col-md-6  title">Тести предмету: {{}}</p>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="panel-body">-->
-        <!--<table class="table table-striped table-condensed">-->
-            <!--<tbody>-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th class="clip" class="header" ng-repeat="headerElement in tests.headElements">{{::headerElement}}</th>-->
-                <!--<th></th>-->
-                <!--<th></th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr ng-class-odd="'odd'" ng-repeat="">-->
-                <!--<td>{{subject.subject_name}}</td>-->
-                <!--<td>{{subject.subject_description}}</a></td>-->
-                <!--<td>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<button class="btn btn-warning" ng-click=""-->
-                            <!--title="Редагувати {{}}">-->
-                        <!--<i class="glyphicon glyphicon-pencil"></i>-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-danger"  ng-click=""-->
-                            <!--title="Видалити {{}}">-->
-                        <!--<i class="glyphicon glyphicon-remove"></i>-->
-                    <!--</button>-->
-                <!--</td>-->
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
-    <!--</div>-->
-<!--</div>-->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-12 col-md-6  pull-right">
+                <div class="col-xs-3 col-md-1 pull-right">
+                    <button class="btn btn-info"  ng-click=""  title="Додати предмет">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                </div>
+                <div class="col-xs-9 col-md-6 pull-right">
+                    <input class="form-control" type="text" ng-model="search" placeholder="Пошук...">
+                </div>
+            </div>
+            <p class="col-xs-12 col-md-6  title">Тести предмету: {{}}</p>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed">
+            <tbody>
+            <thead>
+            <tr>
+                <th class="clip" class="header" ng-repeat="headerElement in tests.headElements">{{::headerElement}}</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-class-odd="'odd'" ng-repeat="">
+                <td>{{subject.subject_name}}</td>
+                <td>{{subject.subject_description}}</a></td>
+                <td>
+                </td>
+                <td>
+                    <button class="btn btn-warning" ng-click=""
+                            title="Редагувати {{}}">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+                    <button class="btn btn-danger"  ng-click=""
+                            title="Видалити {{}}">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -8,19 +8,18 @@
 
     function SpecialitiesController (specialitiesService, APP_CONST, SPECIALITIES_CONST) {
         var vm = this;
+        vm.showAddForm = showAddForm;
+        vm.showEditForm = showEditForm;
+        vm.addFormCollapsed = true;
+        vm.editFormCollapsed = true;
         vm.newSpeciality = {};
         vm.editModel = {};
         vm.headElements = specialitiesService.getHeader();
-        vm.addFormCollapsed = true;
-        vm.editFormCollapsed = true;
-        vm.allowAddEdit = allowAddEdit;
-        vm.minNameLength = SPECIALITIES_CONST.MIN_NAME_LENGTH;
-        vm.maxNameLength = SPECIALITIES_CONST.MAX_NAME_LENGTH;
-        vm.showAddForm = showAddForm;
-        vm.showEditForm = showEditForm;
         vm.addSpeciality = addSpeciality;
         vm.removeSpeciality = removeSpeciality;
         vm.editSpeciality = editSpeciality;
+        vm.minNameLength = SPECIALITIES_CONST.MIN_NAME_LENGTH;
+        vm.maxNameLength = SPECIALITIES_CONST.MAX_NAME_LENGTH;
         vm.maxSize = 5;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
@@ -28,17 +27,12 @@
         activate();
 
         function activate() {
-            specialitiesService.totalItems().then(function (quantity) {
+            specialitiesService.totalItems().then(function(quantity) {
                 vm.totalItems = +quantity;
             });
-            specialitiesService.getSpecialities(vm.currentRecordsRange).then(function (data) {
+            specialitiesService.getSpecialitiesRange(vm.currentRecordsRange).then(function(data) {
                 vm.list = data;
             });
-        }
-
-        function allowAddEdit(obj) {
-
-            return !(obj.speciality_name && obj.speciality_code);
         }
 
         function showAddForm() {
@@ -54,6 +48,12 @@
                 speciality_name: speciality.speciality_name,
                 speciality_code: speciality.speciality_code
             };
+        }
+
+        function getSpecialities() {
+            specialitiesService.getSpecialities().then(function(data) {
+                vm.all = data;
+            });
         }
 
         function addSpeciality() {

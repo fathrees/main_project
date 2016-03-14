@@ -16,7 +16,7 @@
             ADD_SPECIALITY: domain + "speciality/insertData",
             COUNT_SPECIALITIES: domain + "speciality/countRecords",
             EDIT_SPECIALITY: domain + "speciality/update/",
-            GET_SPECIALITY_RANGE: domain + "speciality/getRecordsRange/",
+            GET_SPECIALITIES_RANGE: domain + "speciality/getRecordsRange/",
             GET_SPECIALITIES: domain + "speciality/getRecords",
             REMOVE_SPECIALITY: domain + "speciality/del/",
 

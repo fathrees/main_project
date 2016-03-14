@@ -8,6 +8,7 @@
 
     function specialitiesService($http, $q, URL, APP_CONST) {
         var service = {
+            getSpecialitiesRange: getSpecialitiesRange,
             getSpecialities: getSpecialities,
             totalItems: totalItems,
             addSpeciality: addSpeciality,
@@ -18,20 +19,32 @@
 
         return service;
 
-        function getSpecialities(currentRecordsRange){
+        function getSpecialitiesRange(currentRecordsRange) {
             var deferred = $q.defer();
-            $http.get(URL.GET_SPECIALITY_RANGE + APP_CONST.QUANTITY_ON_PAGE+ "/" + currentRecordsRange)
-                .then(function(res){
+            $http.get(URL.GET_SPECIALITIES_RANGE + APP_CONST.QUANTITY_ON_PAGE+ "/" + currentRecordsRange)
+                .then(function(res) {
                         deferred.resolve(res.data);
                     },
-                    function(res){
+                    function(res) {
                         deferred.reject(res);
                     });
 
             return deferred.promise;
         }
 
-        function totalItems(){
+        function getSpecialities() {
+            var deferred = $q.defer();
+            $http.get(URL.GET_SPECIALITIES)
+                .then(function(res) {
+                    deferred.resolve(res.data);
+                },
+                function(res) {
+                    deferred.reject(res);
+                });
+            return deferred.promise;
+        }
+
+        function totalItems() {
             var deferred = $q.defer();
             $http.get(URL.COUNT_SPECIALITIES)
                 .then(function(res){
@@ -46,7 +59,7 @@
             return deferred.promise;
         }
 
-        function addSpeciality(newSpeciality){
+        function addSpeciality(newSpeciality) {
             var deferred = $q.defer();
             $http.post(URL.ADD_SPECIALITY, newSpeciality)
                 .then(function(res) {
@@ -59,10 +72,10 @@
             return deferred.promise;
         }
 
-        function editSpeciality(id, editModel){
+        function editSpeciality(id, editModel) {
             var deferred = $q.defer();
             $http.post(URL.EDIT_SPECIALITY + id, editModel)
-                .then(function(res){
+                .then(function(res) {
                         deferred.resolve(res);
                     },
                     function(res) {
@@ -78,7 +91,7 @@
                 .then(function(res) {
                         deferred.resolve(res);
                     },
-                    function(res){
+                    function(res) {
                         deferred.reject(res);
                     });
 

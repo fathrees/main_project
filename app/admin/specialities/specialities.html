@@ -20,22 +20,22 @@
                 <input class="form-control" name="specialityName" type="text" ng-model="specialities.newSpeciality.speciality_name"
                        placeholder="назва (обов'язково!)"  ng-minlength="{{specialities.minNameLength}}"
                        ng-maxlength="{{specialities.maxNameLength}}" required>
+                <span ng-show="addForm.specialityName.$error.maxlength"><br>Макс. довжина назви {{specialities.maxNameLength}}!</span>
+                <span ng-show="addForm.specialityName.$error.minlength"><br>Мін. довжина назви {{specialities.minNameLength}}!</span>
             </div>
             <div class="col-md-3">
                 <input class="form-control" name="specialityCode" type="text" ng-model="specialities.newSpeciality.speciality_code"
-                       placeholder="код (обов'язково!)" required validation-directive>
+                       placeholder="код (обов'язково!)" required validate-directive>
+                <span ng-show="addForm.specialityCode.$error.validCode"><br>Приклади коду: 6.123456, 7.12345678, 8.12345678</span>
+                <span ng-show="addForm.specialityCode.$error.existCode"><br>Такий код вже існує! Введіть інший!</span>
             </div>
             <div class="col-md-6 pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="addForm.specialityName.$invalid &&
-                   !addForm.specialityCode.code" title="Зберегти">
+                <button type="submit" class="btn btn-success" ng-disabled="addForm.$invalid" title="Зберегти">
                     <i class="glyphicon glyphicon-floppy-saved"></i>
                 </button>
                 <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="specialities.showAddForm()">
                     <i class="glyphicon glyphicon-floppy-remove"></i>
                 </button>
-                <span ng-show="addForm.specialityName.$error.maxlength">Макс. довжина назви {{specialities.maxNameLength}}!</span>
-                <span ng-show="addForm.specialityName.$error.minlength">Мін. довжина назви {{specialities.minNameLength}}!</span>
-                <span ng-show="addForm.specialityCode.$error.code">Код має мати вигляд: (6/7/8).123456(78)!</span>
             </div>
         </form>
         <!--EDIT FORM-->
@@ -72,7 +72,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | filter: search | orderBy: speciality_code">
+            <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
                 <td class="clip">{{speciality.speciality_name}}</td>
                 <td class="clip">{{speciality.speciality_code}}</td>

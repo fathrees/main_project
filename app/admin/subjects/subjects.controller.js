@@ -64,8 +64,7 @@
         }
 
         function removeSubject(index) {
-            vm.index = index
-            subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
+            subjectsService.removeSubject(vm.list[index].subject_id).then(function (res) {
                 activate();
             })
         }

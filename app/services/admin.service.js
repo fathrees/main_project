@@ -4,9 +4,9 @@
     angular.module("app.admin")
         .factory("adminService", adminService);
 
-    adminService.$inject = ["$http", "$q", "domain", "entities", "entitiesUKR", "actions"];
+    adminService.$inject = ["$http", "$q", "domain", "entities", "actions"];
 
-    function adminService($http, $q, domain, entities, entitiesUKR, actions) {
+    function adminService($http, $q, domain, entities, actions) {
         var service = {
             getAllCountRecords: getAllCountRecords
         };

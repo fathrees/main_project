@@ -10,6 +10,7 @@
         var vm = this;
         vm.headElements = testsService.getHeader();
         vm.addFormCollapsed = true;
+        vm.submitFunction = "sdfksdl;gf()";
         vm.editFormCollapsed = true;
         vm.showAddForm = showAddForm;
         vm.showEditForm = showEditForm;
@@ -32,13 +33,15 @@
         function showAddForm() {
             vm.addFormCollapsed = !vm.addFormCollapsed;
             vm.editFormCollapsed = true;
+
         }
 
         function showEditForm(index, test) {
-            vm.editFormCollapsed = false;
-            vm.addFormCollapsed = true;
+            vm.editFormCollapsed = true;
+            vm.addFormCollapsed = false;
             vm.index = index;
-            vm.currentTest = {
+            vm.submitFunction = "tests.editTest()";
+            vm.newTest = {
                 test_name: test.test_name,
                 tasks: +(test.tasks),
                 time_for_test: +(test.time_for_test),

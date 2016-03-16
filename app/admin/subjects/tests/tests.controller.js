@@ -26,7 +26,6 @@
         function activate (){
             testsService.getTests($stateParams.subject_id).then(function(data){
                 vm.list = data;
-                console.log(vm.list);
             });
         }
 
@@ -69,12 +68,10 @@
 
         function removeTest(index) {
             testsService.removeTest(vm.list[index].test_id).then(function (res) {
-                if (res.response = "ok") {
-                    console.log("Тест успішно видалено)"
+                if (res.response === "ok") {
                 }else if(res.response = "error 23000"){
-                    console.log("Тест не видалено. необхідно видалити запитання в тесті)"
+                    console.log("Тест не видалено. необхідно видалити запитання в тесті");
                 }
-               );
                 activate();
             })
         }

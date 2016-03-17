@@ -18,7 +18,6 @@
             var urlCalls = {};
             angular.forEach(ENTITIES, function(entity) {
                 if ((entity != "test_detail") && (entity != "question") && (entity != "answer") && (entity != "result")) {
-                    console.log(entity);
                     urlCalls[entity] = $http.get(BASE_URL + entity + ACTIONS.COUNT_ENTITY);
                 }
             });

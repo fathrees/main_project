@@ -4,7 +4,7 @@
     angular.module("app.admin")
         .controller("SpecialitiesController", SpecialitiesController);
 
-    SpecialitiesController.$inject = ["specialitiesService", "APP_CONST", "SPECIALITIES_CONST"];
+    SpecialitiesController.$inject = ["specialitiesService", "ENTITY_RANGE_ON_PAGE", "SPECIALITIES_CONST"];
 
     function SpecialitiesController (specialitiesService, ENTITY_RANGE_ON_PAGE, SPECIALITIES_CONST) {
         var vm = this;

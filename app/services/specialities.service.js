@@ -4,9 +4,9 @@
     angular.module("app.admin")
         .factory("specialitiesService", specialitiesService);
 
-    specialitiesService.$inject = ["$http", "$q", "BASE-URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE"];
+    specialitiesService.$inject = ["$http", "$q", "BASE_URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE"];
 
-    function specialitiesService($http, $q, BASE-URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE) {
+    function specialitiesService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE) {
         var service = {
             getSpecialitiesRange: getSpecialitiesRange,
             getSpecialities: getSpecialities,
@@ -20,7 +20,7 @@
 
         function getSpecialitiesRange(currentRecordsRange) {
             var deferred = $q.defer();
-            $http.get(BASE-URL.ENTITIES.GET_ENTITY_RANGE + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange)
+            $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.GET_ENTITY_RANGE + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange)
                 .then(function(res) {
                         deferred.resolve(res.data);
                     },
@@ -33,7 +33,7 @@
 
         function getSpecialities() {
             var deferred = $q.defer();
-            $http.get(BASE-URL.ENTITIES.GET_ENTITIES)
+            $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.GET_ENTITIES)
                 .then(function(res) {
                     deferred.resolve(res.data);
                 },
@@ -45,7 +45,7 @@
 
         function totalItems() {
             var deferred = $q.defer();
-            $http.get(BASE-URL.ENTITIES.COUNT_ENTITY)
+            $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.COUNT_ENTITY)
                 .then(function(res){
                         if(res.status === 200) {
                             deferred.resolve(res.data.numberOfRecords)
@@ -68,7 +68,7 @@
 
         function _addSpeciality(speciality) {
             var deferred = $q.defer();
-            $http.post(BASE-URL.ENTITIES.ADD_ENTITY, speciality)
+            $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.ADD_ENTITY, speciality)
                 .then(function(res) {
                         deferred.resolve(res.data);
                     },
@@ -81,7 +81,7 @@
 
         function _editSpeciality(speciality) {
             var deferred = $q.defer();
-            $http.post(BASE-URL.ENTITIES.EDIT_ENTITY + speciality.speciality_id, speciality)
+            $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.EDIT_ENTITY + speciality.speciality_id, speciality)
                 .then(function(res) {
                         deferred.resolve(res);
                     },
@@ -94,7 +94,7 @@
 
         function removeSpeciality(id) {
             var deferred = $q.defer();
-            $http.get(BASE-URL.ENTITIES.REMOVE_ENTITY + id)
+            $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.REMOVE_ENTITY + id)
                 .then(function(res) {
                         deferred.resolve(res);
                     },

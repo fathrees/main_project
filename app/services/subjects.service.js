@@ -64,15 +64,15 @@
             }
         }
 
-        function _addSubject (newSubject){
+        function _addSubject (subject){
 
-           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.ADD_ENTITY, newSubject)
+           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.ADD_ENTITY, subject)
                 .then(_successCallback, _errorCallback);
         }
 
-        function _editSubject(editSubject){
+        function _editSubject(subject){
 
-           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.EDIT_ENTITY  + editSubject.subject_id, editSubject)
+           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.EDIT_ENTITY  + subject.subject_id, subject)
                 .then(_successCallback, _errorCallback);
         }
 

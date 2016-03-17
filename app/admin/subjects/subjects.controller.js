@@ -28,8 +28,7 @@
             });
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
-            });
-        }
+            })}
 
         function hideForm() {
             vm.formCollapsed = true;
@@ -74,22 +73,15 @@
             })
         }
 
-        function editSubject() {
-            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (config) {
-                vm.list[vm.index].subject_name = config.subject_name;
-                vm.list[vm.index].subject_description = config.subject_description;
-            })
-        }
-
         function getNextRange ()   {
             vm.currentRecordsRange =(vm.currentPage - 1) * vm.entitiesPerPage;
         }
 
-        function pageChanged (){
-            getNextRange ();
+        function pageChanged () {
+            getNextRange();
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
             });
         }
-    }
+   }
 })();

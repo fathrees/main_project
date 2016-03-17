@@ -4,15 +4,14 @@
     angular.module("app.admin")
         .factory("specialitiesService", specialitiesService);
 
-    specialitiesService.$inject = ["$http", "$q", "URL", "APP_CONST"];
+    specialitiesService.$inject = ["$http", "$q", "BASE-URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE"];
 
-    function specialitiesService($http, $q, URL, APP_CONST) {
+    function specialitiesService($http, $q, BASE-URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE) {
         var service = {
             getSpecialitiesRange: getSpecialitiesRange,
             getSpecialities: getSpecialities,
             totalItems: totalItems,
-            addSpeciality: addSpeciality,
-            editSpeciality: editSpeciality,
+            saveSpeciality: saveSpeciality,
             removeSpeciality: removeSpeciality,
             getHeader: getHeader
         };
@@ -21,7 +20,7 @@
 
         function getSpecialitiesRange(currentRecordsRange) {
             var deferred = $q.defer();
-            $http.get(URL.GET_SPECIALITIES_RANGE + APP_CONST.QUANTITY_ON_PAGE+ "/" + currentRecordsRange)
+            $http.get(BASE-URL.ENTITIES.GET_ENTITY_RANGE + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange)
                 .then(function(res) {
                         deferred.resolve(res.data);
                     },
@@ -34,7 +33,7 @@
 
         function getSpecialities() {
             var deferred = $q.defer();
-            $http.get(URL.GET_SPECIALITIES)
+            $http.get(BASE-URL.ENTITIES.GET_ENTITIES)
                 .then(function(res) {
                     deferred.resolve(res.data);
                 },
@@ -46,7 +45,7 @@
 
         function totalItems() {
             var deferred = $q.defer();
-            $http.get(URL.COUNT_SPECIALITIES)
+            $http.get(BASE-URL.ENTITIES.COUNT_ENTITY)
                 .then(function(res){
                         if(res.status === 200) {
                             deferred.resolve(res.data.numberOfRecords)
@@ -59,9 +58,17 @@
             return deferred.promise;
         }
 
-        function addSpeciality(newSpeciality) {
+        function saveSpeciality(speciality) {
+            if (speciality.speciality_id === undefined) {
+                return _addSpeciality(speciality);
+            } else {
+                return _editSpeciality(speciality);
+            }
+        }
+
+        function _addSpeciality(speciality) {
             var deferred = $q.defer();
-            $http.post(URL.ADD_SPECIALITY, newSpeciality)
+            $http.post(BASE-URL.ENTITIES.ADD_ENTITY, speciality)
                 .then(function(res) {
                         deferred.resolve(res.data);
                     },
@@ -72,9 +79,9 @@
             return deferred.promise;
         }
 
-        function editSpeciality(id, editModel) {
+        function _editSpeciality(speciality) {
             var deferred = $q.defer();
-            $http.post(URL.EDIT_SPECIALITY + id, editModel)
+            $http.post(BASE-URL.ENTITIES.EDIT_ENTITY + speciality.speciality_id, speciality)
                 .then(function(res) {
                         deferred.resolve(res);
                     },
@@ -87,7 +94,7 @@
 
         function removeSpeciality(id) {
             var deferred = $q.defer();
-            $http.get(URL.REMOVE_SPECIALITY + id)
+            $http.get(BASE-URL.ENTITIES.REMOVE_ENTITY + id)
                 .then(function(res) {
                         deferred.resolve(res);
                     },

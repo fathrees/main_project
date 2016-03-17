@@ -19,6 +19,7 @@
         vm.addSubject = addSubject;
         vm.removeSubject = removeSubject;
         vm.editSubject = editSubject;
+        vm.entitiesPerPage = APP_CONST.QUANTITY_ON_PAGE;
         vm.maxSize = 5;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
@@ -69,13 +70,14 @@
         }
 
         function editSubject() {
-            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (res) {
-                activate();
+            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (config) {
+                vm.list[vm.index].subject_name = config.subject_name;
+                vm.list[vm.index].subject_description = config.subject_description;
             })
         }
 
         function getNextRange ()   {
-                   vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
+            vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
         }
 
         function pageChanged (){
@@ -83,7 +85,6 @@
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
             });
-
         }
     }
 })();

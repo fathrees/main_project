@@ -4,9 +4,9 @@
     angular.module("app")
         .factory("authService", authService);
 
-    authService.$inject = ["$http", "$q", "URL"];
+    authService.$inject = ["$http", "$q", "BASE_URL", "AUTH"];
 
-    function authService ($http, $q, URL) {
+    function authService ($http, $q, BASE_URL, AUTH) {
         var service = {
             login: login,
             isLogged: isLogged,
@@ -18,7 +18,7 @@
         function login (credentials){
             var defer = $q.defer();
 
-            $http.post(URL.LOGIN, credentials)
+            $http.post(BASE_URL + AUTH.LOGIN, credentials)
                 .then(function (res){
                         defer.resolve (res.data);
                     },
@@ -32,7 +32,7 @@
         function isLogged(){
             var defer = $q.defer();
 
-            $http.get (URL.ISLOGGED)
+            $http.get (BASE_URL + AUTH.IS_LOGGED)
                 .then(function (res){
                         if(res.data.response === "logged") {
                             defer.resolve(res.data);
@@ -48,7 +48,7 @@
         function logout(){
             var defer = $q.defer();
 
-            $http.get(URL.LOGOUT)
+            $http.get(BASE_URL + AUTH.LOGOUT)
                 .then(function (res){
                         defer.resolve(res);
                     },

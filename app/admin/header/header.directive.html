@@ -2,7 +2,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="row hidden-xs">
-                <span class="navbar-text navbar-left">iTester</span>
+                <span class="navbar-text navbar-left">D-Tester</span>
                 <span class="navbar-text">Hello, {{ header.username }}</span>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-click="header.logout()" ui-sref="auth">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="navbar-header">
-                <a class="navbar-brand" ui-sref="admin">iTester</a>
+                <a class="navbar-brand" ui-sref="admin" ng-click="navCollapsed=true">D-Tester</a>
                 <button type="button" class="navbar-toggle" ng-init="navCollapsed=true"
                         ng-click="navCollapsed=!navCollapsed">
                     <span class="icon-bar"></span>

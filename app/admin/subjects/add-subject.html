@@ -1,0 +1,22 @@
+
+<form name="addform" class="row" uib-collapse="subjects.addFormCollapsed" ng-submit="subjects.addSubject()">
+    <div class="col-md-6 pull-right">
+        <button type="submit" class="btn btn-success" ng-disabled="subjects.allowAddEdit(subjects.newSubject)"
+                title="Зберегти предмет">
+            <i class="glyphicon glyphicon-floppy-saved"></i>
+        </button>
+        <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="subjects.showAddForm()">
+            <i class="glyphicon glyphicon-floppy-remove"></i>
+        </button>
+        <span  ng-show="addform.subjectname.$error.maxlength">Max length 100 symbols!</span>
+        <span  ng-show="subjects.allowAddEdit(subjects.newSubject)">Min length for all fields 3 symbols!</span>
+    </div>
+    <div class="col-md-3">
+        <input class="form-control" name="subjectname" type="text" ng-model="subjects.newSubject.subject_name"
+               placeholder="Введіть назву предмету..."  ng-minlength="3" ng-maxlength="100" required>
+    </div>
+    <div class="col-md-3">
+        <input class="form-control" name="subjectdesc" type="text" ng-model="subjects.newSubject.subject_description"
+               placeholder="Введіть опис предмету..."  ng-minlength="3" required>
+    </div>
+</form>

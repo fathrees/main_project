@@ -1,10 +1,10 @@
 <div class="panel panel-primary specialities">
     <div class="panel-heading">
-        <!--SEARCH ADDBUTTON-->
+        <!--SEARCH SAVEBUTTON-->
         <div class="row">
             <div class="col-xs-12 col-md-6  pull-right">
                 <div class="col-xs-3 col-md-1 pull-right">
-                    <button class="btn btn-success"  ng-click="specialities.showAddForm()"  title="Додати">
+                    <button class="btn btn-success" ng-click="specialities.showSaveForm()" title="Додати">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </div>
@@ -14,50 +14,30 @@
             </div>
             <p class="col-xs-12 col-md-6  title">Спеціальності</p>
         </div>
-        <!--ADD FORM-->
-        <form name="addForm" class="row" uib-collapse="specialities.addFormCollapsed" ng-submit="specialities.addSpeciality()">
+        <!--SAVE FORM-->
+        <form name="saveForm" class="row" uib-collapse="specialities.saveFormCollapsed" ng-submit="specialities.saveSpeciality()">
             <div class="col-md-3">
-                <input class="form-control" name="specialityName" type="text" ng-model="specialities.newSpeciality.speciality_name"
+                <input class="form-control" name="specialityName" type="text" ng-model="specialities.speciality.speciality_name"
                        placeholder="назва (обов'язково!)"  ng-minlength="{{specialities.minNameLength}}"
-                       ng-maxlength="{{specialities.maxNameLength}}" required>
-                <span ng-show="addForm.specialityName.$error.maxlength"><br>Макс. довжина назви {{specialities.maxNameLength}}!</span>
-                <span ng-show="addForm.specialityName.$error.minlength"><br>Мін. довжина назви {{specialities.minNameLength}}!</span>
+                       ng-maxlength="{{specialities.maxNameLength}}" required validate-directive>
+                <span ng-show="saveForm.specialityName.$error.maxlength"><br>Макс. довжина назви {{specialities.maxNameLength}}!</span>
+                <span ng-show="saveForm.specialityName.$error.minlength"><br>Мін. довжина назви {{specialities.minNameLength}}!</span>
+                <span ng-show="saveForm.specialityName.$error.validText"><br>Назва має містити хоча б одну літеру!</span>
+                <span ng-show="saveForm.specialityName.$error.alreadyExist && saveForm.specialityName.$dirty"><br>Така назва вже існує!</span>
             </div>
             <div class="col-md-3">
-                <input class="form-control" name="specialityCode" type="text" ng-model="specialities.newSpeciality.speciality_code"
+                <input class="form-control" name="specialityCode" type="text" ng-model="specialities.speciality.speciality_code"
                        placeholder="код (обов'язково!)" required validate-directive>
-                <span ng-show="addForm.specialityCode.$error.validCode"><br>Приклади коду: 6.123456, 7.12345678, 8.12345678</span>
-                <span ng-show="addForm.specialityCode.$error.existCode"><br>Такий код вже існує! Введіть інший!</span>
+                <span ng-show="saveForm.specialityCode.$error.validText"><br>Приклад коду: 6.123456, 7.12345678, 8.12345678</span>
+                <span ng-show="saveForm.specialityCode.$error.alreadyExist && saveForm.specialityCode.$dirty"><br>Такий код вже існує!</span>
             </div>
             <div class="col-md-6 pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="addForm.$invalid" title="Зберегти">
+                <button type="submit" class="btn btn-success" title="Зберегти" ng-disabled="saveForm.$invalid">
                     <i class="glyphicon glyphicon-floppy-saved"></i>
                 </button>
-                <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="specialities.showAddForm()">
+                <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="specialities.hideSaveForm()">
                     <i class="glyphicon glyphicon-floppy-remove"></i>
                 </button>
-            </div>
-        </form>
-        <!--EDIT FORM-->
-        <form name="editForm" class="row" uib-collapse="specialities.editFormCollapsed" ng-submit="specialities.editSpeciality()">
-            <div class="col-md-6 pull-right">
-                <button type="submit" class="btn btn-success" ng-disabled="specialities.allowAddEdit(specialities.editModel)"
-                        title="Зберегти">
-                    <i class="glyphicon glyphicon-floppy-saved"></i>
-                </button>
-                <a class="btn btn-danger" title="Відмінити" ng-click="specialities.editFormCollapsed = !specialities.editFormCollapsed">
-                    <i class="glyphicon glyphicon-floppy-remove"></i>
-                </a>
-                <span  ng-show="editForm.specialityname.$error.maxlength">Max length 100 symbols!</span>
-                <span  ng-show="specialities.allowAddEdit(specialities.editModel)">Мінімум символів: {{specialities.minSymbs}}!</span>
-            </div>
-            <div class="col-md-3 ">
-                <input class="form-control" name="specialityname" type="text" ng-model="specialities.editModel.speciality_name"
-                       ng-minlength="3" ng-maxlength="100" required>
-            </div>
-            <div class="col-md-3">
-                <input class="form-control" name="specialitycode" type="text" ng-model="specialities.editModel.speciality_code"
-                       ng-minlength="3" required>
             </div>
         </form>
     </div>
@@ -74,14 +54,14 @@
             <tbody>
             <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
-                <td class="clip">{{speciality.speciality_name}}</td>
+                <td class="clip"><a ng-click="specialities.filterGroups(specialities.speciality)" ui-sref="admin.groups">{{speciality.speciality_name}}</a></td>
                 <td class="clip">{{speciality.speciality_code}}</td>
                 <td class="clip">
-                    <button class="btn btn-warning" ng-click="specialities.showEditForm($index, speciality)"
+                    <button class="btn btn-warning" ng-click="specialities.showSaveForm(speciality)"
                             title="Редагувати {{::speciality.speciality_name}}">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
-                    <button class="btn btn-danger"  ng-click="specialities.removeSpeciality($index)"
+                    <button class="btn btn-danger"  ng-click="specialities.removeSpeciality(speciality)"
                             title="Видалити {{::speciality.speciality_name}}">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>

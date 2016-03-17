@@ -6,18 +6,15 @@
 
     SpecialitiesController.$inject = ["specialitiesService", "APP_CONST", "SPECIALITIES_CONST"];
 
-    function SpecialitiesController (specialitiesService, APP_CONST, SPECIALITIES_CONST) {
+    function SpecialitiesController (specialitiesService, ENTITY_RANGE_ON_PAGE, SPECIALITIES_CONST) {
         var vm = this;
-        vm.showAddForm = showAddForm;
-        vm.showEditForm = showEditForm;
-        vm.addFormCollapsed = true;
-        vm.editFormCollapsed = true;
-        vm.newSpeciality = {};
-        vm.editModel = {};
+        vm.showSaveForm = showSaveForm;
+        vm.hideSaveForm = hideSaveForm;
+        vm.saveFormCollapsed = true;
         vm.headElements = specialitiesService.getHeader();
-        vm.addSpeciality = addSpeciality;
+        vm.saveSpeciality = saveSpeciality;
         vm.removeSpeciality = removeSpeciality;
-        vm.editSpeciality = editSpeciality;
+        vm.felterGroups = filterGroups;
         vm.minNameLength = SPECIALITIES_CONST.MIN_NAME_LENGTH;
         vm.maxNameLength = SPECIALITIES_CONST.MAX_NAME_LENGTH;
         vm.maxSize = 5;
@@ -35,49 +32,38 @@
             });
         }
 
-        function showAddForm() {
-            vm.addFormCollapsed = !vm.addFormCollapsed;
-            vm.editFormCollapsed = true;
+        function showSaveForm(speciality) {
+            vm.saveFormCollapsed = false;
+            if (speciality === null) {
+                vm.speciality = {};
+            } else {
+                vm.speciality = speciality;
+            }
+        }
+        function hideSaveForm() {
+            vm.saveFormCollapsed = true;
+            vm.speciality = {};
         }
 
-        function showEditForm(index, speciality) {
-            vm.editFormCollapsed = false;
-            vm.addFormCollapsed = true;
-            vm.index = index;
-            vm.editModel = {
-                speciality_name: speciality.speciality_name,
-                speciality_code: speciality.speciality_code
-            };
-        }
-
-        function getSpecialities() {
-            specialitiesService.getSpecialities().then(function(data) {
-                vm.all = data;
+        function saveSpeciality() {
+            specialitiesService.saveSpeciality(vm.speciality).then(function(res) {
+                activate();
+                vm.hideSaveForm();
             });
         }
 
-        function addSpeciality() {
-            specialitiesService.addSpeciality(vm.newSpeciality).then(function(data) {
+        function removeSpeciality(speciality) {
+            specialitiesService.removeSpeciality(speciality.speciality_id).then(function(res) {
                 activate();
-                vm.newSpeciality = {};
-            })
+            });
         }
 
-        function removeSpeciality(index) {
-            vm.index = index
-            specialitiesService.removeSpeciality(vm.list[vm.index].speciality_id).then(function(res) {
-                activate();
-            })
-        }
+        function filterGroups(){
 
-        function editSpeciality() {
-            specialitiesService.editSpeciality(vm.list[vm.index].speciality_id, vm.editModel).then(function(res) {
-                activate();
-            })
         }
 
         function getNextRange() {
-            vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
+            vm.currentRecordsRange =(vm.currentPage - 1) * ENTITY_RANGE_ON_PAGE;
         }
 
         function pageChanged(){

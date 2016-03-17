@@ -7,31 +7,48 @@
     validateDirective.$inject = ["SPECIALITIES_CONST", "specialitiesService"];
 
     function validateDirective(SPECIALITIES_CONST, specialitiesService) {
-        var all = specialitiesService.getSpecialities().then(function(data){
-            return data;
-        });
+        var all;
+        getSpecialities();
 
-        function validCode(regexp, code) {
-            return regexp.test(code);
+        function getSpecialities(){
+            specialitiesService.getSpecialities().then(function(data) {
+               all = data;
+            });
         }
 
-        function existCode(all, code){
-            var arr = all.$$state.value;
-            for (var i = 0; i < arr.lenght; i++) {
-                console.log(arr[i].speciality_code);
-                return ((arr[i].speciality_code.indexOf(code) < 0) ? false : true);
+        function validText(regexp, text) {
+            return regexp.test(text);
+        }
+
+        function alreadyExist(arrObj, key, text){
+            for (var i = 0; i < arrObj.length; i++) {
+                if (arrObj[i][key] === text) {
+                    return true;
+                };
             };
+            return false;
+        }
+
+        function whichInput(inputName){
+            var attr = {};
+            if (inputName === "specialityName"){
+                attr.regexp = SPECIALITIES_CONST.NAME_REGEXP;
+                attr.key = "speciality_name";
+            } else if (inputName === "specialityCode"){
+                attr.regexp = SPECIALITIES_CONST.CODE_REGEXP;
+                attr.key = "speciality_code";
+            }
+
+            return attr;
         }
 
         return {
             restrict: "EA",
             require: "ngModel",
-            //controller: "SpecialitiesController",
-            //controllerAs: "specialities",
             link: function(scope, element, attr, mCtrl) {
                 function validation(value) {
-                    mCtrl.$setValidity("validCode", validCode(SPECIALITIES_CONST.CODE_REGEXP, value));
-                    mCtrl.$setValidity("existCode", existCode(all, value));
+                    mCtrl.$setValidity("validText", validText(whichInput(attr.name).regexp, value));
+                    mCtrl.$setValidity("alreadyExist", !alreadyExist(all, whichInput(attr.name).key, value));
 
                     return value;
                 }

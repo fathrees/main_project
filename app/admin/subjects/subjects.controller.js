@@ -12,7 +12,7 @@
         vm.formCollapsed = true;
         vm.hideForm = hideForm;
         vm.showForm = showForm;
-        vm.allowAddEdit = allowAddEdit;
+        vm.allowSubmit = allowSubmit;
         vm.saveEntity = saveEntity;
         vm.removeSubject = removeSubject;
         vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
@@ -20,6 +20,9 @@
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
+        vm.showPagination = function (){
+            return (vm.totalItems > 10)
+        }
         activate();
 
         function activate() {
@@ -34,7 +37,7 @@
             vm.formCollapsed = true;
         }
 
-        function allowAddEdit (obj) {
+        function allowSubmit (obj) {
             if (obj !== undefined) {
 
                 return !(obj.attempts && obj.tasks && obj.test_name && obj.time_for_test);
@@ -68,9 +71,16 @@
         }
 
         function removeSubject(subject) {
+            if(confirm(MESSAGE.DEL_CONFIRM)){
             subjectsService.removeSubject(subject).then(function (res) {
+                if (res.response === "ok") {
+                    alert(MESSAGE.DEL_SUCCESS)
+                } else if (res.response = "error 23000") {
+                    alert(MESSAGE.DEL_ERROR);
+                }
                 activate();
             })
+            }
         }
 
         function getNextRange ()   {

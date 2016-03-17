@@ -19,6 +19,6 @@
             <i class="glyphicon glyphicon-floppy-remove"></i>
         </button>
         <span  ng-show="addform.subjectname.$error.maxlength">Max length 100 symbols!</span>
-        <span  ng-show="subjects.allowAddEdit(subjects.newSubject)">Min length for all fields 3 symbols!</span>
+        <span  ng-show="subjects.allowSubmit(subjects.newSubject)">Min length for all fields 3 symbols!</span>
     </div>
 </form>

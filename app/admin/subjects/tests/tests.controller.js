@@ -17,7 +17,6 @@
         vm.saveEntity = saveEntity;
         vm.removeTest = removeTest;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
-;
 
         activate();
 

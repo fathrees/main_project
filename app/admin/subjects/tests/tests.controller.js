@@ -4,95 +4,84 @@
     angular.module("app.admin.subjects")
         .controller("TestsController", TestsController);
 
-    TestsController.$inject = ["$stateParams", "testsService"];
+    TestsController.$inject = ["$stateParams", "testsService", "subjectsService", "REGEXP", "MESSAGE"];
 
-    function TestsController($stateParams, testsService) {
+    function TestsController($stateParams, testsService, subjectsService, REGEXP, MESSAGE) {
         var vm = this;
         vm.headElements = testsService.getHeader();
-        vm.addFormCollapsed = true;
-        vm.submitFunction = "sdfksdl;gf()";
-        vm.editFormCollapsed = true;
-        vm.showAddForm = showAddForm;
-        vm.showEditForm = showEditForm;
-        vm.allowAddEdit = allowAddEdit;
-        vm.addTest = addTest;
-        vm.currentTest = {};
-        vm.editTest = editTest;
+        vm.status = testsService.getStatus();
+        vm.formCollapsed = true;
+        vm.hideForm = hideForm;
+        vm.showForm = showForm;
+        vm.allowSubmit = allowSubmit;
+        vm.saveEntity = saveEntity;
         vm.removeTest = removeTest;
-        vm.newTest = {
-            subject_id: $stateParams.subject_id
-        }
+        vm.onlyNumber = REGEXP.ONLY_NUMBER;
+;
+
         activate();
 
         function activate (){
             testsService.getTests($stateParams.subject_id).then(function(data){
                 vm.list = data;
+                console.log(data);
             });
+            subjectsService.getOneSubject($stateParams.subject_id).then(function(data){
+                vm.currentSubject = data[0].subject_name;
+;
+            })
         }
 
-        function showAddForm() {
-            vm.addFormCollapsed = !vm.addFormCollapsed;
-            vm.editFormCollapsed = true;
-
+        function hideForm() {
+            vm.formCollapsed = true;
         }
 
-        function showEditForm(index, test) {
-            vm.editFormCollapsed = true;
-            vm.addFormCollapsed = false;
-            vm.index = index;
-            vm.submitFunction = "tests.editTest()";
-            vm.newTest = {
-                test_name: test.test_name,
-                tasks: +(test.tasks),
-                time_for_test: +(test.time_for_test),
-                subject_id: $stateParams.subject_id,
-                enabled: +(test.enabled),
-                attempts: +(test.attempts)
-            };
-        }
-
-        function allowAddEdit (obj) {
-
-            return !(obj.attempts && obj.tasks && obj.test_name && obj.time_for_test && obj.enabled);
-        }
-
-        function addTest () {
-            testsService.addTest(vm.newTest).then(function (data) {
-                if(data.response === "ok"){
-                    vm.list.push(vm.newTest);
-                } else{
-                    console.log("Помилка. Тест не додано");
-                };
-                vm.newTest = {
+        function showForm(test) {
+            vm.formCollapsed = false;
+            if (test === undefined) {
+                vm.test = {
                     subject_id: $stateParams.subject_id
-                };
-            })
-        }
-
-        function removeTest(index) {
-            testsService.removeTest(vm.list[index].test_id).then(function (res) {
-                if (res.response === "ok") {
-                }else if(res.response = "error 23000"){
-                    console.log("Тест не видалено. необхідно видалити запитання в тесті");
                 }
-                activate();
-            })
+            }else{
+                vm.test = test;
+            }
         }
 
-        function editTest() {
-            testsService.editTest(vm.list[vm.index].test_id, vm.currentTest).then(function (data) {
+        function allowSubmit (obj) {
+            if (obj !== undefined) {
+
+                return !(obj.attempts && obj.tasks && obj.test_name && obj.time_for_test);
+            }else {
+
+                return true;
+            }
+
+        }
+
+        function saveEntity () {
+            testsService.saveTest(vm.test).then(function (data) {
                 if(data.response === "ok"){
-                    vm.list[vm.index].test_name = vm.currentTest.test_name;
-                    vm.list[vm.index].tasks = vm.currentTest.tasks;
-                    vm.list[vm.index].time_for_test = vm.currentTest.time_for_test;
-                    vm.list[vm.index].enabled = vm.currentTest.enabled;
-                    vm.list[vm.index].attempts = vm.currentTest.attempts;
-                    vm.editFormCollapsed = true;
+                    alert(MESSAGE.SAVE_SUCCSES);
+
                 } else{
-                    console.log("Помилка. Зміни не збережені");
+                    alert(MESSAGE.SAVE_ERROR);
                 };
+                activate();
+                vm.test = {};
             })
         }
 
+        function removeTest(test) {
+            if(confirm(MESSAGE.DEL_CONFIRM)) {
+                testsService.removeTest(test.test_id).then(function (res) {
+                    if (res.response === "ok") {
+                        alert(MESSAGE.DEL_SUCCESS)
+                    } else if (res.response = "error 23000") {
+                        alert(MESSAGE.DEL_ERROR);
+                    }
+                    activate();
+                })
+            }
+        }
     }
 })();

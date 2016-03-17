@@ -1,23 +1,40 @@
-
 (function() {
     "use strict";
 
-    var domain = "http://dtapi.local/";
-
     angular.module("app")
-        .constant("APP_CONST", {
-        QUANTITY_ON_PAGE: 10
-    })
-        .constant("URL", {
-            LOGIN: domain + "login/index",
-            ISLOGGED: domain + "login/isLogged",
-            LOGOUT: domain + "login/logout",
-
-            ADD_SUBJECT: domain + "subject/insertData",
-            COUNT_SUBJECTS: domain + "subject/countRecords",
-            EDIT_SUBJECT: domain + "subject/update/",
-            GET_SUBJECT_RANGE: domain + "subject/getRecordsRange/",
-            GET_SUBJECTS: domain + "subject/getRecords",
-            REMOVE_SUBJECT: domain + "subject/del/",
-        });
+        .constant("BASE_URL", "http://dtapi.local/")
+        .constant("AUTH", {
+            LOGIN: "login/index",
+            IS_LOGGED: "login/isLogged",
+            LOGOUT: "login/logout"
+        })
+        .constant("ENTITIES", {
+            FACULTY: "faculty",
+            SPECIALITY: "speciality",
+            GROUP: "group",
+            STUDENT: "student",
+            SUBJECT: "subject",
+            TEST: "test",
+            TEST_DETAIL: "test_detail",
+            QUESTION: "question",
+            ANSWER: "answer",
+            RESULT: "result"
+        })
+        .constant("ENTITIES_UKR", {
+            FACULTY: "факультетів",
+            SPECIALITY: "спеціальностей",
+            GROUP: "груп",
+            STUDENT: "студентів",
+            SUBJECT: "предметів",
+            TEST: "тестів"
+        })
+        .constant("ACTIONS", {
+            ADD_ENTITY: "/insertData/",
+            COUNT_ENTITY: "/countRecords/",
+            EDIT_ENTITY: "/update/",
+            GET_ENTITY_RANGE: "/getRecordsRange/",
+            GET_ENTITIES: "/getRecords/",
+            REMOVE_ENTITY: "/del/"
+        })
+        .constant("ENTITY_RANGE_ON_PAGE", 10)
 })();

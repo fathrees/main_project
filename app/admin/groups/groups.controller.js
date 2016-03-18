@@ -15,70 +15,101 @@
         vm.editName = null;
         vm.editFaculty = null;
         vm.editSpeciality = null;
+        /////////////////////////////////////////////////
+        vm.associativeFaculty = groupsService.gFaculties; // move this to facultiess
+        vm.associativeSpeciality = groupsService.gSpecialities; //move to spec.
+        activate();
 
         vm.checkForError = function() {
             if(document.getElementById('table')) {vm.showError = document.getElementById('table').children.length == 1;}
         };
 
-        // gets all the groups
-        groupsService.getGroups().then(function(result) {
-            vm.allGroups = result;
-        });
+        //gets all the groups from backend
+        function activate() {
+            groupsService.getGroups().then(function(data) {
+                vm.list = data;
+            })
+        }
 
+        // to sort data on view
         vm.selectedFaculty = null;
         vm.selectedSpeciality = null;
-
         vm.facultyFilter = function(group) {
             vm.checkForError();
-            return vm.selectedFaculty == null || group.faculty == vm.selectedFaculty;
+            return vm.selectedFaculty == null || vm.associativeFaculty[group.faculty_id] == vm.selectedFaculty;
         };
-
         vm.specialityFilter = function(group) {
             vm.checkForError();
-            return vm.selectedSpeciality == null || group.speciality == vm.selectedSpeciality;
+            return vm.selectedSpeciality == null || vm.associativeSpeciality[group.speciality_id] == vm.selectedSpeciality;
         };
+        vm.filterUndefined = function(entity) {
+            return entity !== undefined;
+        }
+        ///////////////////////////////////////////////////////////////////
 
-        //CRUD
-
+        // delete
         vm.removeGroup = function(group) {
             var ask = confirm('Ви впевнені, що бажаєте видалити групу ' + group.group_name + '?');
-            if (ask) {vm.allGroups.splice(vm.allGroups.indexOf(group), 1)}
+            if (ask) {
+                groupsService.removeGroup(group.group_id).then(function(data) {
+                    data.response.indexOf('error') !== -1 ? alert('Не можна видалити групу, в якій є студенти') : console.log('Групу успішно видалено')
+                    activate();
+                })
+            }
+        }
+        // edit
+        vm.toggleEdit = function(group) { // shows form for editing and fills the fields with initial values
+            if(group !== undefined) {
+                vm.editName = group.group_name;
+                vm.editedGroupId = group.group_id;
+                vm.editFaculty = vm.associativeFaculty[group.faculty_id];
+                vm.editSpeciality = vm.associativeSpeciality[group.speciality_id];
+            }
+            vm.showEditPanel = !vm.showEditPanel;
         };
-
-        vm.addGroup = function() {
-            vm.allGroups.push({
-                group_name: vm.newGroup,
-                group_id: Math.floor(Math.random()*543),
-                faculty: vm.newGroupFaculty,
-                speciality: vm.newGroupSpeciality,
-                faculty_id: Math.floor(Math.random()*543),
-                speciality_id: Math.floor(Math.random()*543)
-            });
-            vm.toggleAdd();
-        };
-
-        vm.editGroup = function(name, faculty, speciality) {
-            vm.allGroups[vm.indexOfEdit] = {
-                group_name: name,
-                faculty: faculty,
-                speciality: speciality
+        vm.editGroup = function(g_name, f_name, s_name) {
+            var group_id = vm.editedGroupId;
+            var editing = {
+                group_name: g_name,
+                faculty_id: vm.associativeFaculty.indexOf(f_name),
+                speciality_id: vm.associativeSpeciality.indexOf(s_name)
             };
-            console.log(vm.allGroups[vm.indexOfEdit]);
+            groupsService.editGroup(group_id, editing).then(function(data) {
+                console.log("Дані про групу успішно змінено");
+                activate();
+            })
             vm.toggleEdit();
         };
+        //add
+        vm.addGroup = function(g_name, f_name, s_name) {
+            vm.newGroup = '';
+            vm.newGroupFaculty = '';
+            vm.newGroupSpeciality = '';
+            var editing = {
+                group_name: g_name,
+                faculty_id: vm.associativeFaculty.indexOf(f_name),
+                speciality_id: vm.associativeSpeciality.indexOf(s_name)
+            };
+            groupsService.addGroup(editing).then(function(data) {
+                console.log("Групу додано до бази даних");
+                activate();
+            })
+        }
+
+
+
+        //teeeeeeeeeeeeesssssssssssstttttttttttt
+        vm.test1 = function() {
+            console.log(vm.newGroup);
+            //console.log(groupsService.gSpecialities);
+            //console.log(vm.list);
+            //console.log(vm.selectedFaculty);
+            //console.log(document.getElementById('table').children.length);
+        }
+
 
         vm.toggleAdd = function() {
             vm.showAddPanel = !vm.showAddPanel;
-        };
-
-        vm.toggleEdit = function(group) {
-            if(group !== undefined) {
-                vm.indexOfEdit = vm.allGroups.indexOf(group);
-                vm.editName = group.group_name;
-                vm.editFaculty = group.faculty;
-                vm.editSpeciality = group.speciality;
-            }
-            vm.showEditPanel = !vm.showEditPanel;
         };
 
         vm.headers = groupsService.headers;

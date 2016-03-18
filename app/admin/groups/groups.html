@@ -1,14 +1,19 @@
+
+<button ng-click="groups.test1()">TEST</button>
+
 <div class="my-app-name-container groups-container">
 <div class="panel panel-default">
+    <!-- Choose -->
     <div class="panel-heading">
         <div class="input-group">
-            <input type="text" ng-model="search.group_name" class="form-control">
+            <input type="text" ng-model="search.group_name" class="form-control" placeholder="введіть назву групи">
             <span class="input-group-btn"><button class="btn btn-success form-control" ng-click="groups.toggleAdd()"><i class="glyphicon glyphicon-plus"></i></button></span>
         </div>
-        <select class="form-control" ng-model="groups.selectedFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+        <select class="form-control" ng-model="groups.selectedFaculty" ng-options="faculty for faculty in groups.associativeFaculty | filter:groups.filterUndefined | orderBy:'faculty'">
+        <!--<select class="form-control" ng-model="groups.selectedFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">-->
             <option value="">Виберіть факультет</option>
         </select>
-        <select class="form-control" ng-model="groups.selectedSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+        <select class="form-control" ng-model="groups.selectedSpeciality" ng-options="speciality for speciality in groups.associativeSpeciality | filter:groups.filterUndefined | orderBy:'speciality'">
             <option value="">Виберіть спецальність</option>
         </select>
     </div>
@@ -22,13 +27,13 @@
                     <input type="text" class="form-control" placeholder="введіть назву групи" ng-model="groups.newGroup"/>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <select class="form-control" ng-model="groups.newGroupFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+                    <select class="form-control" ng-model="groups.newGroupFaculty" ng-options="faculty for faculty in groups.associativeFaculty | filter:groups.filterUndefined | orderBy:'faculty'">
                         <option value="">Виберіть факультет</option>
                     </select>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
-                    <select class="form-control" ng-model="groups.newGroupSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+                    <select class="form-control" ng-model="groups.newGroupSpeciality" ng-options="speciality for speciality in groups.associativeSpeciality | filter:groups.filterUndefined | orderBy:'speciality'">
                         <option value="">Виберіть спецальність</option>
                     </select>
                 </div>
@@ -36,7 +41,7 @@
 
             <div class="col-sm-3"  style="padding-top: 30px; text-align: center">
                 <div class="col-xs-12">
-                    <button class="btn btn-success btn-md" ng-click="groups.addGroup()" ng-disabled="groups.allowAdd()">Зберегти групу</button>
+                    <button class="btn btn-success btn-md" ng-click="groups.addGroup(groups.newGroup, groups.newGroupFaculty, groups.newGroupSpeciality)" ng-disabled="groups.allowAdd()">Зберегти групу</button>
                 </div>
                 <div class="col-xs-12">
                     <button class="btn btn-danger btn-md" ng-click="groups.toggleAdd()">Відмінити</button>
@@ -45,7 +50,6 @@
         </form>
     </div>
 </div>
-
     <!-- Edit entity -->
 <div>
     <div ng-show="groups.showEditPanel">
@@ -56,13 +60,13 @@
                     <input type="text" class="form-control" ng-model="groups.editName">
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <select class="form-control" ng-model="groups.editFaculty" ng-options="group for group in groups.allGroups | orderBy:'faculty' | unique:'faculty'">
+                    <select class="form-control" ng-model="groups.editFaculty" ng-options="faculty for faculty in groups.associativeFaculty | filter:groups.filterUndefined | orderBy:'faculty'">
                         <option value="">Виберіть факультет</option>
                     </select>
                 </div>
 
                 <div class="col-xs-12 col-sm-6">
-                    <select class="form-control" ng-model="groups.editSpeciality" ng-options="group for group in groups.allGroups | orderBy:'speciality' | unique:'speciality'">
+                    <select class="form-control" ng-model="groups.editSpeciality" ng-options="speciality for speciality in groups.associativeSpeciality | filter:groups.filterUndefined | orderBy:'speciality'">
                         <option value="">Виберіть спецальність</option>
                     </select>
                 </div>
@@ -80,35 +84,35 @@
     </div>
 </div>
 
-
-
     <table class="table table-stripped scroll-block">
         <thead>
         <tr>
             <th ng-repeat="header in groups.headers" class="{{ header.class }}">{{ header.header }}</th>
         </tr>
         </thead>
-        <tbody id="table">
-        <tr ng-repeat="group in groups.allGroups | filter:groups.facultyFilter | filter:groups.specialityFilter | filter:search | orderBy:'faculty'">
-            <td class="small-space">
-                {{ $index + 1 }}
-            </td>
 
-            <td class="medium-space">
+
+        <tbody id="table">
+        <tr ng-repeat="group in groups.list | filter:search | orderBy:['faculty_id', 'speciality_id', 'group_name'] | filter:groups.facultyFilter | filter:groups.specialityFilter">
+        <!--<tr ng-repeat="group in groups.allGroups | filter:groups.facultyFilter | filter:groups.specialityFilter | filter:search | orderBy:'faculty'">-->
+
+            <td>
                 <a href="#" ui-sref="admin.students({group_id: group.group_id})">{{ group.group_name }}</a>
             </td>
 
-            <td class="large-space">
-                <a href="#" ui-sref="admin.faculty({faculty_Id: group.faculty_id})"> {{ ::group.faculty }}</a>
+            <td>
+                {{ ::groups.associativeFaculty[group.faculty_id] }}
             </td>
 
-            <td class="large-space">
-                <a href="#" ui-sref="admin.speciality({speciality_id: group.speciality_id})"> {{ ::group.speciality }} </a>
+            <td>
+                {{ ::groups.associativeSpeciality[group.speciality_id] }}
             </td>
 
-            <td class="medium-space">
-                <button class="btn btn-warning" ng-click="groups.toggleEdit(group)"><i class="glyphicon glyphicon-pencil"></i></button>
-                <button class="btn btn-danger" ng-click="groups.removeGroup(group)"><i class="glyphicon glyphicon-remove"></i></button>
+            <td>
+                <button class="btn btn-warning" ng-click="groups.toggleEdit(group)"><i
+                    class="glyphicon glyphicon-pencil"></i></button>
+                <button class="btn btn-danger" ng-click="groups.removeGroup(group)"><i
+                    class="glyphicon glyphicon-remove"></i></button>
             </td>
         </tr>
         <tr>

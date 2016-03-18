@@ -1,8 +1,6 @@
 (function() {
     "use strict";
 
-    var domain = "http://dtapi.local/";
-
     angular.module("app")
         .constant("BASE_URL", "http://dtapi.local/")
         .constant("AUTH", {

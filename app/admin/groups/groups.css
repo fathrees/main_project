@@ -1,41 +1,41 @@
-table.scroll-block {
-    width: 100%;
-    border-spacing: 0;
-}
+/*table.scroll-block {*/
+    /*width: 100%;*/
+    /*border-spacing: 0;*/
+/*}*/
 
-table.scroll-block th,
-table.scroll-block td,
-table.scroll-block tr,
-table.scroll-block thead,
-table.scroll-block tbody { display: block;}
+/*table.scroll-block th,*/
+/*table.scroll-block td,*/
+/*table.scroll-block tr,*/
+/*table.scroll-block thead,*/
+/*table.scroll-block tbody { display: block;}*/
 
-table.scroll-block tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
-}
+/*table.scroll-block tr:after {*/
+    /*content: ' ';*/
+    /*display: block;*/
+    /*visibility: hidden;*/
+    /*clear: both;*/
+/*}*/
 
-table.scroll-block tbody {
-    height: 52vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+/*table.scroll-block tbody {*/
+    /*height: 49vh;*/
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
+/*}*/
 
-.small-space {
-    width: 4%;
-    float:left;
-}
+/*.small-space {*/
+    /*width: 0%;*/
+    /*float:left;*/
+/*}*/
 
-.large-space {
-    width: 36%;
-    float: left;
-}
+/*.large-space {*/
+    /*width: 38%;*/
+    /*float: left;*/
+/*}*/
 
-.medium-space {
-    width: 12%;
-    float: left;
-}
+/*.medium-space {*/
+    /*width: 12%;*/
+    /*float: left;*/
+/*}*/
 
 .groups-container .glyphicon {
     display: inline-block;

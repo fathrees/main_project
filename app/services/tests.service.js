@@ -19,7 +19,6 @@
         return service;
 
         function _successCallback(response) {
-
             return response.data;
         }
         function _errorCallback(response) {

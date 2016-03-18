@@ -9,7 +9,7 @@
                     </button>
                 </div>
             </div>
-            <p class="col-xs-12 col-md-6 ">Тести предмету: {{tests.currentSubject}}</p>
+            <h3 class="col-xs-12 col-md-6">Тести предмету: {{tests.currentSubject}}</h3>
         </div>
         <div ng-include="'app/admin/subjects/tests/save-test.html'" ></div>
     </div>
@@ -50,5 +50,9 @@
             </tr>
             </tbody>
         </table>
+        <uib-pagination ng-show="tests.showPagination" total-items="tests.totalItems" ng-change="tests.getItemsPerPage()"
+                        ng-model="tests.currentPage" max-size="tests.maxSize" class="pagination-sm"
+                        boundary-link-numbers="true" items-per-page="tests.entitiesPerPage" rotate="false"></uib-pagination>
+
     </div>
 </div>

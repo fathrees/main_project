@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("TestsController", TestsController);
 
-    TestsController.$inject = ["$stateParams", "testsService", "subjectsService", "REGEXP", "MESSAGE"];
+    TestsController.$inject = ["$stateParams", "testsService", "subjectsService", "REGEXP", "MESSAGE", "ENTITY_RANGE_ON_PAGE"];
 
-    function TestsController($stateParams, testsService, subjectsService, REGEXP, MESSAGE) {
+    function TestsController($stateParams, testsService, subjectsService, REGEXP, MESSAGE, ENTITY_RANGE_ON_PAGE) {
         var vm = this;
         vm.headElements = testsService.getHeader();
         vm.status = testsService.getStatus();
@@ -18,16 +18,35 @@
         vm.removeTest = removeTest;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
 
+        vm.list = [];
+        vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
+        vm.maxSize = 3;
+        vm.currentPage = 1;
+        vm.currentRecordsRange = 0;
+        vm.getItemsPerPage = getItemsPerPage;
+        vm.numPages = function () {
+            return Math.ceil(vm.totalItems / $scope.numPerPage);
+        };
+
+
         activate();
+
+
 
         function activate (){
             testsService.getTests($stateParams.subject_id).then(function(data){
-                vm.list = data;
-                console.log(data);
+                vm.totalList = data;
+                getItemsPerPage();
+                vm.totalItems = vm.totalList.length;
+                if(vm.totalItems > ENTITY_RANGE_ON_PAGE) {
+                    vm.showPagination = true;
+                }else {
+                    vm.showPagination = false
+                }
+
             });
             subjectsService.getOneSubject($stateParams.subject_id).then(function(data){
                 vm.currentSubject = data[0].subject_name;
-;
             })
         }
 
@@ -63,7 +82,7 @@
                     alert(MESSAGE.SAVE_SUCCSES);
 
                 } else{
-                    alert(MESSAGE.SAVE_ERROR);
+                    alert(MESSAGE.SAVE_ERROR +  " " + data.response);
                 };
                 activate();
                 vm.test = {};
@@ -81,6 +100,12 @@
                     activate();
                 })
             }
+        }
+
+        function getItemsPerPage() {
+            vm.currentRecordsRange = (vm.currentPage - 1) * vm.entitiesPerPage
+            var end = vm.currentRecordsRange + vm.entitiesPerPage;
+            vm.list = vm.totalList.slice(vm.currentRecordsRange, end);
         }
     }
 })();

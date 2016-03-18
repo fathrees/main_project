@@ -4,23 +4,19 @@
     angular.module("app.admin.subjects")
         .controller("SubjectsController", SubjectsController);
 
-    SubjectsController.$inject = ["subjectsService", "APP_CONST"];
+    SubjectsController.$inject = ["subjectsService", "ENTITY_RANGE_ON_PAGE", "MESSAGE"];
 
-    function SubjectsController (subjectsService, APP_CONST) {
+    function SubjectsController (subjectsService, ENTITY_RANGE_ON_PAGE, MESSAGE) {
         var vm = this;
-        vm.newSubject = {};
-        vm.editModel = {};
         vm.headElements = subjectsService.getHeader();
-        vm.addFormCollapsed = true;
-        vm.editFormCollapsed = true;
-        vm.allowAddEdit = allowAddEdit;
-        vm.showAddForm = showAddForm;
-        vm.showEditForm = showEditForm;
-        vm.addSubject = addSubject;
+        vm.formCollapsed = true;
+        vm.hideForm = hideForm;
+        vm.showForm = showForm;
+        vm.allowSubmit = allowSubmit;
+        vm.saveEntity = saveEntity;
         vm.removeSubject = removeSubject;
-        vm.editSubject = editSubject;
-        vm.entitiesPerPage = APP_CONST.QUANTITY_ON_PAGE;
-        vm.maxSize = 5;
+        vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
+        vm.maxSize = 3;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
@@ -29,59 +25,67 @@
         function activate() {
             subjectsService.totalItems().then(function (quantity) {
                 vm.totalItems = +quantity;
+                if(vm.totalItems > ENTITY_RANGE_ON_PAGE) {
+                    vm.showPagination = true;
+                }else {
+                    vm.showPagination = false
+                }
             });
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
-            });
+            })}
+
+        function hideForm() {
+            vm.formCollapsed = true;
         }
 
-        function allowAddEdit (obj) {
+        function allowSubmit (obj) {
+            if (obj !== undefined) {
 
-            return !(obj.subject_name && obj.subject_description);
+                return !(obj.attempts && obj.tasks && obj.test_name && obj.time_for_test);
+            }else {
+
+                return true;
+            }
         }
 
-        function showAddForm() {
-            vm.addFormCollapsed = !vm.addFormCollapsed;
-            vm.editFormCollapsed = true;
-        }
+        function saveEntity () {
+            subjectsService.saveSubject(vm.subject).then(function (data) {
+                if(data.response === "ok"){
+                    alert(MESSAGE.SAVE_SUCCSES);
 
-        function showEditForm(index, subject) {
-            vm.editFormCollapsed = false;
-            vm.addFormCollapsed = true;
-            vm.index = index;
-            vm.editModel = {
-                subject_name: subject.subject_name,
-                subject_description: subject.subject_description
-            };
-        }
-
-        function addSubject() {
-            subjectsService.addSubject(vm.newSubject).then(function (data) {
+                } else{
+                    alert(MESSAGE.SAVE_ERROR);
+                };
                 activate();
-                vm.newSubject = {};
+                vm.subject = {};
             })
         }
 
-        function removeSubject(index) {
-            vm.index = index
-            subjectsService.removeSubject(vm.list[vm.index].subject_id).then(function (res) {
-                activate();
-            })
+        function showForm(subject) {
+            vm.formCollapsed = false;
+            if (subject === undefined) {
+                vm.subject = {}
+            } else {
+                vm.subject = subject;
+            }
         }
 
-        function editSubject() {
-            subjectsService.editSubject(vm.list[vm.index].subject_id, vm.editModel).then(function (config) {
-                vm.list[vm.index].subject_name = config.subject_name;
-                vm.list[vm.index].subject_description = config.subject_description;
-            })
+        function removeSubject(subject) {
+            if(confirm(MESSAGE.DEL_CONFIRM)){
+                subjectsService.removeSubject(subject).then(function (res) {
+                    if (res.response === "ok") {
+                        alert(MESSAGE.DEL_SUCCESS)
+                    } else if (res.response = "error 23000") {
+                        alert(MESSAGE.DEL_ERROR);
+                    }
+                    activate();
+                })
+            }
         }
 
-        function getNextRange ()   {
-            vm.currentRecordsRange =(vm.currentPage - 1) * APP_CONST.QUANTITY_ON_PAGE;
-        }
-
-        function pageChanged (){
-            getNextRange ();
+        function pageChanged () {
+            vm.currentRecordsRange =(vm.currentPage - 1) * vm.entitiesPerPage;
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
                 vm.list = data;
             });

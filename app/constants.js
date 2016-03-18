@@ -1,23 +1,58 @@
-
 (function() {
     "use strict";
 
-    var domain = "http://dtapi.local/";
-
     angular.module("app")
-        .constant("APP_CONST", {
-        QUANTITY_ON_PAGE: 10
-    })
-        .constant("URL", {
-            LOGIN: domain + "login/index",
-            ISLOGGED: domain + "login/isLogged",
-            LOGOUT: domain + "login/logout",
+        .constant("BASE_URL", "http://dtapi.local/")
+        .constant("AUTH", {
+            LOGIN: "login/index",
+            IS_LOGGED: "login/isLogged",
+            LOGOUT: "login/logout"
+        })
+        .constant("ENTITIES", {
+            FACULTY: "faculty",
+            SPECIALITY: "speciality",
+            GROUP: "group",
+            STUDENT: "student",
+            SUBJECT: "subject",
+            TEST: "test",
+            TEST_DETAIL: "test_detail",
+            QUESTION: "question",
+            ANSWER: "answer",
+            RESULT: "result"
+        })
 
-            ADD_SUBJECT: domain + "subject/insertData",
-            COUNT_SUBJECTS: domain + "subject/countRecords",
-            EDIT_SUBJECT: domain + "subject/update/",
-            GET_SUBJECT_RANGE: domain + "subject/getRecordsRange/",
-            GET_SUBJECTS: domain + "subject/getRecords",
-            REMOVE_SUBJECT: domain + "subject/del/",
+        .constant("ACTIONS", {
+            ADD_ENTITY: "/insertData/",
+            COUNT_ENTITY: "/countRecords",
+            COUNT_RECORDS_BY_TEST: "/countRecordsByTest/",
+            EDIT_ENTITY: "/update/",
+            GET_ENTITY_RANGE: "/getRecordsRange/",
+            GET_ENTITIES: "/getRecords/",
+            GET_RECORDS_RANGE_BY_TEST: "/getRecordsRangeByTest/",
+            GET_TEST_BY_SUBJECT: "/getTestsBySubject/",
+            GET_QUESTIONS_BY_LEVEL_RAND: "/getQuestionsByLevelRand/",
+            REMOVE_ENTITY: "/del/"
+        })
+        .constant("ENTITY_RANGE_ON_PAGE", 10)
+
+        .constant("REGEXP", {
+            ONLY_NUMBER: /^[0-9]+$/,
+        })
+
+        .constant("ENTITIES_UKR", {
+            FACULTY: "факультетів",
+            SPECIALITY: "спеціальностей",
+            GROUP: "груп",
+            STUDENT: "студентів",
+            SUBJECT: "предметів",
+            TEST: "тестів"
+        })
+
+        .constant("MESSAGE", {
+            SAVE_SUCCSES: "Зміни збережено",
+            SAVE_ERROR: "Помилка. Зміни не збережено",
+            DEL_CONFIRM: "Ви підтверджуєте видалення? Дію неможливо відмінити",
+            DEL_SUCCESS: "Видалення успішне",
+            DEL_ERROR:"Помилка видалення"
         });
 })();

@@ -4,36 +4,40 @@
     angular.module("app.admin.subjects")
         .factory("subjectsService", subjectsService);
 
-    subjectsService.$inject = ["$http", "$q", "URL", "APP_CONST"];
+    subjectsService.$inject = ["$http", "$q", "ENTITY_RANGE_ON_PAGE", "BASE_URL", "ENTITIES", "ACTIONS"];
 
-    function subjectsService($http, $q, URL, APP_CONST) {
+    function subjectsService($http, $q, ENTITY_RANGE_ON_PAGE, BASE_URL, ENTITIES, ACTIONS) {
         var service = {
             getSubjects: getSubjects,
+            getOneSubject: getOneSubject,
             totalItems: totalItems,
-            addSubject: addSubject,
-            editSubject: editSubject,
+            saveSubject: saveSubject,
             removeSubject: removeSubject,
             getHeader: getHeader
         };
 
         return service;
 
-        function getSubjects(currentRecordsRange){
-            var deferred = $q.defer();
-            $http.get(URL.GET_SUBJECT_RANGE + APP_CONST.QUANTITY_ON_PAGE+ "/" + currentRecordsRange)
-                .then(function (res){
-                        deferred.resolve (res.data);
-                    },
-                    function(res){
-                        deferred.reject (res);
-                    });
+        function _successCallback(response) {
+            return response.data;
+        }
+        function _errorCallback(response) {
+            return response;
+        }
 
-            return deferred.promise;
+        function getSubjects(currentRecordsRange){
+             return $http.get(BASE_URL + ENTITIES.SUBJECT + ACTIONS.GET_ENTITY_RANGE + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange)
+                .then(_successCallback, _errorCallback);
+        }
+
+        function getOneSubject(id) {
+            return $http.get(BASE_URL + ENTITIES.SUBJECT + ACTIONS.GET_ENTITIES + id)
+                .then(_successCallback, _errorCallback);
         }
 
         function totalItems(){
             var deferred = $q.defer();
-            $http.get(URL.COUNT_SUBJECTS)
+            $http.get(BASE_URL + ENTITIES.SUBJECT + ACTIONS.COUNT_ENTITY)
                 .then(function (res){
                         if(res.status === 200 && res.data.numberOfRecords) {
                             deferred.resolve(res.data.numberOfRecords)
@@ -48,46 +52,36 @@
             return deferred.promise;
         }
 
-        function addSubject(newSubject){
-            var deferred = $q.defer();
-            $http.post(URL.ADD_SUBJECT, newSubject)
-                .then(function (res) {
-                        deferred.resolve(res.data);
-                    },
-                    function(res){
-                        deferred.reject(res);
-                    });
+        function saveSubject(subject) {
+            if (subject.subject_id === undefined) {
 
-            return deferred.promise;
+                return _addSubject(subject);
+            } else {
+
+                return _editSubject(subject);
+            }
         }
 
-        function editSubject(id, editModel){
-            var deferred = $q.defer();
-            $http.post(URL.EDIT_SUBJECT + id, editModel)
-                .then(function(res){
-                        deferred.resolve(res.config.data);
-                    },
-                    function (res) {
-                        deferred.reject(res);
-                    });
+        function _addSubject (subject){
 
-            return deferred.promise;
+           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.ADD_ENTITY, subject)
+                .then(_successCallback, _errorCallback);
         }
 
-        function removeSubject(id) {
-            var deferred = $q.defer();
-            $http.get(URL.REMOVE_SUBJECT + id)
-                .then(function (res) {
-                        deferred.resolve(res);
-                    },
-                    function (res){
-                        deferred.reject(res);
-                    });
+        function _editSubject(subject){
 
-            return deferred.promise;
+           return $http.post(BASE_URL + ENTITIES.SUBJECT + ACTIONS.EDIT_ENTITY  + subject.subject_id, subject)
+                .then(_successCallback, _errorCallback);
+        }
+
+        function removeSubject(subject) {
+
+            return $http.get(BASE_URL + ENTITIES.SUBJECT + ACTIONS.REMOVE_ENTITY + subject.subject_id)
+                .then(_successCallback, _errorCallback);
         }
 
         function getHeader() {
+
             return ["Предмет", "Опис предмету"];
         }
     }

@@ -4,9 +4,9 @@
     angular.module("app.admin.groups")
         .factory("groupsService", groupsService);
 
-        groupsService.$inject = ['$http', '$q', 'URL'];
+        groupsService.$inject = ['$http', '$q', 'BASE_URL', 'ENTITIES', 'ACTIONS'];
 
-        function groupsService($http, $q, URL) {
+        function groupsService($http, $q, BASE_URL, ENTITIES, ACTIONS) {
             //==============================================
             // THE GOAL OF THIS CODE IS TO RETURN ARRAYS OF HASHES
             // [{%faculty_id%: %faculty_name%}, ...]
@@ -46,7 +46,7 @@
 
             //function getGroups() {
             //    var deferred = $q.defer();
-            //    $http.get(URL.GET_GROUPS)
+            //    $http.get(BASE_URL.GET_GROUPS)
             //        .then(function (res) {
             //                deferred.resolve(res.data);
             //            },
@@ -65,11 +65,11 @@
             }
 
             function getGroups() {
-                return $http.get(URL.GET_GROUPS).then(_succeesCallback, _errorCallback);
+                return $http.get(BASE_URL + ENTITIES.GROUP + ACTIONS.GET_ENTITIES).then(_succeesCallback, _errorCallback);
             }
 
             function removeGroup(group_id) {
-                return $http.get(URL.REMOVE_GROUP + group_id)
+                return $http.get(BASE_URL + ENTITIES.GROUP + ACTIONS.REMOVE_ENTITY + group_id)
                     .then(function(result) {
                             return result.data;
                         },
@@ -79,7 +79,7 @@
             }
 
             function editGroup(group_id, editing) {
-                return $http.post(URL.EDIT_GROUP + group_id, editing)
+                return $http.post(BASE_URL + ENTITIES.GROUP + ACTIONS.EDIT_ENTITY + group_id, editing)
                     .then(function(result) {
                         return result.config.data;
                     },
@@ -89,7 +89,7 @@
             }
 
             function addGroup(editing) {
-                return $http.post(URL.ADD_GROUP, editing)
+                return $http.post(BASE_URL + ENTITIES.GROUP + ACTIONS.ADD_ENTITY, editing)
                     .then(function(result) {
                         return result.config.data;
                     },

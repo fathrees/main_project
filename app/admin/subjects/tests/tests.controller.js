@@ -18,17 +18,12 @@
         vm.removeTest = removeTest;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
 
-        vm.list = [];
+        //vm.list = [];
         vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
         vm.maxSize = 3;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.getItemsPerPage = getItemsPerPage;
-        vm.numPages = function () {
-            return Math.ceil(vm.totalItems / $scope.numPerPage);
-        };
-
-
         activate();
 
 

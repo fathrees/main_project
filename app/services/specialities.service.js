@@ -18,6 +18,16 @@
 
         return service;
 
+        function _successCallback(result) {
+
+            return result.data;
+        }
+
+        function _errorCallback(reason) {
+
+            return reason;
+        }
+
         function getSpecialitiesRange(currentRecordsRange) {
             var deferred = $q.defer();
             $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.GET_ENTITY_RANGE + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange)
@@ -40,6 +50,7 @@
                 function(res) {
                     deferred.reject(res);
                 });
+
             return deferred.promise;
         }
 
@@ -60,52 +71,34 @@
 
         function saveSpeciality(speciality) {
             if (speciality.speciality_id === undefined) {
+
                 return _addSpeciality(speciality);
             } else {
+
                 return _editSpeciality(speciality);
             }
         }
 
         function _addSpeciality(speciality) {
-            var deferred = $q.defer();
-            $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.ADD_ENTITY, speciality)
-                .then(function(res) {
-                        deferred.resolve(res.data);
-                    },
-                    function(res){
-                        deferred.reject(res);
-                    });
 
-            return deferred.promise;
+            return $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.ADD_ENTITY, speciality)
+                .then(_successCallback, _errorCallback);
         }
 
         function _editSpeciality(speciality) {
-            var deferred = $q.defer();
-            $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.EDIT_ENTITY + speciality.speciality_id, speciality)
-                .then(function(res) {
-                        deferred.resolve(res);
-                    },
-                    function(res) {
-                        deferred.reject(res);
-                    });
 
-            return deferred.promise;
+            return $http.post(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.EDIT_ENTITY + speciality.speciality_id, speciality)
+                .then(_successCallback, _errorCallback);
         }
 
         function removeSpeciality(id) {
-            var deferred = $q.defer();
-            $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.REMOVE_ENTITY + id)
-                .then(function(res) {
-                        deferred.resolve(res);
-                    },
-                    function(res) {
-                        deferred.reject(res);
-                    });
 
-            return deferred.promise;
+            return $http.get(BASE_URL + ENTITIES.SPECIALITY + ACTIONS.REMOVE_ENTITY + id)
+                .then(_successCallback, _errorCallback);
         }
 
         function getHeader() {
+
             return ["№", "Назва", "Код"];
         }
     }

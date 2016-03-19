@@ -1,6 +1,6 @@
 <div class="panel panel-primary specialities">
     <div class="panel-heading">
-        <!--SEARCH SAVEBUTTON-->
+        <!--SEARCH ADD-BUTTON-->
         <div class="row">
             <div class="col-xs-12 col-md-6  pull-right">
                 <div class="col-xs-3 col-md-1 pull-right">
@@ -54,7 +54,7 @@
             <tbody>
             <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
-                <td class="clip"><a ui-sref="admin.groups({group_id: group.group_id})">{{speciality.speciality_name}}</a></td>
+                <td class="clip"><a ui-sref="admin.groupsBySpeciality({speciality_id: speciality.speciality_id})">{{speciality.speciality_name}}</a></td>
                 <td class="clip">{{speciality.speciality_code}}</td>
                 <td class="clip">
                     <button class="btn btn-warning" ng-click="specialities.showSaveForm(speciality)"

@@ -90,15 +90,10 @@
                 templateUrl: "app/admin/specialities/specialities.html",
                 controller: "SpecialitiesController as specialities"
             })
-            .state("admin.editSpeciality", {
-                url: "/specialities/{speciality_id:int}",
-                templateUrl: "app/admin/specialities/speciality.html",
-                controller: "EditSpecialityController as speciality"
-            })
-            .state("admin.addSpeciality", {
-                url: "/specialities/addSpeciality",
-                templateUrl: "app/admin/specialities/speciality.html",
-                controller: "AddSpecialityController as speciality"
+            .state("admin.groupsBySpeciality", {
+                url: "/specialities/{speciality_id:int}/groups",
+                templateUrl: "app/admin/groups/groups.html",
+                controller: "GroupsController as groups"
             })
             .state("admin.subjects", {
                 url: "/subjects",

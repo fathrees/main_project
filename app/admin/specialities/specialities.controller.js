@@ -14,7 +14,6 @@
         vm.headElements = specialitiesService.getHeader();
         vm.saveSpeciality = saveSpeciality;
         vm.removeSpeciality = removeSpeciality;
-        vm.felterGroups = filterGroups;
         vm.minNameLength = SPECIALITIES_CONST.MIN_NAME_LENGTH;
         vm.maxNameLength = SPECIALITIES_CONST.MAX_NAME_LENGTH;
         vm.maxSize = 5;
@@ -53,14 +52,20 @@
         }
 
         function removeSpeciality(speciality) {
-            specialitiesService.removeSpeciality(speciality.speciality_id).then(function(res) {
-                activate();
-            });
+            var message;
+            if (confirm('Ви впевнені, що бажаєте видалити спеціальність "' + speciality.speciality_name + '"?')){
+                specialitiesService.removeSpeciality(speciality.speciality_id).then(function(res) {
+                    if (res.response.indexOf("error") >= 0) {
+                        message = "За цією спеціальністю існують групи. Спочатку видаліть їх.";
+                    } else {
+                        message = 'Спеціальність "' + speciality.speciality_name + '" видалена';
+                        activate();
+                    }
+                    alert(message);
+                });
+            }
         }
 
-        function filterGroups(){
-
-        }
 
         function getNextRange() {
             vm.currentRecordsRange =(vm.currentPage - 1) * ENTITY_RANGE_ON_PAGE;
@@ -68,7 +73,7 @@
 
         function pageChanged(){
             getNextRange();
-            specialitiesService.getSpecialities(vm.currentRecordsRange).then(function(data) {
+            specialitiesService.getSpecialitiesRange(vm.currentRecordsRange).then(function(data) {
                 vm.list = data;
             });
 

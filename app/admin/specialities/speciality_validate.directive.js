@@ -17,15 +17,18 @@
         }
 
         function validText(regexp, text) {
+
             return regexp.test(text);
         }
 
         function alreadyExist(arrObj, key, text){
             for (var i = 0; i < arrObj.length; i++) {
                 if (arrObj[i][key] === text) {
+
                     return true;
                 };
             };
+
             return false;
         }
 

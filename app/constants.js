@@ -15,7 +15,7 @@
             STUDENT: "student",
             SUBJECT: "subject",
             TEST: "test",
-            TEST_DETAIL: "test_detail",
+            TEST_DETAIL: "testDetail",
             QUESTION: "question",
             ANSWER: "answer",
             RESULT: "result"
@@ -30,6 +30,7 @@
             GET_ENTITIES: "/getRecords/",
             GET_RECORDS_RANGE_BY_TEST: "/getRecordsRangeByTest/",
             GET_TEST_BY_SUBJECT: "/getTestsBySubject/",
+            GET_TEST_DETAILS: "/getTestDetailsByTest/",
             GET_QUESTIONS_BY_LEVEL_RAND: "/getQuestionsByLevelRand/",
             REMOVE_ENTITY: "/del/"
         })

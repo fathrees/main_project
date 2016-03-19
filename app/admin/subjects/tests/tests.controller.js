@@ -18,14 +18,12 @@
         vm.removeTest = removeTest;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
 
-        //vm.list = [];
         vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
         vm.maxSize = 3;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.getItemsPerPage = getItemsPerPage;
         activate();
-
 
 
         function activate (){
@@ -38,8 +36,8 @@
                 }else {
                     vm.showPagination = false
                 }
-
             });
+
             subjectsService.getOneSubject($stateParams.subject_id).then(function(data){
                 vm.currentSubject = data[0].subject_name;
             })
@@ -68,7 +66,6 @@
 
                 return true;
             }
-
         }
 
         function saveEntity () {

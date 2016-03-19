@@ -42,5 +42,15 @@
             MAX_NAME_LENGTH: 50,
             CODE_REGEXP: /^([6-8]\.\d{6,8})$/,
             NAME_REGEXP: /[a-zа-яіїє]/i
+        })
+        .constant("REGEXP", {
+            ONLY_NUMBER: /^[0-9]+$/
+        })
+        .constant("MESSAGE", {
+            SAVE_SUCCSES: "Зміни збережено",
+            SAVE_ERROR: "Помилка. Зміни не збережено",
+            DEL_CONFIRM: "Ви підтверджуєте видалення? Дію неможливо відмінити",
+            DEL_SUCCESS: "Видалення успішне",
+            DEL_ERROR:"Помилка видалення"
         });
 })();

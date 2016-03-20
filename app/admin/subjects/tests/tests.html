@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-class-odd="'odd'" ng-repeat="test in tests.list">
+            <tr ng-class-odd="'odd'" ng-repeat="test in tests.list | orderBy:'test_name'">
                 <td>{{::test.test_name}}</td>
                 <td>{{::test.tasks}}</a></td>
                 <td>{{::test.time_for_test}}</td>

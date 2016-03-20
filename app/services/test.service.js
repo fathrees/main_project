@@ -9,12 +9,10 @@
     function testService($http, $q) {
         var service = {
             getQuestionsRange: getQuestionsRange,
-            getQuestions: getQuestions,
             totalItems: totalItems,
             saveQuestion: saveQuestion,
             removeQuestion: removeQuestion,
             getHeader: getHeader
-
         };
 
         return service;
@@ -39,14 +37,8 @@
                 .then(_successCallback, _errorCallback);
         }
 
-        function getQuestionsRange(currentRecordsRange, test_id) {
-            var limit = 50;
+        function getQuestionsRange(currentRecordsRange, limit, test_id) {
             return $http.get("http://dtapi.local/question/getRecordsRangeByTest/" + test_id + "/" + limit + "/" + currentRecordsRange + "/")
-                .then(_successCallback, _errorCallback);
-        }
-
-        function getQuestions() {
-            return $http.get("http://dtapi.local/question/getRecords/")
                 .then(_successCallback, _errorCallback);
         }
 
@@ -87,5 +79,4 @@
         }
 
     }
-
 })();

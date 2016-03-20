@@ -13,49 +13,74 @@
             </div>
             <p class="col-xs-12 col-md-6 title">Список завдань:</p>
         </div>
-
+        <!--Save Form-->
         <form name="saveForm" class="row" uib-collapse="test.saveFormCollapsed" ng-submit="test.saveQuestion()">
-            <div class="col-md-12">
-                <textarea rows="4" class="form-control" name="questionText" ng-model="test.question.question_text"
-                          placeholder="Введіть текст питання..." ng-minlength="5" ng-maxlength="100">
-                </textarea>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <span class="btn btn-primary btn-file">
+                        <i class="glyphicon glyphicon-picture"></i> Вибрати зображення
+                        <input type="file" image-load="test.image"/>
+                    </span>
+                    <img ng-show="test.image" ng-src="{{test.image}}" class="img-responsive img-thumbnail"
+                         width="100" height="50" alt="Зображення">
+                </div>
             </div>
 
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-2">
-                        <select class="form-control" name="questionLevel" ng-model="test.question.level"
-                                placeholder="Рівень складності">
-                            <option ng-selected="test.question.level == level" ng-repeat="level in test.levels"
-                                    ng-value="{{level}}">{{level}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-control" name="questionType" ng-model="test.question.type"
-                                title="Тип питання">
-                            <option ng-selected="test.question.type == type.value" ng-repeat="type in test.types"
-                                    ng-value="{{type.value}}">{{type.name}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                    <input type="file" class="btn btn-info"/>
-                            </span>
-                            <input class="form-control" name="questionAttachment"
-                                   ng-model="test.question.attachment" placeholder="Оберіть картинку" readonly/>
+            <div class="col-md-9">
+                <div class="col-md-12">
+                    <textarea rows="4" class="form-control" name="questionText" ng-model="test.question.question_text"
+                              placeholder="Введіть текст питання..." ng-minlength="5" ng-maxlength="100" required>
+                    </textarea>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <select class="form-control" ng-model="test.question.level"
+                                    ng-options="level for level in test.levels" required>
+                                <option value="">Виберіть рівень</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <button type="submit" class="btn btn-success" title="Зберегти" ng-disabled="saveForm.$invalid">
-                            <i class="glyphicon glyphicon-floppy-saved"></i>
-                        </button>
-                        <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="test.hideSaveForm()">
-                            <i class="glyphicon glyphicon-floppy-remove"></i>
-                        </button>
+                        <div class="col-md-7">
+                            <select class="form-control" ng-model="test.question.type"
+                                    ng-options="type.value as type.name for type in test.types" required>
+                                <option value="">Виберіть тип завдання</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-2 pull-right">
+                <button type="submit" class="btn btn-success" title="Зберегти" ng-disabled="saveForm.$invalid">
+                    <i class="glyphicon glyphicon-floppy-saved"></i>
+                </button>
+                <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="test.hideSaveForm()">
+                    <i class="glyphicon glyphicon-floppy-remove"></i>
+                </button>
+            </div>
+
+            <style>
+                .btn-file {
+                    position: relative;
+                    overflow: hidden;
+                }
+                .btn-file input[type=file] {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    min-width: 100%;
+                    min-height: 100%;
+                    font-size: 100px;
+                    text-align: right;
+                    filter: alpha(opacity=0);
+                    opacity: 0;
+                    outline: none;
+                    background: white;
+                    cursor: inherit;
+                    display: block;
+                }
+            </style>
+
         </form>
     </div>
     <!--DATA TABLE-->
@@ -68,15 +93,21 @@
                             {{::headerElement}}
                         </th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
             <tbody>
             <tr ng-class-odd="'odd'"
-                ng-repeat="question in test.questionsList | filter: search">
+                ng-repeat="question in test.questionsList">
                 <td class="clip">{{$index + 1}}</td>
-                <td class="clip">{{question.question_text}}</td>
-                <td class="clip">{{question.level}}</td>
-                <td class="clip">{{question.type}}</td>
+                <td class="clip">{{::question.question_text}}</td>
+                <td class="clip">{{::question.level}}</td>
+                <td class="clip">{{::question.type}}</td>
+                <td class="clip">
+                    <button class="btn btn-info" ui-sref="admin.answer({question_id: question.question_id})" title="Варіанти відповідей">
+                        <i class="glyphicon glyphicon-th-list"></i>
+                    </button>
+                </td>
                 <td class="clip">
                     <button class="btn btn-warning" ng-click="test.showSaveForm(question)" title="Редагувати завдання">
                         <i class="glyphicon glyphicon-pencil"></i>

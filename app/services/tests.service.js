@@ -135,12 +135,13 @@
          * @returns {array} availableLevel is the array with available level in select tag.
          */
 
-        function getLevel (arrTestdetail){
+        function getLevel (arrTestDetail){
             var level = [];
             var usedLevel = [];
-            arrTestdetail.forEach(function(item){
+            if(arrTestDetail.length > 0) {
+            arrTestDetail.forEach(function(item){
                 usedLevel.push(item.level);
-            });
+            })};
             for (var i = 1; i <= 7; i++){
                 level.push(i);
             };
@@ -164,9 +165,10 @@
         function availableTasks (arrTestDetail, maxQuantytyOfTasks){
             console.log(arrTestDetail + "   " + maxQuantytyOfTasks)
             var countOfUsedTasks = 0;
+            if(arrTestDetail.length > 0){
             arrTestDetail.forEach(function(item){
                 countOfUsedTasks += parseInt(item.tasks);
-            })
+            })}
 
             return (parseInt(maxQuantytyOfTasks) - countOfUsedTasks);
         }

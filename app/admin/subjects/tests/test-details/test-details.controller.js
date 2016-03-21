@@ -17,15 +17,8 @@
         vm.hideForm = hideForm;
         vm.showForm = showForm;
         vm.saveEntity = saveEntity;
-       // vm.summaryRate = 0;
         vm.availableTask = 0;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
-        vm.isFormInvalid = isFormInvalid;
-
-
-        vm.isNotNumber = function(value){
-            return isNaN(value)
-        }
 
         activate();
 
@@ -38,13 +31,16 @@
             })
 
             testsService.getTestLevel($stateParams.test_id).then(function(data){
-                vm.list = data;
-                console.log(vm.list);
-                vm.summaryRate = 0;
-                vm.list.forEach(function(item){
-                    vm.summaryRate += (parseInt(item.tasks) * parseInt(item.rate));
-                })
-                vm.taskIsUsed = taskIsUsed();
+                if(Array.isArray(data)) {
+                    vm.list = data;
+                    vm.summaryRate = 0;
+                    vm.list.forEach(function (item) {
+                        vm.summaryRate += (parseInt(item.tasks) * parseInt(item.rate));
+                    })
+                }else {
+                    vm.summaryRate = 0;
+                    vm.list = [];
+                }
             })
         }
 
@@ -62,7 +58,6 @@
 
             vm.availableLevel = testsService.getLevel (vm.list);
             vm.availableTask =  testsService.availableTasks (vm.list, vm.currentTest.tasks);
-            console.log(vm.availableTask);
             vm.formCollapsed = false;
             if (testLevel === undefined) {
                 vm.testLevel = {
@@ -103,23 +98,10 @@
             }
         }
 
-         /**
-          * Set add button disabled.
-          * @return {boolean} When all tasks or levels were used add button is disabled and show message*/
-
-        function taskIsUsed (){
-            return !vm.availableTask || !vm.availableLevel.length;
-        }
-
         function summaryRate (item) {
             arrTestDetail.forEach(function(item){
                 countOfUsedTasks += parseInt(item.tasks);
             })
-        }
-
-        function isFormInvalid () {
-            vm.invalidform = (vm.testLevel.tasks > vm.availableTask);
-            console.log((vm.testLevel.tasks > vm.availableTask));
         }
     }
 })();

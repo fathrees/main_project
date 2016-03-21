@@ -50,6 +50,7 @@
         }
 
         function showForm(test) {
+            console.log(test);
             vm.formCollapsed = false;
             if (test === undefined) {
                 vm.test = {
@@ -71,6 +72,7 @@
         }
 
         function saveEntity () {
+            console.log(vm.test);
             testsService.saveTest(vm.test).then(function (data) {
                 if(data.response === "ok"){
                     alert(MESSAGE.SAVE_SUCCSES);
@@ -78,6 +80,7 @@
                 } else{
                     alert(MESSAGE.SAVE_ERROR +  " " + data.response);
                 };
+                vm.hideForm();
                 activate();
                 vm.test = {};
             })

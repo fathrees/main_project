@@ -18,12 +18,10 @@
         return service;
 
         function _successCallback(response) {
-            console.log(response);
             return response.data;
         }
 
         function _errorCallback(response) {
-            console.log(response);
             return response;
         }
 

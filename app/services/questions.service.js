@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .factory("questionsService", questionsService);
 
-    questionsService.$inject = ["$http", "$q"];
+    questionsService.$inject = ["$http", "$q", "BASE_URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE", "MESSAGE"];
 
-    function questionsService($http, $q) {
+    function questionsService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE, MESSAGE) {
         var service = {
             getQuestionsRange: getQuestionsRange,
             totalItems: totalItems,
@@ -28,23 +28,23 @@
         }
 
         function _addQuestion(question) {
-            return $http.post("http://dtapi.local/question/insertData/", question)
+            return $http.post(BASE_URL + ENTITIES.QUESTION + ACTIONS.ADD_ENTITY, question)
                 .then(_successCallback, _errorCallback);
         }
 
         function _editQuestion(question) {
-            return $http.post("http://dtapi.local/question/update/" + question.question_id, question)
+            return $http.post(BASE_URL + ENTITIES.QUESTION + ACTIONS.EDIT_ENTITY + question.question_id, question)
                 .then(_successCallback, _errorCallback);
         }
 
         function getQuestionsRange(currentRecordsRange, limit, test_id) {
-            return $http.get("http://dtapi.local/question/getRecordsRangeByTest/" + test_id + "/" + limit + "/" + currentRecordsRange + "/")
+            return $http.get(BASE_URL + ENTITIES.QUESTION + "/getRecordsRangeByTest/" + test_id + "/" + limit + "/" + currentRecordsRange + "/")
                 .then(_successCallback, _errorCallback);
         }
 
         function totalItems(test_id) {
             var deferred = $q.defer();
-            $http.get("http://dtapi.local/question/countRecords/" + test_id)
+            $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.COUNT_ENTITY + test_id)
                 .then(function(response){
                         if(response.status === 200) {
                             deferred.resolve(response.data.numberOfRecords)
@@ -70,7 +70,7 @@
         }
 
         function removeQuestion(id) {
-            return $http.get("http://dtapi.local/question/del/" + id)
+            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.REMOVE_ENTITY + id)
                 .then(_successCallback, _errorCallback);
         }
 

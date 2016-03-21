@@ -8,6 +8,7 @@
         </div>
         <div class="col-md-4">
             <input class="form-control" name="tasks" type="text" ng-model="testDetails.testLevel.tasks"
+                   max-value="{{testDetails.availableTask}}"
                    placeholder="Завдань (доступно {{testDetails.availableTask}})"
                    ng-pattern="testDetails.onlyNumber" required>
 
@@ -15,9 +16,10 @@
         </div>
         <div class="col-md-4">
             <input class="form-control" name="rate" type="text" ng-model="testDetails.testLevel.rate"
-                   ng-pattern="testDetails.onlyNumber" placeholder="Ціна завдання" required>
+                   ng-pattern="testDetails.onlyNumber" placeholder="Ціна завдання"
+                   max-value="255" required>
 
-            <span ng-show="saveform.rate.$error.pattern">Тільки цифри</span>
+            <span ng-show="saveform.rate.$error.pattern">Тільки цифри. Не більше 255</span>
         </div>
     </div>
     <div class="col-md-4 pull-right">

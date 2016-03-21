@@ -163,7 +163,6 @@
          */
 
         function availableTasks (arrTestDetail, maxQuantytyOfTasks){
-            console.log(arrTestDetail + "   " + maxQuantytyOfTasks)
             var countOfUsedTasks = 0;
             if(arrTestDetail.length > 0){
             arrTestDetail.forEach(function(item){

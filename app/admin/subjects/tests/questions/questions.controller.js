@@ -2,16 +2,16 @@
     "use strict";
 
     angular.module("app.admin.subjects")
-        .controller("TestController", TestController);
+        .controller("QuestionsController", QuestionsController);
 
-    TestController.$inject = ["$stateParams", "testService"];
+    QuestionsController.$inject = ["$stateParams", "questionsService"];
 
-    function TestController($stateParams, testService) {
+    function QuestionsController($stateParams, questionsService) {
         var vm = this;
         vm.showSaveForm = showSaveForm;
         vm.hideSaveForm = hideSaveForm;
         vm.saveFormCollapsed = true;
-        vm.headElements = testService.getHeader();
+        vm.headElements = questionsService.getHeader();
         vm.saveQuestion = saveQuestion;
         vm.removeQuestion = removeQuestion;
         vm.image;
@@ -24,10 +24,10 @@
         activate();
 
         function activate() {
-            testService.totalItems($stateParams.test_id).then(function(quantity) {
+            questionsService.totalItems($stateParams.test_id).then(function(quantity) {
                 vm.totalItems = +quantity;
             });
-            testService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
+            questionsService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
                 vm.questionsList = data;
             });
         }
@@ -55,14 +55,14 @@
             if (vm.image != null) {
                 vm.question.attachment = vm.image;
             }
-            testService.saveQuestion(vm.question, $stateParams.test_id).then(function(response) {
+            questionsService.saveQuestion(vm.question, $stateParams.test_id).then(function(response) {
                 activate();
                 vm.hideSaveForm();
             });
         }
 
         function removeQuestion(question) {
-            testService.removeQuestion(question.question_id).then(function(response) {
+            questionsService.removeQuestion(question.question_id).then(function(response) {
                 activate();
             });
         }
@@ -73,7 +73,7 @@
 
         function pageChanged(){
             getNextRange();
-            testService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
+            questionsService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
                 vm.questionsList = data;
             });
         }

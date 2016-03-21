@@ -2,11 +2,11 @@
     "use strict";
 
     angular.module("app.admin.subjects")
-        .factory("testService", testService);
+        .factory("questionsService", questionsService);
 
-    testService.$inject = ["$http", "$q"];
+    questionsService.$inject = ["$http", "$q"];
 
-    function testService($http, $q) {
+    function questionsService($http, $q) {
         var service = {
             getQuestionsRange: getQuestionsRange,
             totalItems: totalItems,

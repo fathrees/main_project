@@ -1,10 +1,9 @@
-
 /*Style and alignment login form*/
 html, body, body>div, .auth-container{
     height: 100%;
 }
 .auth-container{
-    background: URL(../assets/img/background.jpg) no-repeat;
+    background: url("../assets/img/background.jpg") no-repeat;
     background-size: cover;
     color: #fff;
     display: flex;

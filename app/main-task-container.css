@@ -1,4 +1,3 @@
-/* class btn */
 .my-app-name-container .btn {
   border: none;
   border-radius: 0;
@@ -17,7 +16,6 @@
 .my-app-name-container .btn:focus,
 .my-app-name-container .btn.focus {
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
-  background-color: ;
 }
 .my-app-name-container .btn:active,
 .my-app-name-container .btn.active {
@@ -26,7 +24,6 @@
 
 
 /* class btn-primary */
-
 .my-app-name-container .btn-primary {
   border: none;
 }
@@ -50,7 +47,6 @@
 }
 
 /* class btn-default */
-
 .my-app-name-container .btn-default {
   background-color: #BDBDBD;
 }
@@ -77,6 +73,50 @@
 .my-app-name-container .open > .dropdown-toggle.btn-default.focus {
   background-color: #F0F0F0;
   box-shadow: 0 7px 7px rgba(0,0,0,0.5); /* button shadow */
+}
+
+/* class btn-success */
+.my-app-name-container .btn-success {
+  background-color: #4CAF50;
+}
+.my-app-name-container .btn-success:focus,
+.my-app-name-container .btn-success.focus {
+  background-color: #81C784;
+}
+.my-app-name-container .btn-success:hover {
+  background-color: #66BB6A;
+}
+.my-app-name-container .btn-success:active,
+.my-app-name-container .btn-success.active,
+.my-app-name-container .open > .dropdown-toggle.btn-success {
+  background-color: #70C270;
+}
+.my-app-name-container .btn-success:active:hover,
+.my-app-name-container .btn-success.active:hover,
+.my-app-name-container .open > .dropdown-toggle.btn-success:hover,
+.my-app-name-container .btn-success:active:focus,
+.my-app-name-container .btn-success.active:focus,
+.my-app-name-container .open > .dropdown-toggle.btn-success:focus,
+.my-app-name-container .btn-success:active.focus,
+.my-app-name-container .btn-success.active.focus,
+.my-app-name-container .open > .dropdown-toggle.btn-success.focus {
+  background-color: #5EBA5E;
+}
+.my-app-name-container .btn-success:active,
+.my-app-name-container .btn-success.active,
+.my-app-name-container .open > .dropdown-toggle.btn-success {
+  background-image: none;
+}
+.my-app-name-container .btn-success.disabled:hover,
+.my-app-name-container .btn-success[disabled]:hover,
+.my-app-name-container fieldset[disabled] .btn-success:hover,
+.my-app-name-container .btn-success.disabled:focus,
+.my-app-name-container .btn-success[disabled]:focus,
+.my-app-name-container fieldset[disabled] .btn-success:focus,
+.my-app-name-container .btn-success.disabled.focus,
+.my-app-name-container .btn-success[disabled].focus,
+.my-app-name-container fieldset[disabled] .btn-success.focus {
+  background-color: #5CB85C;
 }
 
 /* class btn-info */
@@ -113,6 +153,34 @@
   background-image: none;
   background-color: #B49374;
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+}
+
+/* class btn-info */
+.my-app-name-container .btn-warning {
+  background-color: #FF9800;
+}
+.my-app-name-container .btn-warning:focus,
+.my-app-name-container .btn-warning.focus {
+  background-color: #FFA726;
+}
+.my-app-name-container .btn-warning:hover {
+  background-color: #FFA726;
+}
+.my-app-name-container .btn-warning:active,
+.my-app-name-container .btn-warning.active,
+.my-app-name-container .open > .dropdown-toggle.btn-warning {
+  background-color: #FFB74D;
+}
+.my-app-name-container .btn-warning:active:hover,
+.my-app-name-container .btn-warning.active:hover,
+.my-app-name-container .open > .dropdown-toggle.btn-warning:hover,
+.my-app-name-container .btn-warning:active:focus,
+.my-app-name-container .btn-warning.active:focus,
+.my-app-name-container .open > .dropdown-toggle.btn-warning:focus,
+.my-app-name-container .btn-warning:active.focus,
+.my-app-name-container .btn-warning.active.focus,
+.my-app-name-container .open > .dropdown-toggle.btn-warning.focus {
+  background-color:  #FFB74D;
 }
 
 /* btn-danger*/
@@ -337,4 +405,13 @@
 .my-app-name-container .navbar {
   border-radius: 0;
   background-color: #03588C;
+}
+
+
+.my-app-name-container btn a {
+  color: inherit;
+}
+.my-app-name-container btn  a:hover,
+.my-app-name-container btn a:focus {
+  color: inherit;
 }

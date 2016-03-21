@@ -95,18 +95,13 @@
                 templateUrl: "app/admin/subjects/tests/tests.html",
                 controller: "TestsController as tests"
             })
-            .state("admin.test", {
+            .state("admin.questions", {
                 url: "/subjects/{subject_id:int}/tests/{test_id:int}",
-                templateUrl: "app/admin/subjects/tests/test.html",
-                controller: "TestController as test"
-            })
-            .state("admin.question", {
-                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}",
-                templateUrl: "app/admin/subjects/tests/question/question.html",
-                controller: "QuestionController as question"
+                templateUrl: "app/admin/subjects/tests/questions/questions.html",
+                controller: "QuestionsController as questions"
             })
             .state("admin.answer", {
-                url: "/subjects/{subject_id:int}/tests/{test_id:int}/answer/{answer_id:int}",
+                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}/answer/{answer_id:int}",
                 templateUrl: "app/admin/subjects/tests/answer/answer.html",
                 controller: "AnswerController as answer"
             })

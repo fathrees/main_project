@@ -28,13 +28,13 @@
                 <td>{{::test.tasks}}</a></td>
                 <td>{{::test.time_for_test}}</td>
                 <td>{{::tests.status[test.enabled].enabled}}</td>
-                <td><button class="btn btn-info"  ui-sref="admin.test({subject_id: test.subject_id, test_id: test.test_id})"
-                            title="Деталі тесту">
+                <td><button class="btn btn-info"  ui-sref="admin.questions({subject_id: test.subject_id, test_id: test.test_id})"
+                            title="Переглянути завдання">
                     <i class="glyphicon glyphicon-list-alt"></i> Завдання
                 </button></td>
                 <td>
                     <button class="btn btn-info" ui-sref="admin.testDetails({subject_id: test.subject_id, test_id: test.test_id})"
-                            title="Переглянути завдання">
+                            title="Деталі тесту">
                         <i class="glyphicon glyphicon-wrench"></i> Деталі
                     </button></td>
                 <td>

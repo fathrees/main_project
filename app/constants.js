@@ -23,7 +23,7 @@
 
         .constant("ACTIONS", {
             ADD_ENTITY: "/insertData/",
-            COUNT_ENTITY: "/countRecords",
+            COUNT_ENTITY: "/countRecords/",
             COUNT_RECORDS_BY_TEST: "/countRecordsByTest/",
             EDIT_ENTITY: "/update/",
             GET_ENTITY_RANGE: "/getRecordsRange/",

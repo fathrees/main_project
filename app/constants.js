@@ -15,25 +15,23 @@
             STUDENT: "student",
             SUBJECT: "subject",
             TEST: "test",
-            TEST_DETAIL: "test_detail",
+            TEST_DETAIL: "testDetail",
             QUESTION: "question",
             ANSWER: "answer",
             RESULT: "result"
         })
-        .constant("ENTITIES_UKR", {
-            FACULTY: "факультетів",
-            SPECIALITY: "спеціальностей",
-            GROUP: "груп",
-            STUDENT: "студентів",
-            SUBJECT: "предметів",
-            TEST: "тестів"
-        })
+
         .constant("ACTIONS", {
             ADD_ENTITY: "/insertData/",
-            COUNT_ENTITY: "/countRecords/",
+            COUNT_ENTITY: "/countRecords",
+            COUNT_RECORDS_BY_TEST: "/countRecordsByTest/",
             EDIT_ENTITY: "/update/",
             GET_ENTITY_RANGE: "/getRecordsRange/",
             GET_ENTITIES: "/getRecords/",
+            GET_RECORDS_RANGE_BY_TEST: "/getRecordsRangeByTest/",
+            GET_TEST_BY_SUBJECT: "/getTestsBySubject/",
+            GET_TEST_DETAILS: "/getTestDetailsByTest/",
+            GET_QUESTIONS_BY_LEVEL_RAND: "/getQuestionsByLevelRand/",
             REMOVE_ENTITY: "/del/"
         })
         .constant("ENTITY_RANGE_ON_PAGE", 10)
@@ -46,6 +44,16 @@
         .constant("REGEXP", {
             ONLY_NUMBER: /^[0-9]+$/
         })
+
+        .constant("ENTITIES_UKR", {
+            FACULTY: "факультетів",
+            SPECIALITY: "спеціальностей",
+            GROUP: "груп",
+            STUDENT: "студентів",
+            SUBJECT: "предметів",
+            TEST: "тестів"
+        })
+
         .constant("MESSAGE", {
             SAVE_SUCCSES: "Зміни збережено",
             SAVE_ERROR: "Помилка. Зміни не збережено",

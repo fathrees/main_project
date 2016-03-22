@@ -26,10 +26,12 @@
 /* class btn-primary */
 .my-app-name-container .btn-primary {
   border: none;
+   background-color: #3F51B5;
 }
 .my-app-name-container .btn-primary:focus,
 .my-app-name-container .btn-primary.focus {
   border: none;
+  background-color: #4E97D7;
 }
 .my-app-name-container .btn-primary:hover {
   background-color: #4E97D7;
@@ -81,15 +83,15 @@
 }
 .my-app-name-container .btn-success:focus,
 .my-app-name-container .btn-success.focus {
-  background-color: #81C784;
+  background-color: #71C174;
 }
 .my-app-name-container .btn-success:hover {
-  background-color: #66BB6A;
+  background-color: #5FB962;
 }
 .my-app-name-container .btn-success:active,
 .my-app-name-container .btn-success.active,
 .my-app-name-container .open > .dropdown-toggle.btn-success {
-  background-color: #70C270;
+  background-color: #95D097;
 }
 .my-app-name-container .btn-success:active:hover,
 .my-app-name-container .btn-success.active:hover,
@@ -100,7 +102,7 @@
 .my-app-name-container .btn-success:active.focus,
 .my-app-name-container .btn-success.active.focus,
 .my-app-name-container .open > .dropdown-toggle.btn-success.focus {
-  background-color: #5EBA5E;
+  background-color: #83C985;
 }
 .my-app-name-container .btn-success:active,
 .my-app-name-container .btn-success.active,
@@ -116,7 +118,7 @@
 .my-app-name-container .btn-success.disabled.focus,
 .my-app-name-container .btn-success[disabled].focus,
 .my-app-name-container fieldset[disabled] .btn-success.focus {
-  background-color: #5CB85C;
+  background-color: #95D097;
 }
 
 /* class btn-info */
@@ -258,7 +260,7 @@
   border: none;
 }
 .my-app-name-container .table tr:hover {
-  background-color: #DCAD6F;
+  background-color: #EBD0AD;
 }
 
 /* panel */
@@ -407,7 +409,69 @@
   background-color: #03588C;
 }
 
+@media (min-width: 768px) {
+  .navbar {
+    border-radius: 0;
+  }
+}
 
+/* navbar-default */
+.my-app-name-container .navbar-default {
+  border-color: transparent;
+}
+
+.my-app-name-container .navbar-default .navbar-toggle {
+  border-color: transparent;
+}
+.my-app-name-container .navbar-default .navbar-toggle:hover,
+.my-app-name-container .navbar-default .navbar-toggle:focus {
+  background-color: #046DAF;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+}
+
+
+/* navbar-nav */
+.my-app-name-container .navbar-default .navbar-nav > li > a {
+  color: #9999FF;
+}
+.my-app-name-container .navbar-default .navbar-nav > li > a:hover {
+  color: #CCCCFF;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+  background-color: #046DAF;
+}
+
+/* navbar-toggle */
+.my-app-name-container .navbar-toggle {
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+
+.my-app-name-container .navbar-toggle:focus {
+  background-color: inherit;
+}
+
+/* navbar-inverse */
+.my-app-name-container .navbar-inverse .navbar-toggle {
+  border-color: transparent;
+}
+.my-app-name-container .navbar-inverse .navbar-toggle:hover,
+.my-app-name-container .navbar-inverse .navbar-toggle:focus {
+  background-color: #046DAF;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
+}
+
+.my-app-name-container .navbar-inverse .navbar-collapse,
+.my-app-name-container .navbar-inverse .navbar-form {
+  border-color: transparent;
+}
+.my-app-name-container .navbar-inverse .navbar-nav > .open > a,
+.my-app-name-container .navbar-inverse .navbar-nav > .open > a:hover,
+.my-app-name-container .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: inherit;
+}
+
+/* Buttom image temporary fix */
 .my-app-name-container btn a {
   color: inherit;
 }

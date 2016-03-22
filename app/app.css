@@ -44,10 +44,12 @@ header .container .row a {
     margin-right: 30px;
 }
 
-.specialities input.ng-invalid {
+.specialities input.ng-invalid,
+.admins input.ng-invalid {
     background-color: #ffc0cb;
 }
-.specialities input.ng-valid {
+.specialities input.ng-valid,
+.admins input.ng-valid {
     background-color: #fff;
 }
 /* For image load button */

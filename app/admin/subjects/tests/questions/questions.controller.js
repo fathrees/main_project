@@ -4,31 +4,49 @@
     angular.module("app.admin.subjects")
         .controller("QuestionsController", QuestionsController);
 
-    QuestionsController.$inject = ["$stateParams", "questionsService"];
+    QuestionsController.$inject = ["$stateParams", "questionsService", "ENTITY_RANGE_ON_PAGE", "MESSAGE"];
 
-    function QuestionsController($stateParams, questionsService) {
+    function QuestionsController($stateParams, questionsService, ENTITY_RANGE_ON_PAGE, MESSAGE) {
         var vm = this;
         vm.showSaveForm = showSaveForm;
         vm.hideSaveForm = hideSaveForm;
         vm.saveFormCollapsed = true;
         vm.headElements = questionsService.getHeader();
+        vm.levels = questionsService.getLevels();
+        vm.types = questionsService.getTypes();
         vm.saveQuestion = saveQuestion;
         vm.removeQuestion = removeQuestion;
         vm.image;
-        vm.levels = ["1", "2", "3", "4", "5"];
-        vm.types = [{name: "Простий вибір", value: "1"}, {name: "Мульти-вибір", value: "2"}];
         vm.maxSize = 5;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
+        vm.subject_id = $stateParams.subject_id;
         activate();
 
         function activate() {
-            questionsService.totalItems($stateParams.test_id).then(function(quantity) {
-                vm.totalItems = +quantity;
+            getCountQuestionsByTest();
+            getQuestionsRange();
+        }
+
+        function getCountQuestionsByTest() {
+            questionsService.getCountQuestionsByTest($stateParams.test_id).then(function(quantity) {
+                vm.quantityQuestions = quantity;
+                if (vm.quantityQuestions > ENTITY_RANGE_ON_PAGE) {
+                    vm.showPagination = true;
+                } else {
+                    vm.showPagination = false
+                }
             });
-            questionsService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
-                vm.questionsList = data;
+        }
+
+        function getQuestionsRange() {
+            questionsService.getQuestionsRange(vm.currentRecordsRange, $stateParams.test_id).then(function(data) {
+                if (Array.isArray(data)) {
+                    vm.questionsList = data;
+                } else {
+                    vm.questionsList = [];
+                }
             });
         }
 
@@ -55,27 +73,35 @@
             if (vm.image != null) {
                 vm.question.attachment = vm.image;
             }
-            questionsService.saveQuestion(vm.question, $stateParams.test_id).then(function(response) {
+            questionsService.saveQuestion(vm.question, $stateParams.test_id).then(function(data) {
+                if(data.response === "ok"){
+                    alert(MESSAGE.SAVE_SUCCSES);
+                } else{
+                    alert(MESSAGE.SAVE_ERROR +  " " + data.response);
+                }
                 activate();
-                vm.hideSaveForm();
+                hideSaveForm();
             });
         }
 
         function removeQuestion(question) {
-            questionsService.removeQuestion(question.question_id).then(function(response) {
+            questionsService.removeQuestion(question.question_id).then(function(data) {
+                if (data.response === "ok") {
+                    alert(MESSAGE.DEL_SUCCESS)
+                } else if (data.response === "error 23000") {
+                    alert(MESSAGE.DEL_ERROR);
+                }
                 activate();
             });
         }
 
         function getNextRange() {
-            vm.currentRecordsRange = (vm.currentPage - 1) * 10;
+            vm.currentRecordsRange = (vm.currentPage - 1) * ENTITY_RANGE_ON_PAGE;
         }
 
         function pageChanged(){
             getNextRange();
-            questionsService.getQuestionsRange(vm.currentRecordsRange, 10, $stateParams.test_id).then(function(data) {
-                vm.questionsList = data;
-            });
+            getQuestionsRange();
         }
     }
 })();

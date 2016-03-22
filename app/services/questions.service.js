@@ -9,10 +9,12 @@
     function questionsService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE, MESSAGE) {
         var service = {
             getQuestionsRange: getQuestionsRange,
-            totalItems: totalItems,
+            getCountQuestionsByTest: getCountQuestionsByTest,
             saveQuestion: saveQuestion,
             removeQuestion: removeQuestion,
-            getHeader: getHeader
+            getHeader: getHeader,
+            getLevels: getLevels,
+            getTypes: getTypes
         };
 
         return service;
@@ -35,14 +37,15 @@
                 .then(_successCallback, _errorCallback);
         }
 
-        function getQuestionsRange(currentRecordsRange, limit, test_id) {
-            return $http.get(BASE_URL + ENTITIES.QUESTION + "/getRecordsRangeByTest/" + test_id + "/" + limit + "/" + currentRecordsRange + "/")
+        function getQuestionsRange(currentRecordsRange, test_id) {
+            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.GET_RECORDS_RANGE_BY_TEST + test_id + "/"
+                + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange + "/")
                 .then(_successCallback, _errorCallback);
         }
 
-        function totalItems(test_id) {
+        function getCountQuestionsByTest(test_id) {
             var deferred = $q.defer();
-            $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.COUNT_ENTITY + test_id)
+            $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.COUNT_RECORDS_BY_TEST + test_id)
                 .then(function(response){
                         if(response.status === 200) {
                             deferred.resolve(response.data.numberOfRecords)
@@ -73,8 +76,20 @@
         }
 
         function getHeader() {
-            return ["№", "Завдання", "Рівень", "Тип"];
+            return ["Завдання", "Рівень", "Тип"];
         }
 
+        function getLevels() {
+            var levels = [];
+            for (var i = 1; i <= 7; i++){
+                levels.push(i.toString());
+            }
+            
+            return levels;
+        }
+        
+        function getTypes() {
+            return [{name: "Простий вибір", value: "1"}, {name: "Мульти-вибір", value: "2"}];
+        }
     }
 })();

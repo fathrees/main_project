@@ -70,8 +70,8 @@
                 templateUrl: "app/admin/specialities/specialities.html",
                 controller: "SpecialitiesController as specialities"
             })
-            .state("admin.groupsBySpeciality", {
-                url: "/specialities/{speciality_id:int}/groups",
+            .state("admin.groupsByEntity", {
+                url: "/{entity}/{entity_id:int}/groups",
                 templateUrl: "app/admin/groups/groups.html",
                 controller: "GroupsController as groups"
             })

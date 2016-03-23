@@ -4,12 +4,13 @@
     angular.module("app.admin.subjects")
         .factory("questionsService", questionsService);
 
-    questionsService.$inject = ["$http", "$q", "BASE_URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE", "MESSAGE"];
+    questionsService.$inject = ["$http", "$q", "BASE_URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE"];
 
-    function questionsService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE, MESSAGE) {
+    function questionsService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE) {
         var service = {
             getQuestionsRange: getQuestionsRange,
             getCountQuestionsByTest: getCountQuestionsByTest,
+            getOneQuestion: getOneQuestion,
             saveQuestion: saveQuestion,
             removeQuestion: removeQuestion,
             getHeader: getHeader,
@@ -58,9 +59,14 @@
             return deferred.promise;
         }
 
-        function saveQuestion(question, id) {
+        function getOneQuestion(question_id) {
+            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.GET_ENTITIES + question_id)
+                .then(_successCallback, _errorCallback);
+        }
+        
+        function saveQuestion(question, test_id) {
             if (question.question_id === undefined) {
-                question.test_id = id;
+                question.test_id = test_id;
                 if (question.attachment === undefined) {
                     question.attachment = "";
                 }
@@ -70,8 +76,8 @@
             }
         }
 
-        function removeQuestion(id) {
-            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.REMOVE_ENTITY + id)
+        function removeQuestion(question_id) {
+            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.REMOVE_ENTITY + question_id)
                 .then(_successCallback, _errorCallback);
         }
 

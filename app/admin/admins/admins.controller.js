@@ -21,7 +21,11 @@
         function _parseDate(arrObj) {
             for (var i = 0; i < arrObj.length; i++) {
                 var newDate = new Date(arrObj[i].last_login*1000);
-                newDate = newDate.getHours() + ":" + newDate.getMinutes() + " " + newDate.getDate() + "." + (newDate.getMonth() + 1) + "." + newDate.getFullYear();
+                newDate = ((newDate.getHours() < 10) ? ("0" + newDate.getHours()) : newDate.getHours()) + ":" +
+                    ((newDate.getMinutes() < 10) ? ("0" + newDate.getMinutes()) : newDate.getMinutes()) + " " +
+                    ((newDate.getDate() < 10) ? ("0" + newDate.getDate()) : newDate.getDate()) + "." +
+                    ((((newDate.getMonth() + 1)) < 10) ? ("0" + (newDate.getMonth() + 1)) : ((newDate.getMonth() + 1))) + "." +
+                    newDate.getFullYear();
                 arrObj[i].last_login = newDate;
             }
         }

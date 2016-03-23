@@ -16,7 +16,7 @@
         return service;
         function getAdmins() {
             var deferred = $q.defer();
-            $http.get(BASE_URL + URL.ENTITIES.ADMIN + URL.GET_ENTITIES)
+            $http.get(BASE_URL + URL.ENTITIES.ADMINS + URL.GET_ENTITIES)
                 .then(function(res) {
                         deferred.resolve(res.data);
                     },

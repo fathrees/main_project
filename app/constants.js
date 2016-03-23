@@ -39,7 +39,7 @@
         .constant("ENTITY_RANGE_ON_PAGE", 10)
         //NEED delete to
 
-        .constant("URLS", {
+        .constant("URL", {
             //"AUTH"
             LOGIN: "login/index",
             IS_LOGGED: "login/isLogged",

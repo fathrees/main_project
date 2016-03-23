@@ -101,8 +101,8 @@
                 controller: "QuestionsController as questions"
             })
             .state("admin.answer", {
-                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}/answer/{answer_id:int}",
-                templateUrl: "app/admin/subjects/tests/answer/answer.html",
+                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}/answer",
+                templateUrl: "app/admin/subjects/tests/questions/answer/answer.html",
                 controller: "AnswerController as answer"
             })
             .state("admin.testDetails", {

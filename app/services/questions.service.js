@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .factory("questionsService", questionsService);
 
-    questionsService.$inject = ["$http", "$q", "BASE_URL", "ENTITIES", "ACTIONS", "ENTITY_RANGE_ON_PAGE"];
+    questionsService.$inject = ["$http", "$q", "BASE_URL", "URLS", "PAGINATION"];
 
-    function questionsService($http, $q, BASE_URL, ENTITIES, ACTIONS, ENTITY_RANGE_ON_PAGE) {
+    function questionsService($http, $q, BASE_URL, URLS, PAGINATION) {
         var service = {
             getQuestionsRange: getQuestionsRange,
             getCountQuestionsByTest: getCountQuestionsByTest,
@@ -29,24 +29,24 @@
         }
 
         function _addQuestion(question) {
-            return $http.post(BASE_URL + ENTITIES.QUESTION + ACTIONS.ADD_ENTITY, question)
+            return $http.post(BASE_URL + URLS.ENTITIES.QUESTION + URLS.ADD_ENTITY, question)
                 .then(_successCallback, _errorCallback);
         }
 
         function _editQuestion(question) {
-            return $http.post(BASE_URL + ENTITIES.QUESTION + ACTIONS.EDIT_ENTITY + question.question_id, question)
+            return $http.post(BASE_URL + URLS.ENTITIES.QUESTION + URLS.EDIT_ENTITY + question.question_id, question)
                 .then(_successCallback, _errorCallback);
         }
 
         function getQuestionsRange(currentRecordsRange, test_id) {
-            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.GET_RECORDS_RANGE_BY_TEST + test_id + "/"
-                + ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange + "/")
+            return $http.get(BASE_URL + URLS.ENTITIES.QUESTION + URLS.GET_RECORDS_RANGE_BY_TEST + test_id + "/"
+                + PAGINATION.ENTITIES_RANGE_ON_PAGE + "/" + currentRecordsRange + "/")
                 .then(_successCallback, _errorCallback);
         }
 
         function getCountQuestionsByTest(test_id) {
             var deferred = $q.defer();
-            $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.COUNT_RECORDS_BY_TEST + test_id)
+            $http.get(BASE_URL + URLS.ENTITIES.QUESTION + URLS.COUNT_RECORDS_BY_TEST + test_id)
                 .then(function(response){
                         if(response.status === 200) {
                             deferred.resolve(response.data.numberOfRecords)
@@ -60,7 +60,7 @@
         }
 
         function getOneQuestion(question_id) {
-            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.GET_ENTITIES + question_id)
+            return $http.get(BASE_URL + URLS.ENTITIES.QUESTION + URLS.GET_ENTITIES + question_id)
                 .then(_successCallback, _errorCallback);
         }
         
@@ -77,7 +77,7 @@
         }
 
         function removeQuestion(question_id) {
-            return $http.get(BASE_URL + ENTITIES.QUESTION + ACTIONS.REMOVE_ENTITY + question_id)
+            return $http.get(BASE_URL + URLS.ENTITIES.QUESTION + URLS.REMOVE_ENTITY + question_id)
                 .then(_successCallback, _errorCallback);
         }
 

@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("QuestionsController", QuestionsController);
 
-    QuestionsController.$inject = ["$stateParams", "questionsService", "ENTITY_RANGE_ON_PAGE", "MESSAGE"];
+    QuestionsController.$inject = ["$stateParams", "questionsService", "PAGINATION", "MESSAGE"];
 
-    function QuestionsController($stateParams, questionsService, ENTITY_RANGE_ON_PAGE, MESSAGE) {
+    function QuestionsController($stateParams, questionsService, PAGINATION, MESSAGE) {
         var vm = this;
         vm.showSaveForm = showSaveForm;
         vm.hideSaveForm = hideSaveForm;
@@ -17,8 +17,8 @@
         vm.saveQuestion = saveQuestion;
         vm.removeQuestion = removeQuestion;
         vm.image;
-        vm.maxSize = 5;
-        vm.currentPage = 1;
+        vm.maxSize = PAGINATION.PAGES_SHOWN;
+        vm.currentPage = PAGINATION.CURRENT_PAGE;
         vm.currentRecordsRange = 0;
         vm.pageChanged = pageChanged;
         vm.subject_id = $stateParams.subject_id;
@@ -32,7 +32,7 @@
         function getCountQuestionsByTest() {
             questionsService.getCountQuestionsByTest($stateParams.test_id).then(function(quantity) {
                 vm.quantityQuestions = quantity;
-                if (vm.quantityQuestions > ENTITY_RANGE_ON_PAGE) {
+                if (vm.quantityQuestions > PAGINATION.ENTITIES_RANGE_ON_PAGE) {
                     vm.showPagination = true;
                 } else {
                     vm.showPagination = false
@@ -96,7 +96,7 @@
         }
 
         function getNextRange() {
-            vm.currentRecordsRange = (vm.currentPage - 1) * ENTITY_RANGE_ON_PAGE;
+            vm.currentRecordsRange = (vm.currentPage - 1) * PAGINATION.ENTITIES_RANGE_ON_PAGE;
         }
 
         function pageChanged(){

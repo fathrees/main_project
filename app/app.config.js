@@ -26,7 +26,7 @@
                 controller: "AdminsController as admins"
             })
             .state("admin.adminDetail", {
-                url: "/admins/{admin_Id:int}",
+                url: "/admins/{admin_id:int}",
                 templateUrl: "app/admin/admins/admin-detail.html",
                 controller: "AdminDetailController as detail"
             })

@@ -4,11 +4,14 @@
     angular.module("app.admin")
         .controller("AdminsController", AdminsController);
 
-    AdminsController.$inject = ["adminService"];
+    AdminsController.$inject = ["adminService", "$uibModal"];
 
-    function AdminsController(adminService) {
+    function AdminsController(adminService, $uibModal) {
         var vm = this;
         vm.headElements = adminService.getHeader();
+        vm.showSaveForm = showSaveForm;
+        vm.animation = true;
+
         activate();
 
         function activate() {
@@ -28,6 +31,35 @@
                     newDate.getFullYear();
                 arrObj[i].last_login = newDate;
             }
+        }
+
+        function showSaveForm(kindOf) {
+            vm.kindOfSave = kindOf;
+            if (kindOf === "Реєстрація"){
+                vm.admin = {};
+            }
+            var modalInstance = $uibModal.open({
+                animation: vm.animation,
+                templateUrl: "app/admin/admins/admin-saveform.html",
+                controller: "AdminSaveFormController",
+                controllerAs: "adminSave",
+                resolve: {
+                    admin: function() {
+                        return vm.admin;
+                    },
+                    kindOfSave: function() {
+                        return vm.kindOfSave;
+                    }
+                }
+            });
+
+            modalInstance.result.then(
+                function(resolve) {
+                    vm.admin = resolve;
+                },
+                function() {
+                    console.log('Modal dismissed at: ' + new Date());
+                });
         }
     }
 })();

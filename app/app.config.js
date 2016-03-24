@@ -80,13 +80,13 @@
                 templateUrl: "app/admin/subjects/subjects.html",
                 controller: "SubjectsController as subjects"
             })
-            .state("admin.schedules", {
-                url: "/subjects/{subject_id:int}/schedules",
+            .state("admin.scheduleForEntity", {
+                url: "/{entity}/{entity_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedules.html",
                 controller: "SchedulesController as schedules"
             })
-            .state("admin.schedule", {
-                url: "/subjects/{subject_id:int}/schedules/{schedule_id:int}",
+            .state("admin.scheduleForGroup", {
+                url: "/groups/{group_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedule.html",
                 controller: "ScheduleController as schedule"
             })
@@ -117,4 +117,3 @@
             })
     }
 })();
-

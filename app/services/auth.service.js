@@ -47,7 +47,8 @@
         function logout(){
             return $http.get(BASE_URL + AUTH.LOGOUT)
                 .then(function (res){
-                        return res;
+
+                    return res;
                     },
                     function (res){
 

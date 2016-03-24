@@ -26,7 +26,7 @@
                 controller: "AdminsController as admins"
             })
             .state("admin.adminDetail", {
-                url: "/admins/{admin_Id:int}",
+                url: "/admins/{admin_id:int}",
                 templateUrl: "app/admin/admins/admin-detail.html",
                 controller: "AdminDetailController as detail"
             })
@@ -70,8 +70,8 @@
                 templateUrl: "app/admin/specialities/specialities.html",
                 controller: "SpecialitiesController as specialities"
             })
-            .state("admin.groupsBySpeciality", {
-                url: "/specialities/{speciality_id:int}/groups",
+            .state("admin.groupsByEntity", {
+                url: "/{entity}/{entity_id:int}/groups",
                 templateUrl: "app/admin/groups/groups.html",
                 controller: "GroupsController as groups"
             })
@@ -80,13 +80,13 @@
                 templateUrl: "app/admin/subjects/subjects.html",
                 controller: "SubjectsController as subjects"
             })
-            .state("admin.schedules", {
-                url: "/subjects/{subject_id:int}/schedules",
+            .state("admin.scheduleForEntity", {
+                url: "/{entity}/{entity_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedules.html",
                 controller: "SchedulesController as schedules"
             })
-            .state("admin.schedule", {
-                url: "/subjects/{subject_id:int}/schedules/{schedule_id:int}",
+            .state("admin.scheduleForGroup", {
+                url: "/groups/{group_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedule.html",
                 controller: "ScheduleController as schedule"
             })
@@ -101,7 +101,7 @@
                 controller: "QuestionsController as questions"
             })
             .state("admin.answer", {
-                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}/answer/{answer_id:int}",
+                url: "/subjects/{subject_id:int}/tests/{test_id:int}/question/{question_id:int}/answer",
                 templateUrl: "app/admin/subjects/tests/questions/answer/answer.html",
                 controller: "AnswerController as answer"
             })
@@ -132,4 +132,3 @@
             })
     }
 })();
-

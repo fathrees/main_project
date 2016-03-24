@@ -26,8 +26,8 @@
                 if (arrObj[i][key] === text) {
 
                     return true;
-                };
-            };
+                }
+            }
 
             return false;
         }
@@ -46,7 +46,7 @@
         }
 
         return {
-            restrict: "EA",
+            restrict: "A",
             require: "ngModel",
             link: function(scope, element, attr, mCtrl) {
                 function validation(value) {

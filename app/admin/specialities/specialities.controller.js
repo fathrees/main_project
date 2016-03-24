@@ -4,9 +4,9 @@
     angular.module("app.admin")
         .controller("SpecialitiesController", SpecialitiesController);
 
-    SpecialitiesController.$inject = ["specialitiesService", "ENTITY_RANGE_ON_PAGE", "SPECIALITIES_CONST"];
+    SpecialitiesController.$inject = ["specialitiesService", "PAGINATION", "SPECIALITIES_CONST"];
 
-    function SpecialitiesController (specialitiesService, ENTITY_RANGE_ON_PAGE, SPECIALITIES_CONST) {
+    function SpecialitiesController (specialitiesService, PAGINATION, SPECIALITIES_CONST) {
         var vm = this;
         vm.showSaveForm = showSaveForm;
         vm.hideSaveForm = hideSaveForm;
@@ -68,7 +68,7 @@
 
 
         function getNextRange() {
-            vm.currentRecordsRange =(vm.currentPage - 1) * ENTITY_RANGE_ON_PAGE;
+            vm.currentRecordsRange =(vm.currentPage - 1) * PAGINATION.ENTITIES_RANGE_ON_PAGE;
         }
 
         function pageChanged(){

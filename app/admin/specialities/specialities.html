@@ -12,7 +12,7 @@
                     <input class="form-control" type="text" ng-model="search" placeholder="Пошук">
                 </div>
             </div>
-            <p class="col-xs-12 col-md-6  title">Спеціальності</p>
+            <h3 class="col-xs-12 col-md-6">Спеціальності</h3>
         </div>
         <!--SAVE FORM-->
         <form name="saveForm" class="row" uib-collapse="specialities.saveFormCollapsed" ng-submit="specialities.saveSpeciality()">
@@ -54,7 +54,7 @@
             <tbody>
             <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
-                <td class="clip"><a ui-sref="admin.groupsBySpeciality({speciality_id: speciality.speciality_id})">{{speciality.speciality_name}}</a></td>
+                <td class="clip"><a ui-sref="admin.groupsByEntity({entyty: 'speciality', entity_id: speciality.speciality_id})">{{speciality.speciality_name}}</a></td>
                 <td class="clip">{{speciality.speciality_code}}</td>
                 <td class="clip">
                     <button class="btn btn-warning" ng-click="specialities.showSaveForm(speciality)"

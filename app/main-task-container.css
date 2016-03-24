@@ -185,7 +185,7 @@
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
 }
 
-/* class btn-info */
+/* class btn-warning */
 .my-app-name-container .btn-warning {
   background-color: #FF9800;
 }
@@ -488,6 +488,10 @@
 }
 
 /* navbar-inverse */
+
+.my-app-name-container .navbar-inverse {
+  border-color: transparent;
+}
 .my-app-name-container .navbar-inverse .navbar-toggle {
   border-color: transparent;
 }

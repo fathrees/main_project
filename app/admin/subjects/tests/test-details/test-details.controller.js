@@ -51,7 +51,8 @@
         /**
          * Set ava wich available Level. If it's edit,  pushed level of edited object to array.
          * Count and set how much tasks are aviable. If it's edit,  added tasks of edited object to array.
-         * Switch editing and adding.*/
+         * Switch editing and adding.
+         * @param {objject} testLevel get from template. When addfunction used it is undefined*/
 
         function showForm(testLevel) {
 

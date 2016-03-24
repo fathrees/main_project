@@ -77,7 +77,7 @@
 
         function getHeader() {
 
-            return ["Назва тесту", "Завдань", "Тривалість, хв", "Статус"];
+            return ["Назва тесту", "Завдань", "Тривалість", "Статус"];
         }
 
         function getStatus() {
@@ -138,7 +138,7 @@
         function getLevel (arrTestDetail){
             var level = [];
             var usedLevel = [];
-            if(arrTestDetail.length > 0) {
+            if(arrTestDetail.length) {
             arrTestDetail.forEach(function(item){
                 usedLevel.push(item.level);
             })};

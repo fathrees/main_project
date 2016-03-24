@@ -67,6 +67,7 @@
             GET_ENTITY_RANGE: "/getRecordsRange/",
             GET_ENTITIES: "/getRecords/",
             GET_RECORDS_RANGE_BY_TEST: "/getRecordsRangeByTest/",
+            GET_STUDENTS_BY_GROUP: "/getStudentsByGroup/",
             GET_TEST_BY_SUBJECT: "/getTestsBySubject/",
             GET_TEST_DETAILS: "/getTestDetailsByTest/",
             GET_QUESTIONS_BY_LEVEL_RAND: "/getQuestionsByLevelRand/",

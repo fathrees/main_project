@@ -1,3 +1,30 @@
+.my-app-name-container h1 small,
+.my-app-name-container h2 small,
+.my-app-name-container h3 small,
+.my-app-name-container h4 small,
+.my-app-name-container h5 small,
+.my-app-name-container h6 small,
+.my-app-name-container .h1 small,
+.my-app-name-container .h2 small,
+.my-app-name-container .h3 small,
+.my-app-name-container .h4 small,
+.my-app-name-container .h5 small,
+.my-app-name-container .h6 small,
+.my-app-name-container h1 .small,
+.my-app-name-container h2 .small,
+.my-app-name-container h3 .small,
+.my-app-name-container h4 .small,
+.my-app-name-container h5 .small,
+.my-app-name-container h6 .small,
+.my-app-name-container .h1 .small,
+.my-app-name-container .h2 .small,
+.my-app-name-container .h3 .small,
+.my-app-name-container .h4 .small,
+.my-app-name-container .h5 .small,
+.my-app-name-container .h6 .small {
+  color: #9D9D9D;
+}
+
 .my-app-name-container .btn {
   border: none;
   border-radius: 0;
@@ -57,6 +84,7 @@
   background-color: #E6E6E6;
 }
 .my-app-name-container .btn-default:hover {
+  background-color: #CCCCCC;
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
 }
 .my-app-name-container .btn-default:active,
@@ -479,11 +507,6 @@
   background-color: inherit;
 }
 
-/* Buttom image temporary fix */
-.my-app-name-container btn a {
-  color: inherit;
-}
-.my-app-name-container btn a:hover,
-.my-app-name-container btn a:focus {
-  color: inherit;
+.my-app-name-container a:focus {
+  outline: none;
 }

@@ -85,7 +85,6 @@
             vm.newStudent.password_confirm = random;
         }
 
-
         function addNewStudent() {
             if ($stateParams.content_type === "add") {
                 vm.editAndAddElement = $stateParams.content_type === "add";
@@ -98,7 +97,6 @@
         function editFormAppear() {
             vm.additionalInputs = true;
             vm.disableInputs = false;
-
         }
 
         function editStudent() {
@@ -131,8 +129,6 @@
                 vm.associativeGroups[+vm.groups[i].group_id] = vm.groups[i].group_name;
             }
         });
-
-
 
     }
 })();

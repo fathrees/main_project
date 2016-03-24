@@ -18,8 +18,6 @@
 
         return studentsService;
 
-
-
         function getStudentsByGroupId(group_id, currentRecordsRange) {
             var studentsData = $q.defer();
             $http.get(BASE_URL + URL.ENTITIES.STUDENT + URL.GET_STUDENTS_BY_GROUP + group_id + "/" + PAGINATION.ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange).then(
@@ -33,7 +31,6 @@
 
             return studentsData.promise;
         }
-
 
         //function that add new student in studentController!!! gettin all data that is needed for adding new student
 
@@ -102,27 +99,12 @@
             return studentEdit.promise;
         }
 
-
         //function that get head elements for table that has all info about students of specific group...
 
         function getHeadElements () {
             return ["Ім'я", "Прізвище", "По-батькові", "Номер залікової книги", "Група"];
         }
 
-
-
-        // todo.
-        // function that is written below will be used in the next sprint!
-        //function getStudentsData(url) {
-        //    return $http.get(url).then(
-        //        function (result) {
-        //            return result.data;
-        //        },
-        //        function (reason) {
-        //            return reason;
-        //        }
-        //    );
-        //}
 
     }
 })();

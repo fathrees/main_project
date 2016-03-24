@@ -25,10 +25,10 @@
                 templateUrl: "app/admin/admins/admins.html",
                 controller: "AdminsController as admins"
             })
-            .state("admin.adminDetail", {
+            .state("admin.adminDetails", {
                 url: "/admins/{admin_id:int}",
-                templateUrl: "app/admin/admins/admin-detail.html",
-                controller: "AdminDetailController as detail"
+                templateUrl: "app/admin/admins/admin-details.html",
+                controller: "AdminDetailsController as details"
             })
             .state("admin.faculties", {
                 url: "/faculties",

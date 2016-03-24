@@ -87,7 +87,7 @@
 
         function _editSpeciality(speciality) {
 
-            return $http.post(BASE_URL + URL.SPECIALITY + URL.EDIT_ENTITY + speciality.speciality_id, speciality)
+            return $http.post(BASE_URL + URL.ENTITIES.SPECIALITY + URL.EDIT_ENTITY + speciality.speciality_id, speciality)
                 .then(_successCallback, _errorCallback);
         }
 

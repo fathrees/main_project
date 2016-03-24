@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6  pull-right">
                 <div class="col-xs-3 col-md-1 pull-right">
-                    <button class="btn btn-success" ng-click="specialities.showSaveForm()" title="Додати">
+                    <button class="btn btn-success" ng-click="specialities.showSaveForm()" title="Додати спеціальність">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </div>
@@ -54,16 +54,17 @@
             <tbody>
             <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
-                <td class="clip"><a ui-sref="admin.groupsByEntity({entity: 'speciality', entity_id: speciality.speciality_id})">{{speciality.speciality_name}}</a></td>
+                <td class="clip"><a ui-sref="admin.groupsByEntity({entity: 'speciality', entity_id: speciality.speciality_id})"
+                                    title='Перейти до груп спеціальності "{{speciality.speciality_name}}"'>{{speciality.speciality_name}}</a></td>
                 <td class="clip">{{speciality.speciality_code}}</td>
                 <td class="clip">
                     <button class="btn btn-warning" ng-click="specialities.showSaveForm(speciality)"
-                            title="Редагувати {{::speciality.speciality_name}}">
+                            title='Редагувати "{{::speciality.speciality_name}}"'>
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>
                     <button class="btn btn-danger"  ng-click="specialities.removeSpeciality(speciality)"
-                            title="Видалити {{::speciality.speciality_name}}">
-                        <i class="glyphicon glyphicon-trash"></i>
+                            title='Видалити "{{::speciality.speciality_name}}"'>
+                        <i class="glyphicon glyphicon-remove"></i>
                     </button>
                 </td>
             </tr>
@@ -73,4 +74,4 @@
                         ng-model="specialities.currentPage" max-size="specialities.maxSize" class="pagination-sm"
                         boundary-link-numbers="true" rotate="false"></uib-pagination>
     </div>
-</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+</div>

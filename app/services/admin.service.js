@@ -29,7 +29,7 @@
 
         function getHeader() {
 
-            return ["Логін", "E-mail", "Відвідування", "Дії"];
+            return ["Логін", "E-mail", "Відвідування"];
         }
 
         function getAllCountRecords() {

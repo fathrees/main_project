@@ -98,7 +98,7 @@
         }
 
         function getItemsPerPage() {
-            vm.currentRecordsRange = (vm.currentPage - 1) * vm.entitiesPerPage
+            vm.currentRecordsRange = (vm.currentPage - 1) * vm.entitiesPerPage;
             var end = vm.currentRecordsRange + vm.entitiesPerPage;
             if(vm.totalList.length > 0) {
                 vm.list = vm.totalList.slice(vm.currentRecordsRange, end);

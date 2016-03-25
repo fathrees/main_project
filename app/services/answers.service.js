@@ -55,8 +55,8 @@
 
         function removeAnswer(id) {
             return $http.get(BASE_URL + URL.ENTITIES.ANSWER  + URL.REMOVE_ENTITY + id)
-    .then(_successCallback, _errorCallback);
-    }
+                .then(_successCallback, _errorCallback);
+        }
 
 
         function getHeader() {
@@ -70,7 +70,9 @@
     }
 
     function disableChoice (arrayOfData,typeOfQuestion){
+        var  trueAnswerOnPage;
         if (Array.isArray(arrayOfData)) {
+            trueAnswerOnPage = arrayOfData.some(function (obj) {
 
                 return parseInt(obj.true_answer);
             })

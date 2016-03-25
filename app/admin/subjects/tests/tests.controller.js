@@ -28,7 +28,7 @@
 
 
         function activate (){
-            testsService.getTests($stateParams.subject_id).then(function(data){
+            testsService.getTestsBySubjest($stateParams.subject_id).then(function(data){
                 vm.totalList = data;
                 vm.list = [];
                 getItemsPerPage();

@@ -28,7 +28,7 @@
 
 
         function activate (){
-            testsService.getTests($stateParams.subject_id).then(function(data){
+            testsService.getTestsBySubjest($stateParams.subject_id).then(function(data){
                 vm.totalList = data;
                 vm.list = [];
                 getItemsPerPage();
@@ -50,7 +50,6 @@
         }
 
         function showForm(test) {
-            console.log(test);
             vm.formCollapsed = false;
             if (test === undefined) {
                 vm.test = {
@@ -72,7 +71,6 @@
         }
 
         function saveEntity () {
-            console.log(vm.test);
             testsService.saveTest(vm.test).then(function (data) {
                 if(data.response === "ok"){
                     alert(MESSAGE.SAVE_SUCCSES);
@@ -92,7 +90,6 @@
                     if (res.response === "ok") {
                         alert(MESSAGE.DEL_SUCCESS)
                     } else if (res.response === "error 23000") {
-                        console.log(res)
                         alert(MESSAGE.DEL_ERROR);
                     }
                     activate();
@@ -101,7 +98,7 @@
         }
 
         function getItemsPerPage() {
-            vm.currentRecordsRange = (vm.currentPage - 1) * vm.entitiesPerPage
+            vm.currentRecordsRange = (vm.currentPage - 1) * vm.entitiesPerPage;
             var end = vm.currentRecordsRange + vm.entitiesPerPage;
             if(vm.totalList.length > 0) {
                 vm.list = vm.totalList.slice(vm.currentRecordsRange, end);

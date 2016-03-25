@@ -32,7 +32,11 @@
                 }
             });
             subjectsService.getSubjects(vm.currentRecordsRange).then(function (data) {
-                vm.list = data;
+                if (Array.isArray(data)) {
+                    vm.list = data;
+                } else {
+                    vm.list = [];
+                }
             })}
 
         function hideForm() {

@@ -4,7 +4,7 @@
     angular.module("app.admin.subjects")
         .factory("testsService", testsService);
 
-    testsService.$inject = ["$http", "BASE_URL", "ENTITIES", "ACTIONS", ];
+    testsService.$inject = ["$http", "BASE_URL", "ENTITIES", "ACTIONS" ];
 
     function testsService($http, BASE_URL, ENTITIES, ACTIONS) {
 
@@ -12,6 +12,7 @@
 
         var service = {
             getTests: getTests,
+            getTestsBySubjest: getTestsBySubjest,
             getOneTest: getOneTest,
             saveTest: saveTest,
             removeTest: removeTest,
@@ -34,8 +35,11 @@
         function _errorCallback(response) {
             return response;
         }
-
-        function getTests (subjectId) {
+        function getTests () {
+            return $http.get(BASE_URL + ENTITIES.TEST + ACTIONS.GET_ENTITIES)
+                .then(_successCallback, _errorCallback);
+        }
+        function getTestsBySubjest (subjectId) {
 
             return $http.get(BASE_URL + ENTITIES.TEST + ACTIONS.GET_TEST_BY_SUBJECT + "/" + subjectId)
                 .then(_successCallback, _errorCallback);

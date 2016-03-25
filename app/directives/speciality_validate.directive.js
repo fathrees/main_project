@@ -51,8 +51,9 @@
             link: function(scope, element, attr, mCtrl) {
                 function validation(value) {
                     mCtrl.$setValidity("validText", validText(whichInput(attr.name).regexp, value));
-                    mCtrl.$setValidity("alreadyExist", !alreadyExist(all, whichInput(attr.name).key, value));
-
+                    if (attr.name.indexOf("speciality" >= 0)){
+                        mCtrl.$setValidity("alreadyExist", !alreadyExist(all, whichInput(attr.name).key, value));
+                    }
                     return value;
                 }
                 mCtrl.$parsers.push(validation);

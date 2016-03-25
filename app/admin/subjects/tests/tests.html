@@ -2,11 +2,11 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="row">
-            <h3 class="col-xs-12 col-md-11">Тести предмету: {{tests.currentSubject}}</h3>
+            <h3 class="col-xs-12 col-md-11">Тести предмету: {{::tests.currentSubject}}</h3>
             <div class="col-xs-12 col-md-1">
-                    <button class="btn btn-success"  ng-click="tests.showForm()"  title="Додати тест">
-                        <i class="glyphicon glyphicon-plus"></i>
-                    </button>
+                <button class="btn btn-success"  ng-click="tests.showForm()"  title="Додати тест">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
             </div>
         </div>
         <div ng-include="'app/admin/subjects/tests/save-test.html'" ></div>

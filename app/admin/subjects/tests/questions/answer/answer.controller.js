@@ -18,26 +18,25 @@
         vm.image;
         activate();
 
+
         function activate (){
             answersService.getAnswersByQuestion($stateParams.question_id).then(function(data){
-                if(Array.isArray(data)) {
+                if (Array.isArray(data)) {
                     vm.list = data;
-                }else{
+                } else {
                     vm.list = [];
                 }
-            })
+            });
 
             questionsService.getOneQuestion($stateParams.question_id).then(function (data) {
                 vm.currentQuestion = data[0];
                 vm.questionType = questionType (vm.currentQuestion.type);
             })
-
-
         }
 
         function showForm(answerItem) {
             vm.formCollapsed = false;
-            vm.trueAnswers[1].disabled = answersService.disableChoice(vm.list, vm.currentQuestion.type)
+            vm.trueAnswers[1].disabled = answersService.disableChoice(vm.list, vm.currentQuestion.type);
             vm.image = null;
             if (answerItem === undefined) {
                 vm.answerItem = {};
@@ -60,9 +59,9 @@
                 vm.answerItem.attachment = vm.image;
             }
             answersService.saveAnswer(vm.answerItem, $stateParams.question_id).then(function(data) {
-                if(data.response === "ok"){
+                if (data.response === "ok"){
                     alert(MESSAGE.SAVE_SUCCSES);
-                } else{
+                } else {
                     alert(MESSAGE.SAVE_ERROR +  " " + data.response);
                 }
                 activate();
@@ -71,14 +70,14 @@
         }
 
         function removeAnswer(answer) {
-            if(confirm(MESSAGE.DEL_CONFIRM)) {
+            if( confirm(MESSAGE.DEL_CONFIRM)) {
                 answersService.removeAnswer(answer.answer_id).then(function (data) {
                     if (data.response === "ok") {
                         alert(MESSAGE.DEL_SUCCESS)
                     } else {
                         alert(MESSAGE.DEL_ERROR);
                     }
-                    hideForm()
+                    hideForm();
                     activate();
                 });
             }
@@ -87,10 +86,11 @@
         function questionType (searchValue) {
             var questionType = questionsService.getTypes()
                 .filter (function (obj) {
+
                     return obj.value === searchValue;
-                })
+                });
+
             return questionType[0].name
         }
     }
-
 })();

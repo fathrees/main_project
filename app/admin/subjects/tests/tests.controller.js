@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .controller("TestsController", TestsController);
 
-    TestsController.$inject = ["$stateParams", "testsService", "subjectsService", "REGEXP", "MESSAGE", "ENTITY_RANGE_ON_PAGE"];
+    TestsController.$inject = ["$stateParams", "testsService", "subjectsService", "REGEXP", "MESSAGE", "PAGINATION"];
 
-    function TestsController($stateParams, testsService, subjectsService, REGEXP, MESSAGE, ENTITY_RANGE_ON_PAGE) {
+    function TestsController($stateParams, testsService, subjectsService, REGEXP, MESSAGE, PAGINATION) {
         var vm = this;
         vm.list = [];
         vm.headElements = testsService.getHeader();
@@ -19,8 +19,8 @@
         vm.removeTest = removeTest;
         vm.onlyNumber = REGEXP.ONLY_NUMBER;
 
-        vm.entitiesPerPage = ENTITY_RANGE_ON_PAGE;
-        vm.maxSize = 3;
+        vm.entitiesPerPage = PAGINATION.ENTITIES_RANGE_ON_PAGE;
+        vm.maxSize = PAGINATION.PAGES_SHOWN;
         vm.currentPage = 1;
         vm.currentRecordsRange = 0;
         vm.getItemsPerPage = getItemsPerPage;
@@ -28,12 +28,12 @@
 
 
         function activate (){
-            testsService.getTestsBySubjest($stateParams.subject_id).then(function(data){
+            testsService.getTestsBySubject($stateParams.subject_id).then(function(data){
                 vm.totalList = data;
                 vm.list = [];
                 getItemsPerPage();
                 vm.totalItems = vm.totalList.length;
-                if(vm.totalItems > ENTITY_RANGE_ON_PAGE) {
+                if (vm.totalItems > ENTITY_RANGE_ON_PAGE) {
                     vm.showPagination = true;
                 }else {
                     vm.showPagination = false
@@ -77,7 +77,7 @@
 
                 } else{
                     alert(MESSAGE.SAVE_ERROR +  " " + data.response);
-                };
+                }
                 vm.hideForm();
                 activate();
                 vm.test = {};

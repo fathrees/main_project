@@ -33,7 +33,7 @@
                 vm.list = [];
                 getItemsPerPage();
                 vm.totalItems = vm.totalList.length;
-                if (vm.totalItems > ENTITY_RANGE_ON_PAGE) {
+                if (vm.totalItems > PAGINATION.ENTITIES_RANGE_ON_PAGE) {
                     vm.showPagination = true;
                 }else {
                     vm.showPagination = false

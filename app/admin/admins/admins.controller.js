@@ -58,7 +58,6 @@
                     vm.admin = resolve;
                 },
                 function() {
-                    console.log('Modal dismissed at: ' + new Date());
                 });
         }
     }

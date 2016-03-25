@@ -8,7 +8,6 @@
 
     function validateDirective(SPECIALITIES_CONST, specialitiesService) {
         var all;
-        getSpecialities();
 
         function getSpecialities(){
             specialitiesService.getSpecialities().then(function(data) {
@@ -37,7 +36,7 @@
             if (inputName === "specialityName"){
                 attr.regexp = SPECIALITIES_CONST.NAME_REGEXP;
                 attr.key = "speciality_name";
-            } else if (inputName === "specialityCode"){
+            } else if (inputName === "specialityCode") {
                 attr.regexp = SPECIALITIES_CONST.CODE_REGEXP;
                 attr.key = "speciality_code";
             }
@@ -51,9 +50,9 @@
             link: function(scope, element, attr, mCtrl) {
                 function validation(value) {
                     mCtrl.$setValidity("validText", validText(whichInput(attr.name).regexp, value));
-                    if (attr.name.indexOf("speciality" >= 0)){
-                        mCtrl.$setValidity("alreadyExist", !alreadyExist(all, whichInput(attr.name).key, value));
-                    }
+                    getSpecialities();
+                    mCtrl.$setValidity("alreadyExist", !alreadyExist(all, whichInput(attr.name).key, value));
+
                     return value;
                 }
                 mCtrl.$parsers.push(validation);

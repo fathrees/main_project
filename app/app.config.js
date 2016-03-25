@@ -45,15 +45,15 @@
                 templateUrl: "app/admin/groups/students/students.html",
                 controller: "StudentsController as students"
             })
-            .state("admin.editStudent", {
-                url: "/groups/{group_id:int}/students/{student_Id:int}",
-                templateUrl: "app/admin/groups/students/student.html",
-                controller: "EditStudentController as student"
+            .state("admin.student", {
+                url: "/groups/{group_id:int}/students/:content_type/{student_id:int}",   
+                templateUrl: "app/admin/groups/students/addstudent.html",
+                controller: "StudentController as student"
             })
             .state("admin.addStudent", {
-                url: "/groups/{group_id:int}/students/addStudent",
-                templateUrl: "app/admin/groups/students/student.html",
-                controller: "AddStudentController as student"
+                url: "/groups/{group_id:int}/students/:content_type",
+                templateUrl: "app/admin/groups/students/addstudent.html",
+                controller: "StudentController as student"
             })
             .state("admin.studentResults", {
                 url: "/groups/{group_id:int}/students/{student_Id:int}/results",
@@ -70,8 +70,8 @@
                 templateUrl: "app/admin/specialities/specialities.html",
                 controller: "SpecialitiesController as specialities"
             })
-            .state("admin.groupsBySpeciality", {
-                url: "/specialities/{speciality_id:int}/groups",
+            .state("admin.groupsByEntity", {
+                url: "/{entity}/{entity_id:int}/groups",
                 templateUrl: "app/admin/groups/groups.html",
                 controller: "GroupsController as groups"
             })
@@ -80,15 +80,10 @@
                 templateUrl: "app/admin/subjects/subjects.html",
                 controller: "SubjectsController as subjects"
             })
-            .state("admin.schedules", {
-                url: "/subjects/{subject_id:int}/schedules",
+            .state("admin.scheduleForEntity", {
+                url: "/{entity}/{entity_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedules.html",
                 controller: "SchedulesController as schedules"
-            })
-            .state("admin.schedule", {
-                url: "/subjects/{subject_id:int}/schedules/{schedule_id:int}",
-                templateUrl: "app/admin/subjects/schedules/schedule.html",
-                controller: "ScheduleController as schedule"
             })
             .state("admin.tests", {
                 url: "/subjects/{subject_id:int}/tests",

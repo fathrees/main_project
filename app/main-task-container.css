@@ -1,3 +1,30 @@
+.my-app-name-container h1 small,
+.my-app-name-container h2 small,
+.my-app-name-container h3 small,
+.my-app-name-container h4 small,
+.my-app-name-container h5 small,
+.my-app-name-container h6 small,
+.my-app-name-container .h1 small,
+.my-app-name-container .h2 small,
+.my-app-name-container .h3 small,
+.my-app-name-container .h4 small,
+.my-app-name-container .h5 small,
+.my-app-name-container .h6 small,
+.my-app-name-container h1 .small,
+.my-app-name-container h2 .small,
+.my-app-name-container h3 .small,
+.my-app-name-container h4 .small,
+.my-app-name-container h5 .small,
+.my-app-name-container h6 .small,
+.my-app-name-container .h1 .small,
+.my-app-name-container .h2 .small,
+.my-app-name-container .h3 .small,
+.my-app-name-container .h4 .small,
+.my-app-name-container .h5 .small,
+.my-app-name-container .h6 .small {
+  color: #9D9D9D;
+}
+
 .my-app-name-container .btn {
   border: none;
   border-radius: 0;
@@ -57,6 +84,7 @@
   background-color: #E6E6E6;
 }
 .my-app-name-container .btn-default:hover {
+  background-color: #CCCCCC;
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
 }
 .my-app-name-container .btn-default:active,
@@ -157,7 +185,7 @@
   box-shadow: 0 5px 5px rgba(0,0,0,0.5); /* button shadow */
 }
 
-/* class btn-info */
+/* class btn-warning */
 .my-app-name-container .btn-warning {
   background-color: #FF9800;
 }
@@ -250,6 +278,11 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+/* my-pagination */
+.my-app-name-container .my-pagination {
+  font-family: Helvetica, FontAwesome;
+} 
 
 /* table */
 .my-app-name-container .table {
@@ -460,6 +493,10 @@
 }
 
 /* navbar-inverse */
+
+.my-app-name-container .navbar-inverse {
+  border-color: transparent;
+}
 .my-app-name-container .navbar-inverse .navbar-toggle {
   border-color: transparent;
 }
@@ -479,11 +516,20 @@
   background-color: inherit;
 }
 
-/* Buttom image temporary fix */
-.my-app-name-container btn a {
-  color: inherit;
+.my-app-name-container a:focus {
+  outline: none;
 }
-.my-app-name-container btn a:hover,
-.my-app-name-container btn a:focus {
-  color: inherit;
+/* header navbar */
+.my-app-name-container .nav.navbar-nav.navbar-right li {
+  border-bottom: 4px solid transparent;
 }
+.my-app-name-container .nav.navbar-nav.navbar-right li:hover {
+  border-bottom: 4px solid #FFFFFF;
+}
+.my-app-name-container .row.hidden-xs .nav.navbar-nav.navbar-right li:hover {
+  border-bottom: 4px solid #FFFFFF;
+}
+.my-app-name-container header {
+  box-shadow: 0 3px 3px rgba (0,0,0,0.5);
+}
+

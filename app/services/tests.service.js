@@ -72,9 +72,9 @@
             }
         }
 
-        function removeTest (id) {
+        function removeTest (test) {
 
-            return $http.get(BASE_URL + URL.ENTITIES.TEST + URL.REMOVE_ENTITY + id)
+            return $http.get(BASE_URL + URL.ENTITIES.TEST + URL.REMOVE_ENTITY + test.test_id)
                 .then(_successCallback, _errorCallback);
         }
 

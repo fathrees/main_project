@@ -86,7 +86,7 @@
 
         function removeTest(test) {
             if(confirm(MESSAGE.DEL_CONFIRM)) {
-                testsService.removeTest(test.test_id).then(function (res) {
+                testsService.removeTest(test).then(function (res) {
                     if (res.response === "ok") {
                         alert(MESSAGE.DEL_SUCCESS)
                     } else if (res.response === "error 23000") {

@@ -10,8 +10,8 @@
         var vm = this;
         vm.headElements = adminService.getHeader();
         vm.showSaveForm = showSaveForm;
+        vm.removeAdmin = removeAdmin;
         vm.animation = true;
-        vm.addAdmin = addAdmin;
 
         activate();
 
@@ -38,10 +38,12 @@
             }
         }
 
-        function showSaveForm(kindOf) {
+        function showSaveForm(kindOf, admin) {
             vm.kindOfSave = kindOf;
             if (kindOf === "Реєстрація"){
                 vm.admin = {};
+            }else{
+                vm.admin = admin;
             }
             var modalInstance = $uibModal.open({
                 animation: vm.animation,
@@ -59,16 +61,32 @@
             });
 
             modalInstance.result.then(
-                function(resolve) {
-                    vm.admin = resolve;
-                    addAdmin(vm.admin);
+                function(admin, kindOfSave) {
+                    vm.admin = admin;
+                    if (kindOfSave === "Реєстрація") {
+                        _addAdmin(vm.admin);
+                    }else{
+                        _editAdmin(vm.admin);
+                    }
                 },
                 function() {
                 });
         }
 
-        function addAdmin(admin) {
+        function _addAdmin(admin) {
             adminService.addAdmin(admin).then(function(res){
+                activate();
+            });
+        }
+
+        function _editAdmin(admin) {
+            adminService.editAdmin(admin).then(function(res){
+                activate();
+            });
+        }
+
+        function removeAdmin(admin) {
+            adminService.removeAdmin(admin).then(function(res){
                 activate();
             });
         }

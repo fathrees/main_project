@@ -11,6 +11,8 @@
             getHeader: getHeader,
             getAdmins: getAdmins,
             addAdmin: addAdmin,
+            editAdmin: editAdmin,
+            removeAdmin: removeAdmin,
             getAllCountRecords: getAllCountRecords
         };
 
@@ -42,6 +44,18 @@
         function addAdmin(admin) {
 
             return $http.post(BASE_URL + URL.ENTITIES.ADMINS + URL.ADD_ENTITY, admin)
+                .then(_successCallback, _errorCallback);
+        }
+
+        function editAdmin(admin) {
+
+            return $http.post(BASE_URL + URL.ENTITIES.ADMINS + URL.EDIT_ENTITY + admin.id, admin)
+                .then(_successCallback, _errorCallback);
+        }
+
+        function removeAdmin(admin) {
+
+            return $http.get(BASE_URL + URL.ENTITIES.ADMINS + URL.REMOVE_ENTITY + admin.id)
                 .then(_successCallback, _errorCallback);
         }
 

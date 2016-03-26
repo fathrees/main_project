@@ -530,6 +530,23 @@
   border-bottom: 4px solid transparent;
 }
 .my-app-name-container header {
-  box-shadow: 0 3px 3px rgba (0,0,0,0.5);
+    box-shadow: 0 3px 3px rgba(0,0,0,0.5);
 }
 
+/* form-control background */
+.my-app-name-container .form-control[disabled],
+.my-app-name-container .form-control[readonly],
+.my-app-name-container fieldset[disabled] .form-control {
+  background-color: #FFFFFF;
+}
+.my-app-name-container .form-control[disabled],
+.my-app-name-container fieldset[disabled] .form-control {
+  cursor: default;
+}
+
+/* form-control input-group */
+@-moz-document url-prefix() {
+ .my-app-name-container .input-group-btn .form-control {
+  width: 160px;
+ }
+}

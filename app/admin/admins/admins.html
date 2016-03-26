@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6  pull-right">
                 <div class="col-xs-3 col-md-1 pull-right">
-                    <button class="btn btn-success" ng-click="admins.showSaveForm('Реєстрація')" title="Додати адміністратора">
+                    <button class="btn btn-success" ng-click="admins.showSaveForm(null, 'Реєстрація')" title="Додати адміністратора">
                         <i class="glyphicon glyphicon-plus"></i>
                     </button>
                 </div>
@@ -31,7 +31,7 @@
                 <td class="clip"><i>{{ admin.last_login }}</i></td>
                 <td class="clip">{{ admin.logins }}</td>
                 <td class="clip">
-                    <button class="btn btn-warning" ng-click="admins.showSaveForm('Редагування', admin)"
+                    <button class="btn btn-warning" ng-click="admins.showSaveForm(admin, 'Редагування')"
                             title="Редагувати {{ ::admin.username }}">
                         <i class="glyphicon glyphicon-pencil"></i>
                     </button>

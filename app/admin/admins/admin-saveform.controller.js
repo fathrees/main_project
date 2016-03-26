@@ -8,8 +8,8 @@
 
     function AdminSaveFormController($uibModalInstance, adminService, admin, kindOfSave) {
         var vm = this;
+        (admin === null)?(vm.admin = {}):(vm.admin = admin);
         vm.kindOfSave = kindOfSave;
-        vm.admin = admin;
         vm.comparePasswords = comparePasswords;
         vm.save = save;
         vm.cancel = cancel;
@@ -21,7 +21,7 @@
         }
 
         function save() {
-            $uibModalInstance.close(vm.admin, vm.kindOfSave);
+            $uibModalInstance.close(vm.admin);
         }
 
         function cancel() {

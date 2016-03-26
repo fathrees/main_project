@@ -4,52 +4,107 @@
     angular.module("app.admin.groups")
         .factory("studentsService", studentsService);
 
-    studentsService.$inject = ["$http", "$q"];
+    studentsService.$inject = ["$http", "$q", "BASE_URL", "URL", "PAGINATION"];
 
-    function studentsService($http, $q) {
+    function studentsService($http, $q, BASE_URL, URL, PAGINATION) {
         var studentsService = {
-            //getStudentsData: getStudentsData,
             getStudentsByGroupId: getStudentsByGroupId,
-            getHeadElements: getHeadElements
-
+            getHeadElements: getHeadElements,
+            addStudent: addStudent,
+            removeStudent: removeStudent,
+            getStudentById: getStudentById,
+            editStudent: editStudent
         };
 
         return studentsService;
 
-        //$q.defer request with filter - to get student`s info from JSON file by he`s/her`s group_id
-
-        function getStudentsByGroupId(url, group_id) {
-                var studentsData = $q.defer();
-                $http.get(url).then(
-                    function (result) {
-                        var filtered = result.data.filter(function (student) {
-                            return group_id === student.group_id;
-                        });
-                        studentsData.resolve(filtered);
+        function getStudentsByGroupId(group_id, currentRecordsRange) {
+            var studentsData = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.STUDENT + URL.GET_STUDENTS_BY_GROUP + group_id + "/" + PAGINATION.ENTITY_RANGE_ON_PAGE + "/" + currentRecordsRange).then(
+                function (response) {
+                    var result = angular.isArray(response.data) ? response.data : [];
+                    studentsData.resolve(result);
+                    },
+                    function (response) {
+                        studentsData.reject(response);
                     });
 
             return studentsData.promise;
         }
 
-        function getHeadElements () {
-            return ["Ім'я", "Прізвище", "Пароль", "Група"];
+        //function that add new student in studentController!!! gettin all data that is needed for adding new student
+
+        function addStudent(newStudent) {
+            var addNewStudent = $q.defer();
+            $http.post(BASE_URL + URL.ENTITIES.STUDENT + URL.ADD_ENTITY, newStudent).then(
+                function (result) {
+                    console.log(newStudent);
+                    console.log(newStudent.password);
+                    addNewStudent.resolve(result.data);
+                },
+                function (result) {
+                    addNewStudent.rejcet(result);
+                });
+
+            return addNewStudent.promise;
+
+        }
+
+        //function that remove student from list of students with the same group_id
+
+        function removeStudent(student) {
+            console.log("srv");
+            var remover = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.STUDENT + URL.REMOVE_ENTITY + student.user_id).then(
+                function (result) {
+                    console.log(result)
+                    remover.resolve(result);
+                },
+                function (result) {
+                    remover.reject(result);
+                });
+            return remover.promise;
         }
 
 
+        //function that get one student by it`s specific user_id
 
-        // todo.
-        // function that is written below will be used in the next sprint!
 
-        //function getStudentsData(url) {
-        //    return $http.get(url).then(
-        //        function (result) {
-        //            return result.data;
-        //        },
-        //        function (reason) {
-        //            return reason;
-        //        }
-        //    );
-        //}
+        function getStudentById(student_id) {
+            var oneStudent = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.STUDENT + URL.GET_ENTITIES + student_id).then(
+                function (response) {
+                    oneStudent.resolve(response.data[0]);
+                },
+                function (response) {
+                    oneStudent.reject(response);
+                });
+
+            return oneStudent.promise;
+        }
+
+        //edit student function
+
+        function editStudent(student, student_id){
+            var studentEdit = $q.defer();
+
+            $http.post(BASE_URL + URL.ENTITIES.STUDENT + URL.EDIT_ENTITY + student_id, student)
+                .then(function(response){
+                        studentEdit.resolve(response.config.data);
+                    },
+                    function (reason) {
+                        studentEdit.reject(reason);
+                    });
+
+            return studentEdit.promise;
+        }
+
+        //function that get head elements for table that has all info about students of specific group...
+
+        function getHeadElements () {
+            return ["Ім'я", "Прізвище", "По-батькові", "Номер залікової книги", "Група"];
+        }
+
 
     }
 })();

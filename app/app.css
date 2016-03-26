@@ -74,3 +74,7 @@ header .navbar-header .navbar-brand {
     cursor: inherit;
     display: block;
 }
+/*  For form validate with ngMessages  */
+.error-message {
+    color: #8B0000;
+}

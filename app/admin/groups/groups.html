@@ -33,7 +33,7 @@
                         </select>
                     </div>
                     <div class="col-md-1">
-                        <button class="btn btn-success" ng-click="groups.toggleFilterAction()" title="Додати нову групу">
+                        <button class="btn btn-success" ng-if="!groups.hideSelect" ng-click="groups.toggleFilterAction()" title="Додати нову групу">
                             <i class="glyphicon glyphicon-plus"></i>
                         </button>
                     </div>

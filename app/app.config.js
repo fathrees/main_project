@@ -45,15 +45,15 @@
                 templateUrl: "app/admin/groups/students/students.html",
                 controller: "StudentsController as students"
             })
-            .state("admin.editStudent", {
-                url: "/groups/{group_id:int}/students/{student_Id:int}",
-                templateUrl: "app/admin/groups/students/student.html",
-                controller: "EditStudentController as student"
+            .state("admin.student", {
+                url: "/groups/{group_id:int}/students/:content_type/{student_id:int}",   
+                templateUrl: "app/admin/groups/students/addstudent.html",
+                controller: "StudentController as student"
             })
             .state("admin.addStudent", {
-                url: "/groups/{group_id:int}/students/addStudent",
-                templateUrl: "app/admin/groups/students/student.html",
-                controller: "AddStudentController as student"
+                url: "/groups/{group_id:int}/students/:content_type",
+                templateUrl: "app/admin/groups/students/addstudent.html",
+                controller: "StudentController as student"
             })
             .state("admin.studentResults", {
                 url: "/groups/{group_id:int}/students/{student_Id:int}/results",
@@ -84,11 +84,6 @@
                 url: "/{entity}/{entity_id:int}/schedules",
                 templateUrl: "app/admin/subjects/schedules/schedules.html",
                 controller: "SchedulesController as schedules"
-            })
-            .state("admin.scheduleForGroup", {
-                url: "/groups/{group_id:int}/schedules",
-                templateUrl: "app/admin/subjects/schedules/schedule.html",
-                controller: "ScheduleController as schedule"
             })
             .state("admin.tests", {
                 url: "/subjects/{subject_id:int}/tests",
@@ -132,3 +127,4 @@
             })
     }
 })();
+

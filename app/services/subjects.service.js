@@ -4,9 +4,9 @@
     angular.module("app.admin.subjects")
         .factory("subjectsService", subjectsService);
 
-    subjectsService.$inject = ["$http", "$q", "PAGINATION", "BASE_URL", "URL"];
+    subjectsService.$inject = ["$http", "$q", "PAGINATION", "BASE_URL", "URL", "testsService"];
 
-    function subjectsService($http, $q, PAGINATION, BASE_URL, URL) {
+    function subjectsService($http, $q, PAGINATION, BASE_URL, URL, testsService) {
         var service = {
             getSubjects: getSubjects,
             getOneSubject: getOneSubject,
@@ -74,10 +74,40 @@
             }
         }
 
-        function removeSubject(subject) {
+        function _removeEmptySubject(subject) {
 
             return $http.get(BASE_URL + URL.ENTITIES.SUBJECT + URL.REMOVE_ENTITY + subject.subject_id)
                 .then(_successCallback, _errorCallback);
+        }
+
+        function removeSubject (subject) {
+            var urlCalls = [];
+            var deferred = $q.defer();
+            testsService.getTestsBySubject(subject.subject_id)
+                .then(function (data) {
+
+                    if(angular.isArray(data)){
+                        angular.forEach(data, function (item) {
+                            urlCalls.push(testsService.removeTest(item));
+                        });
+
+                        $q.all(urlCalls).then(function (res) {
+
+                            _removeEmptySubject (subject).then(function (response) {
+                                        deferred.resolve(response);
+                                    })
+                        }, function (res) {
+                            deferred.resolve(res)
+                        })
+
+                    } else if (data.response === "no records") {
+
+                        _removeEmptySubject (subject).then(function (res) {
+                            deferred.resolve(res)
+                        })
+                    }
+                });
+            return deferred.promise;
         }
 
         function getHeader() {

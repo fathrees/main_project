@@ -38,13 +38,9 @@
             }
         }
 
-        function showSaveForm(kindOf, admin) {
-            vm.kindOfSave = kindOf;
-            if (kindOf === "Реєстрація"){
-                vm.admin = {};
-            }else{
-                vm.admin = admin;
-            }
+        function showSaveForm(admin, kindOfSave) {
+            vm.admin = admin;
+            vm.kindOfSave = kindOfSave;
             var modalInstance = $uibModal.open({
                 animation: vm.animation,
                 templateUrl: "app/admin/admins/admin-saveform.html",
@@ -61,9 +57,9 @@
             });
 
             modalInstance.result.then(
-                function(admin, kindOfSave) {
+                function(admin) {
                     vm.admin = admin;
-                    if (kindOfSave === "Реєстрація") {
+                    if (admin.id === undefined) {
                         _addAdmin(vm.admin);
                     }else{
                         _editAdmin(vm.admin);

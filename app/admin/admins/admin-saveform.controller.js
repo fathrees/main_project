@@ -21,7 +21,7 @@
         }
 
         function save() {
-            $uibModalInstance.close(vm.admin);
+            $uibModalInstance.close(vm.admin, vm.kindOfSave);
         }
 
         function cancel() {

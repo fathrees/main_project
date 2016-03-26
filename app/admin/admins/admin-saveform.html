@@ -3,16 +3,18 @@
 </div>
 <form name="saveForm" ng-submit="adminSave.save()">
     <div class="modal-body">
+        <span ng-show="adminSave.kindOfSave === 'Реєстрація'">Всі поля є обов'язкові</span>
         <input type="text" class="form-control" name="username" placeholder="login" ng-model="adminSave.admin.username" required>
         <input type="email" class="form-control" name="email"  placeholder="e-mail" ng-model="adminSave.admin.email" required>
         <input type="password" class="form-control" name="newPassword" ng-model="adminSave.newPassword"
-               placeholder="введіть новий пароль" required>
+               placeholder="введіть новий пароль" ng-required="adminSave.kindOfSave === 'Реєстрація'">
         <input type="password" class="form-control" name="confirmPassword" ng-model="adminSave.confirmPassword"
-               placeholder="підтвердіть новий пароль" required>
+               placeholder="підтвердіть новий пароль" ng-required="adminSave.kindOfSave === 'Реєстрація'">
         <span ng-show="!adminSave.comparePasswords()">Паролі не співпадають</span>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-success" title="Зберегти" ng-disabled="!adminSave.comparePasswords()">
+        <button type="submit" class="btn btn-success" title="Зберегти"
+                ng-disabled="!adminSave.comparePasswords() || saveForm.$invalid">
             <i class="glyphicon glyphicon-floppy-saved"></i>
         </button>
         <button type="reset" class="btn btn-danger" title="Відмінити" ng-click="adminSave.cancel()">

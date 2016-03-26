@@ -10,10 +10,22 @@
         var service = {
             getHeader: getHeader,
             getAdmins: getAdmins,
+            addAdmin: addAdmin,
             getAllCountRecords: getAllCountRecords
         };
 
         return service;
+
+        function _successCallback(result) {
+
+            return result.data;
+        }
+
+        function _errorCallback(reason) {
+
+            return reason;
+        }
+
         function getAdmins() {
             var deferred = $q.defer();
             $http.get(BASE_URL + URL.ENTITIES.ADMINS + URL.GET_ENTITIES)
@@ -25,6 +37,12 @@
                     });
 
             return deferred.promise;
+        }
+
+        function addAdmin(admin) {
+
+            return $http.post(BASE_URL + URL.ENTITIES.ADMINS + URL.ADD_ENTITY, admin)
+                .then(_successCallback, _errorCallback);
         }
 
         function getHeader() {

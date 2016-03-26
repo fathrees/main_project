@@ -16,6 +16,7 @@
 
 
         function comparePasswords(){
+            vm.admin.password = vm.newPassword;
             return (vm.newPassword === vm.confirmPassword);
         }
 

@@ -11,6 +11,7 @@
         vm.headElements = adminService.getHeader();
         vm.showSaveForm = showSaveForm;
         vm.animation = true;
+        vm.addAdmin = addAdmin;
 
         activate();
 
@@ -23,13 +24,17 @@
 
         function _parseDate(arrObj) {
             for (var i = 0; i < arrObj.length; i++) {
-                var newDate = new Date(arrObj[i].last_login*1000);
-                newDate = ((newDate.getHours() < 10) ? ("0" + newDate.getHours()) : newDate.getHours()) + ":" +
-                    ((newDate.getMinutes() < 10) ? ("0" + newDate.getMinutes()) : newDate.getMinutes()) + " " +
-                    ((newDate.getDate() < 10) ? ("0" + newDate.getDate()) : newDate.getDate()) + "." +
-                    ((((newDate.getMonth() + 1)) < 10) ? ("0" + (newDate.getMonth() + 1)) : ((newDate.getMonth() + 1))) + "." +
-                    newDate.getFullYear();
-                arrObj[i].last_login = newDate;
+                if (arrObj[i].logins != 0) {
+                    var newDate = new Date(arrObj[i].last_login * 1000);
+                    newDate = ((newDate.getHours() < 10) ? ("0" + newDate.getHours()) : newDate.getHours()) + ":" +
+                        ((newDate.getMinutes() < 10) ? ("0" + newDate.getMinutes()) : newDate.getMinutes()) + " " +
+                        ((newDate.getDate() < 10) ? ("0" + newDate.getDate()) : newDate.getDate()) + "." +
+                        ((((newDate.getMonth() + 1)) < 10) ? ("0" + (newDate.getMonth() + 1)) : ((newDate.getMonth() + 1))) + "." +
+                        newDate.getFullYear();
+                    arrObj[i].last_login = newDate;
+                }else{
+                    arrObj[i].last_login = "Не було";
+                }
             }
         }
 
@@ -56,9 +61,16 @@
             modalInstance.result.then(
                 function(resolve) {
                     vm.admin = resolve;
+                    addAdmin(vm.admin);
                 },
                 function() {
                 });
+        }
+
+        function addAdmin(admin) {
+            adminService.addAdmin(admin).then(function(res){
+                activate();
+            });
         }
     }
 })();

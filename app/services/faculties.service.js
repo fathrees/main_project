@@ -1,70 +1,106 @@
-(function () {
+(function() {
     "use strict";
 
     angular.module("app.admin")
         .factory("facultiesService", facultiesService);
 
-    facultiesService.$inject = ["$http", "$q"];
+    facultiesService.$inject = ["$http", "$q", "BASE_URL", "URL", "PAGINATION"];
 
-    function facultiesService($http, $q) {
-        var facultiesList = {};
-
+    function facultiesService($http, $q, BASE_URL, URL, PAGINATION) {
         var service = {
+            getFacultiesRange: getFacultiesRange,
             getFaculties: getFaculties,
-            getOneFaculty: getOneFaculty,
-            addFaculty: addFaculty,
-            deleteFaculty: deleteFaculty
+            saveFaculty: saveFaculty,
+            removeFaculty: removeFaculty,
+            totalItems: totalItems,
+            getHeader: getHeader
         };
 
         return service;
 
+        function _successCallback(result) {
+
+            return result.data;
+        }
+
+        function _errorCallback(reason) {
+
+            return reason;
+        }
+
+        function getFacultiesRange(currentRecordsRange) {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.FACULTY + URL.GET_ENTITY_RANGE + PAGINATION.ENTITIES_RANGE_ON_PAGE + "/" + currentRecordsRange)
+                .then(function(res) {
+                        deferred.resolve(res.data);
+                    },
+                    function(res) {
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
+        }
+
         function getFaculties() {
-            if(facultiesList.promise === undefined) {
-                facultiesList = $q.defer();
-                $http.get("app/admin/faculties/faculties.json").then(function(response) {
-                    facultiesList.resolve(response);
-                }, function (response) {
-                    facultiesList.reject(response);
-                });
+            var deferred = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.FACULTY + URL.GET_ENTITIES)
+                .then(function(res) {
+                        deferred.resolve(res.data);
+                    },
+                    function(res) {
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
+        }
+
+        function totalItems() {
+            var deferred = $q.defer();
+            $http.get(BASE_URL + URL.ENTITIES.FACULTY + URL.COUNT_ENTITY)
+                .then(function(res){
+                        if(res.status === 200) {
+                            deferred.resolve(res.data.numberOfRecords)
+                        }
+                    },
+                    function(res){
+                        deferred.reject(res);
+                    });
+
+            return deferred.promise;
+        }
+
+        function saveFaculty(faculty) {
+            if (faculty.faculty_id === undefined) {
+
+                return _addFaculty(faculty);
+            } else {
+
+                return _editFaculty(faculty);
             }
-
-            return facultiesList.promise;
         }
 
-        function getOneFaculty(id) {
-            var facultiesArray = [],
-                faculty = $q.defer();
-            facultiesList.promise.then(function(response) {
-                facultiesArray = response.data.faculties;
-                angular.forEach(facultiesArray, function (item){
-                    if(item.id === id){
-                        faculty.resolve(item);
-                    }
-                });
-            });
+        function _addFaculty(faculty) {
 
-            return faculty.promise;
+            return $http.post(BASE_URL + URL.ENTITIES.FACULTY + URL.ADD_ENTITY, faculty)
+                .then(_successCallback, _errorCallback);
         }
 
-        function deleteFaculty(id) {
-            var facultiesArray = [];
-            facultiesList.promise.then(function(response) {
-                facultiesArray = response.data.faculties;
-                angular.forEach(facultiesArray, function (item){
-                    if(item.id === id){
-                        facultiesArray.splice(facultiesArray.indexOf(item), 1);
-                    }
-                });
-            });
+        function _editFaculty(faculty) {
+
+            return $http.post(BASE_URL + URL.ENTITIES.FACULTY + URL.EDIT_ENTITY + faculty.faculty_id, faculty)
+                .then(_successCallback, _errorCallback);
         }
 
-        function addFaculty(faculty) {
-            var facultiesArray = [];
-            facultiesList.promise.then(function (response) {
-                facultiesArray = response.data.faculties;
-                facultiesArray[facultiesArray.length] = faculty;
-                facultiesArray[facultiesArray.length - 1].id = facultiesArray.length;
-            });
+        function removeFaculty(id) {
+
+            return $http.get(BASE_URL + URL.ENTITIES.FACULTY + URL.REMOVE_ENTITY + id)
+                .then(_successCallback, _errorCallback);
+        }
+
+        function getHeader() {
+
+            return ["№", "Назва", "Код"];
         }
     }
+
 })();

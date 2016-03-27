@@ -6,7 +6,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-xs-12 col-md-4">
                 <div class="form-group">
                     <label ng-if="student.editAndAddElement"  for="picture">Обрати фото</label>
                     <input ng-if="student.editAndAddElement" id="picture" ng-model="student.newStudent.photo" type="file" onchange="previewFile()"/>
@@ -14,7 +14,7 @@
                     <img ng-src="{{student.newStudent.photo}}" height="250" width="250" alt="Зображення" >
                 </div>
             </div>
-            <div class="col-sm-9">
+            <div class="col-xs-12 col-md-8">
                 <div>
                     <label for="PIB">ПІБ</label>
                     <div class="form-group">
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-md-6">
                 <div class="form-group">
                     <label for="password">Пароль</label>
                     <div class="input-group">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-md-6">
                 <div class="form-group">
                     <label for="gradebook_id">Номер залікової книжки</label>
                     <input ng-disabled="student.disableInputs" id="gradebook_id" class="form-control" type="text" ng-model="student.newStudent.gradebook_id" placeholder="номер залікової книжки"/>
@@ -55,13 +55,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-md-6">
                 <div ng-if="student.additionalInputs" class="form-group">
                     <label for="email">E-mail</label>
                     <input id="email" class="form-control" type="text" ng-model="student.newStudent.email" placeholder="email"/>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-xs-12 col-md-6">
                 <div ng-if="student.additionalInputs" class="form-group">
                     <label for="login">Нікнейм студента</label>
                     <input id="login" class="form-control" type="text" ng-model="student.newStudent.username" placeholder="e.x. olexandr20"/>
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-xs-12 col-md-12">
                 <div>
                     <button type="button"  ui-sref="admin.student({group_id: student.group_id, content_type: 'edit', student_id: student.student_id})" ng-if="student.showElements" class="btn btn-info pull-right"
                             ng-click="student.editFormAppear()">Редагувати</button>

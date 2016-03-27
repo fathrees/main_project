@@ -55,7 +55,7 @@
             <tr ng-class-odd="'odd'" ng-repeat="speciality in specialities.list | orderBy: 'speciality_code' | filter: search">
                 <td class="clip">{{$index + 1}}</td>
                 <td class="clip"><a ui-sref="admin.groupsByEntity({entity: 'speciality', entity_id: speciality.speciality_id})"
-                                    title='Перейти до груп спеціальності "{{speciality.speciality_name}}"'>{{speciality.speciality_name}}</a></td>
+                    title='Перейти до груп спеціальності "{{speciality.speciality_name}}"'>{{speciality.speciality_name}}</a></td>
                 <td class="clip">{{speciality.speciality_code}}</td>
                 <td class="clip">
                     <button class="btn btn-warning" ng-click="specialities.showSaveForm(speciality)"
@@ -74,4 +74,4 @@
                         ng-model="specialities.currentPage" max-size="specialities.maxSize" class="pagination-sm"
                         boundary-link-numbers="true" rotate="false"></uib-pagination>
     </div>
-</div>
+</div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

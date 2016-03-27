@@ -8,11 +8,13 @@
 
     function adminService($http, $q, BASE_URL, URL, ENTITIES_UKR) {
         var service = {
-            getHeader: getHeader,
             getAdmins: getAdmins,
+            parseDate: parseDate,
+            comparePasswords: comparePasswords,
             addAdmin: addAdmin,
             editAdmin: editAdmin,
             removeAdmin: removeAdmin,
+            getHeader: getHeader,
             getAllCountRecords: getAllCountRecords
         };
 
@@ -39,6 +41,26 @@
                     });
 
             return deferred.promise;
+        }
+
+        function parseDate(arrObj) {
+            for (var i = 0; i < arrObj.length; i++) {
+                if (arrObj[i].logins != 0) {
+                    var newDate = new Date(arrObj[i].last_login * 1000);
+                    newDate = ((newDate.getHours() < 10) ? ("0" + newDate.getHours()) : newDate.getHours()) + ":" +
+                        ((newDate.getMinutes() < 10) ? ("0" + newDate.getMinutes()) : newDate.getMinutes()) + " " +
+                        ((newDate.getDate() < 10) ? ("0" + newDate.getDate()) : newDate.getDate()) + "." +
+                        ((((newDate.getMonth() + 1)) < 10) ? ("0" + (newDate.getMonth() + 1)) : ((newDate.getMonth() + 1))) + "." +
+                        newDate.getFullYear();
+                    arrObj[i].last_login = newDate;
+                }else{
+                    arrObj[i].last_login = "Не було";
+                }
+            }
+        }
+
+        function comparePasswords(newPassword, confirmPassword){
+            return (newPassword === confirmPassword);
         }
 
         function addAdmin(admin) {

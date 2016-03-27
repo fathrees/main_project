@@ -4,11 +4,12 @@
     angular.module("app.admin")
         .controller("AdminsController", AdminsController);
 
-    AdminsController.$inject = ["adminService", "$uibModal"];
+    AdminsController.$inject = ["adminService", "authService", "$uibModal", "ADMINS_CONST"];
 
-    function AdminsController(adminService, $uibModal) {
+    function AdminsController(adminService, authService, $uibModal, ADMINS_CONST) {
         var vm = this;
         vm.headElements = adminService.getHeader();
+        vm.adminAccess = adminAccess;
         vm.showSaveForm = showSaveForm;
         vm.removeAdmin = removeAdmin;
         vm.animation = true;
@@ -18,32 +19,52 @@
         function activate() {
             adminService.getAdmins().then(function(data) {
                 vm.list = data;
-                _parseDate(vm.list);
+                adminService.parseDate(vm.list);
             });
         }
 
-        function _parseDate(arrObj) {
-            for (var i = 0; i < arrObj.length; i++) {
-                if (arrObj[i].logins != 0) {
-                    var newDate = new Date(arrObj[i].last_login * 1000);
-                    newDate = ((newDate.getHours() < 10) ? ("0" + newDate.getHours()) : newDate.getHours()) + ":" +
-                        ((newDate.getMinutes() < 10) ? ("0" + newDate.getMinutes()) : newDate.getMinutes()) + " " +
-                        ((newDate.getDate() < 10) ? ("0" + newDate.getDate()) : newDate.getDate()) + "." +
-                        ((((newDate.getMonth() + 1)) < 10) ? ("0" + (newDate.getMonth() + 1)) : ((newDate.getMonth() + 1))) + "." +
-                        newDate.getFullYear();
-                    arrObj[i].last_login = newDate;
-                }else{
-                    arrObj[i].last_login = "Не було";
+        function adminAccess(admin, kindOfSave) {
+            authService.isLogged().then(function(res){
+                vm.logged = res;
+                console.log(ADMINS_CONST.ROOTS.join().indexOf(admin.username));
+                if ((admin.id === vm.logged.id) || (ADMINS_CONST.ROOTS.join().indexOf(admin.username) > -1)) {
+                    if (kindOfSave === "Редагування") {
+                        showSaveForm(admin, kindOfSave);
+                    } else {
+                        removeAdmin(admin);
+                    }
+                } else {
+                    showDenyForm(admin, kindOfSave);
                 }
-            }
+            });
+
         }
+
+        function showDenyForm(admin, kindOfSave){
+            var modalInstance = $uibModal.open({
+                animation: vm.animation,
+                size: "sm",
+                templateUrl: "app/admin/admins/admin-deny.form.html",
+                controller: "AdminDenyFormController",
+                controllerAs: "adminDeny",
+                resolve: {
+                    admin: function () {
+                        return admin;
+                    },
+                    kindOfSave: function () {
+                        return kindOfSave;
+                    }
+                }
+            });
+        }
+
 
         function showSaveForm(admin, kindOfSave) {
             vm.admin = admin;
             vm.kindOfSave = kindOfSave;
             var modalInstance = $uibModal.open({
                 animation: vm.animation,
-                templateUrl: "app/admin/admins/admin-saveform.html",
+                templateUrl: "app/admin/admins/admin-save.form.html",
                 controller: "AdminSaveFormController",
                 controllerAs: "adminSave",
                 resolve: {
@@ -55,7 +76,6 @@
                     }
                 }
             });
-
             modalInstance.result.then(
                 function(admin) {
                     vm.admin = admin;

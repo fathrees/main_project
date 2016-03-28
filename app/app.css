@@ -51,7 +51,7 @@ header .navbar-text.navbar-right a:hover {
 header .navbar-text.navbar-right a:active  {
     color: #FFFFFF;
 }
-/*  For form validation of specialities  */
+/*  For form validation of specialities and admins  */
 .specialities input.ng-invalid,
 .admins input.ng-invalid {
     background-color: #ffc0cb;
@@ -60,6 +60,10 @@ header .navbar-text.navbar-right a:active  {
 .admins input.ng-valid {
     background-color: #fff;
 }
+.modal-body input{
+    margin-bottom: 5px;
+}
+
 /* For image load button */
 .btn-file {
     position: relative;

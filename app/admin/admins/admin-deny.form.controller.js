@@ -16,16 +16,10 @@
         delItSelf();
 
         function delItSelf() {
-            var itSelf = vm.roots.indexOf(vm.admin.username);
-            console.log(vm.roots.indexOf(vm.admin.username));
-            if ((vm.kindOfSave === "Видалення") && (itSelf > -1)) {
-                vm.admin = null;
-                vm.roots.splice(itSelf, 1);
-            }
+            vm.isRoot = (vm.roots.indexOf(vm.admin.username) > -1);
         }
 
         function gotIt() {
-            vm.roots = ADMINS_CONST.ROOTS;
             $uibModalInstance.close();
         }
     }

@@ -71,7 +71,12 @@
             </tbody>
         </table>
         <uib-pagination total-items="specialities.totalItems" ng-change="specialities.pageChanged()"
-                        ng-model="specialities.currentPage" max-size="specialities.maxSize" class="pagination-sm"
-                        boundary-link-numbers="true" rotate="false"></uib-pagination>
+                        ng-model="specialities.currentPage" max-size="specialities.maxSize" class="my-pagination"
+                        boundary-link-numbers="true" rotate="false"
+                        first-text="&#xf049;"
+                        previous-text="&#xf048;"
+                        next-text="&#xf051;"
+                        last-text="&#xf050;">
+        </uib-pagination>
     </div>
 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

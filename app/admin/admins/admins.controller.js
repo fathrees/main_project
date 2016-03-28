@@ -26,12 +26,15 @@
         function adminAccess(admin, kindOfSave) {
             authService.isLogged().then(function(res){
                 vm.logged = res;
-                console.log(ADMINS_CONST.ROOTS.join().indexOf(admin.username));
-                if ((admin.id === vm.logged.id) || (ADMINS_CONST.ROOTS.join().indexOf(admin.username) > -1)) {
+                var isRoot = ADMINS_CONST.ROOTS.indexOf(vm.logged.username) > -1;
+                var itSelf = (admin.id === vm.logged.id);
+                if (itSelf || isRoot) {
                     if (kindOfSave === "Редагування") {
                         showSaveForm(admin, kindOfSave);
-                    } else {
+                    }else if (!itSelf) {
                         removeAdmin(admin);
+                    }else{
+                        showDenyForm(admin, kindOfSave);
                     }
                 } else {
                     showDenyForm(admin, kindOfSave);
@@ -56,6 +59,12 @@
                     }
                 }
             });
+            //modalInstance.result.then(
+            //    function(wasOpened) {
+            //        if (wasOpened) {
+            //            activate();
+            //        }
+            //    });
         }
 
 

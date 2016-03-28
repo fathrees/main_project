@@ -9,13 +9,24 @@
     function AdminDenyFormController($uibModalInstance, ADMINS_CONST, admin, kindOfSave) {
         var vm = this;
         vm.admin = admin;
-        console.log(admin);
         vm.kindOfSave = kindOfSave;
         vm.roots = ADMINS_CONST.ROOTS;
-        vm.cancel = cancel;
+        vm.gotIt = gotIt;
 
-        function cancel() {
-            $uibModalInstance.dismiss('cancel');
+        delItSelf();
+
+        function delItSelf() {
+            var itSelf = vm.roots.indexOf(vm.admin.username);
+            console.log(vm.roots.indexOf(vm.admin.username));
+            if ((vm.kindOfSave === "Видалення") && (itSelf > -1)) {
+                vm.admin = null;
+                vm.roots.splice(itSelf, 1);
+            }
+        }
+
+        function gotIt() {
+            vm.roots = ADMINS_CONST.ROOTS;
+            $uibModalInstance.close();
         }
     }
 })();

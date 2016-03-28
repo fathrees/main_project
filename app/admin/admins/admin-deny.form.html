@@ -1,10 +1,10 @@
 <div class="modal-header">
-    <h3 class="modal-title">Недостатньо прав</h3>
+    <h3 class="modal-title">Недостатньо прав!</h3>
 </div>
-<div class="modal-body">{{adminDeny.kindOfSave}} <b>{{adminDeny.admin.username}}</b> доступне тільки для
-    <b>{{adminDeny.admin.username}}</b> або для
+<div class="modal-body">{{adminDeny.kindOfSave}} <b>{{adminDeny.admin.username}}</b> доступне тільки для:
+    <b>{{adminDeny.admin.username}}</b><br>
     <span ng-repeat="root in adminDeny.roots"><b>{{root}}</b></span>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-info" ng-click="adminDeny.cancel()">Зрозуміло</button>
+    <button type="button" class="btn btn-info" ng-click="adminDeny.gotIt()">Зрозуміло</button>
 </div>

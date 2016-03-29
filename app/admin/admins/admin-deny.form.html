@@ -5,6 +5,7 @@
     <span ng-show="(adminDeny.kindOfSave === 'Видалення') && adminDeny.isRoot"> під час сеансу </span>неможливе.<br>
     <span ng-show="!adminDeny.itSelf">Недостатньо прав. </span>
     Доступно для:<br>
+    <span ng-repeat="(adminDeny.kindOfSave !== 'Видалення') && !adminDeny.isRoot">{{adminDeny.admin.username}}<br></span>
     <span ng-repeat="root in adminDeny.roots"><b>{{root}}</b><br></span>
 </div>
 <div class="modal-footer">
